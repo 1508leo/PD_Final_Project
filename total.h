@@ -1,8 +1,8 @@
 #ifndef TOTAL_H
 #define TOTAL_H
 
-#define YES 0
-#define NO 1
+#define NO 0
+#define YES 1
 
 #define MAX_BUF 4096
 #define ADMINISTRATOR_MODE 2
@@ -182,7 +182,7 @@ void search_isbn(int option_re, char isbn[]);
 
 void search_viewer_count(int option_re); // print every book that amount of viewer is greater than 0 from the most popular
 
-void show_book(); // print the result into table. If doesn't search the books return the the message
+void show_book(); // print the result into table. If doesn't search the books return the message
 
 void reserve_book(int number, int number_book, int option_reserve); // change the status of book
 
