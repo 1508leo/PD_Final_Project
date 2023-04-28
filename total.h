@@ -182,7 +182,7 @@ void search_isbn(int option_re, char isbn[]);
 
 void search_viewer_count(int option_re); // print every book that amount of viewer is greater than 0 from the most popular
 
-void show_book(); // print the result into table
+void show_book(); // print the result into table. If doesn't search the books return the the message
 
 void reserve_book(int number, int number_book, int option_reserve); // change the status of book
 
