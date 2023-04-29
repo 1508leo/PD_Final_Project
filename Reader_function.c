@@ -1,4 +1,3 @@
-//我還要修正一下，還沒正式完工(存在github放一下
 #include "fp_headerfile.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -90,6 +89,80 @@ void search_author(int option_re, char author[])
     }
 }
 
+void search_publisher(int option_re, char publisher[])
+{
+    int num_books = 0;
+    int match = 0;
+
+    // count the number of books that match the search criteria
+    for (int i = 0; i < MAX_BUF; i++)
+    {
+        if (book[i].book_name != NULL && strstr(book[i].publisher, publisher) != NULL)
+        {
+            num_books++;
+        }
+    }
+
+    // check if any books were found
+    if (num_books == 0)
+    {
+        printf("No books found.\n");
+        return;
+    }
+
+    // print the header for the search results
+    printf("Search results for \"%s\" in the publisher field:\n\n", publisher);
+    printf("  %-30s %-20s %-20s %-15s %-15s\n", "Book Title", "Author", "Publisher", "Publication Year", "ISBN");
+
+    // print the search results
+    for (int i = 0; i < MAX_BUF && match < num_books; i++)
+    {
+        if (book[i].book_name != NULL && strstr(book[i].publisher, publisher) != NULL)
+        {
+            match++;
+            if (option_re == 1)
+            {
+                printf("%2d. %-30s %-20s %-20s %-15d %-15s\n", match, book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].isbn);
+            }
+        }
+    }
+}
+
+void show_book()
+{
+    int num_books = 0;
+
+    // count the number of books
+    for (int i = 0; i < MAX_BUF; i++)
+    {
+        if (book[i].book_name != NULL)
+        {
+            num_books++;
+        }
+    }
+
+    // check if any books were found
+    if (num_books == 0)
+    {
+        printf("No books found.\n");
+        return;
+    }
+
+    // print the header for the search results
+    printf("\n%-5s %-30s %-20s %-20s %-15s %-15s\n", "No.", "Book Title", "Author", "Publisher", "Publication Year", "ISBN");
+
+    // print the search results
+    int count = 0;
+    for (int i = 0; i < MAX_BUF; i++)
+    {
+        if (book[i].book_name != NULL)
+        {
+            count++;
+            printf("%-5d %-30s %-20s %-20s %-15d %-15s\n", count, book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].isbn);
+        }
+    }
+}
+
 void reserve_book(int number, int number_book, int option_reserve)
 {
     int count = 0;
@@ -132,7 +205,8 @@ void reserve_book(int number, int number_book, int option_reserve)
     printf("Error: Book %d not found.\n", number);
 }
 
-int main(void)
+
+int main(int argc, char *argv[])
 {
     char query[MAX_BUF];
     int option;
