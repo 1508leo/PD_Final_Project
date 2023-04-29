@@ -294,13 +294,13 @@ int main(void)
     int number_book;
     int option_reserve;
     char search_term[MAX_BUF];
-    // TODO: initialize book and reader data structures
-
+    printf("===========================");
     printf("Welcome to the library!\n");
-
+    printf("===========================");
     while (1)
     {
-        printf("\nWhat would you like to do?\n");
+        printf("===========================");
+        printf("What would you like to do?\n");
         printf("1. Search by book name\n");
         printf("2. Search by author\n");
         printf("3. Search by publisher\n");
@@ -310,6 +310,7 @@ int main(void)
         printf("7. Reserve a book\n");
         printf("8. Show all books\n");
         printf("9. Exit\n");
+        printf("===========================");
         printf("Enter an option: ");
         scanf("%d", &option);
 
