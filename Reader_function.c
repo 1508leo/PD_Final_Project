@@ -1,4 +1,4 @@
-/* 還沒完全處理好是否有隱藏的問題，會於日後檢查。目前先放置在此，謝謝
+/* 還沒完全處理好是否有隱藏的問題，會於日後檢查。目前先放置在此，謝謝*/
 #include "fp_headerfile.h"
 #include <stdio.h>
 #include <stdlib.h>
