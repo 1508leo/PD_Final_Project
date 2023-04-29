@@ -1,3 +1,4 @@
+/* 還沒完全處理好是否有隱藏的問題，會於日後檢查。目前先放置在此，謝謝
 #include "fp_headerfile.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -118,6 +119,84 @@ void search_publisher(int option_re, char publisher[])
     for (int i = 0; i < MAX_BUF && match < num_books; i++)
     {
         if (book[i].book_name != NULL && strstr(book[i].publisher, publisher) != NULL)
+        {
+            match++;
+            if (option_re == 1)
+            {
+                printf("%2d. %-30s %-20s %-20s %-15d %-15s\n", match, book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].isbn);
+            }
+        }
+    }
+}
+
+void search_call_number(int option_re, float *call_number)
+{
+    int num_books = 0;
+    int match = 0;
+
+    // count the number of books that match the search criteria
+    for (int i = 0; i < MAX_BUF; i++)
+    {
+        if (book[i].book_name != NULL && book[i].call_number == *call_number)
+        {
+            num_books++;
+        }
+    }
+
+    // check if any books were found
+    if (num_books == 0)
+    {
+        printf("No books found.\n");
+        return;
+    }
+
+    // print the header for the search results
+    printf("Search results for \"%f\" in the call number field:\n\n", *call_number);
+    printf("  %-30s %-20s %-20s %-15s %-15s\n", "Book Title", "Author", "Publisher", "Publication Year", "ISBN");
+
+    // print the search results
+    for (int i = 0; i < MAX_BUF && match < num_books; i++)
+    {
+        if (book[i].book_name != NULL && book[i].call_number == *call_number)
+        {
+            match++;
+            if (option_re == 1)
+            {
+                printf("%2d. %-30s %-20s %-20s %-15d %-15s\n", match, book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].isbn);
+            }
+        }
+    }
+}
+
+void search_ISBN(int option_re, char isbn[])
+{
+    int num_books = 0;
+    int match = 0;
+
+    // count the number of books that match the search criteria
+    for (int i = 0; i < MAX_BUF; i++)
+    {
+        if (book[i].book_name != NULL && strcmp(book[i].isbn, isbn) == 0)
+        {
+            num_books++;
+        }
+    }
+
+    // check if any books were found
+    if (num_books == 0)
+    {
+        printf("No books found.\n");
+        return;
+    }
+
+    // print the header for the search results
+    printf("Search results for \"%s\" in the ISBN field:\n\n", isbn);
+    printf("  %-30s %-20s %-20s %-15s %-15s\n", "Book Title", "Author", "Publisher", "Publication Year", "ISBN");
+
+    // print the search results
+    for (int i = 0; i < MAX_BUF && match < num_books; i++)
+    {
+        if (book[i].book_name != NULL && strcmp(book[i].isbn, isbn) == 0)
         {
             match++;
             if (option_re == 1)
