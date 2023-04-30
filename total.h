@@ -1,6 +1,11 @@
 #ifndef TOTAL_H
 #define TOTAL_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
 #define NO 0
 #define YES 1
 
