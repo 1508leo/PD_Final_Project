@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define NO 0
 #define YES 1
@@ -188,6 +189,6 @@ void search_viewer_count(int option_re); // print every book that amount of view
 
 void show_book(); // print the result into table. If doesn't search the books return the message
 
-void reserve_book(int number, int number_book, int option_reserve); // change the status of book
+void reserve_book(int number_book, int option_reserve); // change the status of book
 
 #endif /* TOTAL_H */
