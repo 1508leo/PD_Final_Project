@@ -1,9 +1,25 @@
-/* 還沒完全處理好是否有隱藏的問題，會於日後檢查。目前先放置在此，謝謝*/
+//施工中
 #include "fp_headerfile.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+
+void reader_mode()
+{
+    int option_re; // 這裡的變數是用來選擇要做什麼事情的
+    printf("===========================");
+    printf("|What would you like to do?|\n");
+    printf("|1. Search by book name    |\n");
+    printf("|2. Search by author       |\n");
+    printf("|3. Search by publisher    |\n");
+    printf("|4. Search by call number  |\n");
+    printf("|5. Search by ISBN         |\n");
+    printf("|6. Search by viewer count |\n");
+    printf("|7. Reserve a book         |\n");
+    printf("|8. Show all books         |\n");
+    printf("|9. Exit                   |\n");
+    printf("===========================");
+    printf("Please enter an option: ");
+    scanf("%d", &option_re); // 輸入要做什麼事情
+    interface_re(option_re); // 請開始做事情
+}
 
 void search_book_name(int option_re, char book_name[])
 {
@@ -28,12 +44,16 @@ void search_book_name(int option_re, char book_name[])
     if (count > 0)
     {
         printf("%d books found:\n", count);
+        printf("=================================================================================================================\n");
+        printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
+        printf("=================================================================================================================\n");
         for (int j = 0; j < count; j++)
         {
-            printf("%d. %s by %s, %s\n", j + 1, book[results[j]].book_name,
-                   book[results[j]].author, book[results[j]].publisher);
+            printf("%s|%s|%s|%d|%d|%.2f|%s|%d|%d|\n", book[results[j]].book_name, book[results[j]].author,
+                   book[results[j]].publisher, book[results[j]].publish_year, book[results[j]].amount,
+                   book[results[j]].call_number, book[results[j]].isbn, book[results[j]].viewer_count, book[results[j]].accession_number);
         }
-        if (option_re == 1)
+    /*    if (option_re == 1)
         {
             // prompt user to reserve a book
             int number, option_reserve;
@@ -43,10 +63,112 @@ void search_book_name(int option_re, char book_name[])
             scanf("%d", &option_reserve);
             reserve_book(number, count, option_reserve);
         }
+        */
+        
     }
     else
     {
-        printf("No books found.\n");
+        printf("===================================\n");
+        printf("| Sorry, There is no books found. |\n");
+        printf("===================================\n");
+    }
+}
+
+void interface_re(int option_re)
+{
+    if (option_re == BUTTON_BOOK_NAME)
+    { // 410是用來判斷是否為搜尋書籍的選項
+        printf("Enter book name: ");
+        char book_name[MAX_BUF];
+        while (fgets(book_name, MAX_BUF, stdin) != NULL)
+        { // 預防空格
+            int len = strlen(book_name);
+            if (*(book_name + len - 1) == '\n')
+            {
+                *(book_name + len - 1) = '\0';
+            }
+            break;
+        }
+        search_book_name(BUTTON_BOOK_NAME, book_name);
+    }
+    if (option_re == BUTTON_AUTHOR)
+    {
+        printf("Enter author: ");
+        char author[MAX_BUF];
+        while (fgets(author, MAX_BUF, stdin) != NULL)
+        { // 預防空格
+            int len = strlen(author);
+            if (*(author + len - 1) == '\n')
+            {
+                *(author + len - 1) = '\0';
+            }
+            break;
+        }
+        search_author(1, author);
+    }
+    if (option_re == BUTTON_PUBLISHER)
+    {
+        printf("Enter publisher: ");
+        char publisher[MAX_BUF];
+        while (fgets(publisher, MAX_BUF, stdin) != NULL)
+        { // 預防空格
+            int len = strlen(publisher);
+            if (*(publisher + len - 1) == '\n')
+            {
+                *(publisher + len - 1) = '\0';
+            }
+            break;
+        }
+        search_publisher(1, publisher);
+    }
+    if (option_re == BUTTON_CALL_NUMBER)
+    {
+        printf("Enter call number: ");
+        float call_number;
+        scanf("%f", &call_number);
+        search_call_number(1, call_number);
+    }
+    if (option_re == BUTTON_ISBN)
+    {
+        printf("Enter ISBN: ");
+        char isbn[MAX_BUF];
+        scanf("%s", isbn);
+        search_isbn(1, isbn);
+    }
+    if (option_re == BUTTON_VIEWER_COUNT)
+    {
+        printf("Enter viewer count: ");
+        int viewer_count;
+        scanf("%d", &viewer_count);
+        search_viewer_count(1, viewer_count);
+    }
+    if (option_re == BUTTON_RESERVE)
+    {
+        printf("Enter book name: ");
+        char book_name_reserve[MAX_BUF];
+        while (fgets(book_name_reserve, MAX_BUF, stdin) != NULL)
+        { // 預防空格
+            int len = strlen(book_name_reserve);
+            if (*(book_name_reserve + len - 1) == '\n')
+            {
+                *(book_name_reserve + len - 1) = '\0';
+            }
+            break;
+        }
+        search_book_name(1, book_name_reserve);
+    }
+    if (option_re == BUTTON_SHOW_ALL_BOOKS)
+    {
+        review_library(1, 0);
+    }
+    if (option_re == BUTTON_EXIT)
+    {
+        printf("Exiting...\n");
+        exit(0);
+    }
+    else
+    {
+        printf("Invalid option.\n");
     }
 }
 
@@ -283,7 +405,6 @@ void reserve_book(int number, int number_book, int option_reserve)
     // book not found
     printf("Error: Book %d not found.\n", number);
 }
-
 
 int main(int argc, char *argv[])
 {
