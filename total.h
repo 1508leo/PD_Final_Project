@@ -6,6 +6,9 @@
 #include <string.h>
 #include <ctype.h>
 
+int number_ad = 4; //initialize 4 administrator
+int accession_numer = 0; //record accession_number
+
 #define NO -1
 #define YES 1
 
