@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define NO 0
+#define NO -1
 #define YES 1
 
 #define MAX_BUF 4096
@@ -87,6 +87,8 @@ struct readers
     struct readers *link;
 };
 
+struct readers *first;
+
 void sort_publish_year();
 
 void sort_amount();
@@ -111,9 +113,9 @@ void interface_re_entry(int option_entry); //sign in or sign up
 /* Explain and fill in information */
 void interface_set_reader(int option_entry, char name[], int id, char grade[], char email[], char account[],char password[]); //get the information
 
-void set_check_account_re(char account[]); //need to print error message
+int set_check_account_re(char account[]); //need to print error message
 
-void set_check_password_re(char password[]); //need to print error message
+int set_check_password_re(char password[]); //need to print error message
 
 void add_reader(char name[], int id, char grade[], char email[], char account[],char password[]); //add into linked list
 
@@ -175,17 +177,18 @@ void interface_re(int option_re); // contain 9 buttons ( include exit button )
 void check_personal_information(int option_re);
 
 /* Search every book which contain the same string in searching */
-void search_book_name(int option_re, char book_name[]);
+/* Decided by option_re */
+void search_book_name(char book_name[]);
 
-void search_author(int option_re, char author[]);
+void search_author(char author[]);
 
-void search_publisher(int option_re, char publisher[]);
+void search_publisher(char publisher[]);
 
-void search_call_number(int option_re, float call_number[]);
+void search_call_number(float call_number[]);
 
-void search_isbn(int option_re, char isbn[]);
+void search_isbn(char isbn[]);
 
-void search_viewer_count(int option_re); // print every book that amount of viewer is greater than 0 from the most popular
+void search_viewer_count(); // print every book that amount of viewer is greater than 0 from the most popular
 
 void show_book(); // print the result into table. If doesn't search the books return the message
 
