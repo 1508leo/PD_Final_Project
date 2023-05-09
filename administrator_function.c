@@ -109,7 +109,7 @@ void modify_re_information(int option_number){//這個函數目前還缺刪除�
 
     printf("enter the reader name which you want to modify:\n");
     char *temp_reader_name;
-    scanf(" %s",temp_reader_name);
+    scanf(" %s",temp_reader_name);//輸入想查找的名稱
 
     int oper = 1;//預設一選擇器為1
     while(current != NULL){
@@ -127,15 +127,12 @@ void modify_re_information(int option_number){//這個函數目前還缺刪除�
 } // modify or delete reader information
 
 void check_ad_information(int option_ad){
-    for (int i = 0; i < MAX_BUF; i++)
+    for (int i = 0; i < number_ad; i++)
     {
-        if (administrator[i].ad_name != NULL)
-        {
-            printf("======================================\n");
-            printf("| ad_name | ad_account | ad_password |\n");
-            printf("======================================\n");
-            printf("%s|%s|%s", administrator[i].ad_name, administrator[i].ad_account, administrator[i].ad_password);
-        }
+        printf("======================================\n");
+        printf("| ad_name | ad_account | ad_password |\n");
+        printf("======================================\n");
+        printf("%s|%s|%s", administrator[i].ad_name, administrator[i].ad_account, administrator[i].ad_password);
     }
 }
 
@@ -153,7 +150,6 @@ void modify_ad_information(int number, int option_number){ // 這個函數目前
     scanf(" %s",administrator[id].ad_account);
     printf("new password:");
     scanf(" %s",administrator[id].ad_password);
-
 }
 
 //void interface_set_administrator(int option_ad, char name[], char account[], char password[]); //按鈕
