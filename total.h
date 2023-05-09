@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int index_ad = 3; //trace the amount of administrator initialize 4 administrator
+int number_ad = 4; //trace the amount of administrator initialize 4 administrator
 int index_books = 0; // trace the amount of books
 int accession_numer = 0; //record accession_number
 int amount_re = 0; // trace the amount of reader
@@ -163,7 +163,7 @@ void modify_re_information(int option_number); // modify or delete reader inform
 
 void check_ad_information(int option_ad); 
 
-void modify_re_information(int number, int option_number); // delete administrator information
+void modify_ad_information(int number, int option_number); // delete administrator information
 
 void interface_set_administrator(int option_ad, char name[], char account[], char password[]); //get the information
 
