@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int amount_ad = 4; //trace the amount of administrator initialize 4 administrator
+int index_ad = 3; //trace the amount of administrator initialize 4 administrator
 int amount_books = 0; // trace the amount of books
 int accession_numer = 0; //record accession_number
 int amount_re = 0; // trace the amount of reader
@@ -33,9 +33,9 @@ int amount_re = 0; // trace the amount of reader
 
 /* Option_ad */
 #define BUTTON_REVIEW 310
-#define BUTTON_ADD_DELETE 320
-#define BUTTON_ADD 321
-#define BUTTON_DELETE 322
+#define BUTTON_ADD_DELETE 320 //choose add or delete book, this will create two child buttom
+#define BUTTON_ADD 321 // add book
+#define BUTTON_DELETE 322 // delete book
 #define BUTTON_CHECK_BORROWING 330
 #define BUTTON_CHECK_RE 340
 #define BUTTON_CHECK_AD 350
@@ -76,6 +76,7 @@ struct administrators
     char *ad_account;
     char *ad_password;
 } administrator[MAX_BUF];
+
 
 struct readers
 {
@@ -120,7 +121,7 @@ void interface_set_reader(int option_entry, char name[], int id, char grade[], c
 
 int set_check_account_re(char account[]); //need to print error message
 
-int set_check_password_re(char password[]); //need to print error message
+//int set_check_password_re(char password[]); //need to print error message
 
 void add_reader(char name[], int id, char grade[], char email[], char account[],char password[]); //add into linked list
 
@@ -168,7 +169,7 @@ void interface_set_administrator(int option_ad, char name[], char account[], cha
 
 void set_check_account_ad(char account[]); // need to print error message
 
-void set_check_password_ad(char password[]); // need to print error message
+//void set_check_password_ad(char password[]); // need to print error message
 
 void add_administrator(char name[], char account[],char password[]); // add into structure
 
