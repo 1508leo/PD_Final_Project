@@ -7,7 +7,7 @@
 #include <ctype.h>
 
 int index_ad = 3; //trace the amount of administrator initialize 4 administrator
-int amount_books = 0; // trace the amount of books
+int index_books = 0; // trace the amount of books
 int accession_numer = 0; //record accession_number
 int amount_re = 0; // trace the amount of reader
 
