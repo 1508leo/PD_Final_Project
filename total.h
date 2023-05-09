@@ -6,10 +6,10 @@
 #include <string.h>
 #include <ctype.h>
 
-int amount_ad = 4; //initialize 4 administrator
-int amount_books = 0;
+int amount_ad = 4; //trace the amount of administrator initialize 4 administrator
+int amount_books = 0; // trace the amount of books
 int accession_numer = 0; //record accession_number
-int amount_re = 0;
+int amount_re = 0; // trace the amount of reader
 
 #define NO -1
 #define YES 1
