@@ -89,7 +89,6 @@ struct readers
     char **borrow_history;
     int credit;
     struct readers *next;
-    struct readers *prev;
     struct readers *link;
 };
 
