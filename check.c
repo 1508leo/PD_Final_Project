@@ -54,3 +54,65 @@ void add_reader(char name[], int id, char grade[], char email[], char account[],
         cur -> link = new_reader;
     } 
 }
+
+/* Check whether the account is existent */
+int in_check_account_ad(char account[])
+{
+    for(int i = 0; i < number_ad; i++)
+    {
+        if(strcmp(administrator[i].ad_account, account) == 0) // the account exist
+            return YES;
+    }
+    /* Account doesn't exist */
+    printf("\033[H\033[2J"); // clear the screen
+    printf("The account doesn't exist!\n\n");
+
+    return NO; // ask to enter again
+}
+
+/* Check whether the password is correct */
+int in_check_password_ad(char account[], char password[])
+{
+    for(int i = 0; i < number_ad; i++)
+    {
+        if(strcmp(administrator[i].ad_password, password) == 0) // the password is correct
+            return YES;
+    }
+    /* Password isn't correct */
+    printf("\033[H\033[2J"); // clear the screen
+    printf("Your password isn't correct!\n\n");
+    printf("Account: %s\n", account);
+    
+    return NO; // ask to enter again
+}
+
+/* Option_entry = BUTTON_SIGN_IN */
+void sign_in_administrator()
+{
+    char account[MAX_BUF], password[MAX_BUF];
+    int success=0; // to store the return value of checking function
+    while(1)
+    {
+        printf("Please enter your account: ");
+        scanf("%s", account);
+        success = in_check_account_ad(account); // check
+
+        if(success == NO) // "No" means the account doesn't exist
+            continue;
+        else
+            break; // account exist
+    }
+    
+    while(1)
+    {
+        
+        printf("Please enter your password: ");
+        scanf("%s", password);
+        success = in_check_password_ad(account, password);
+
+        if(success == NO) // "No" means the password isn't correct
+            continue;
+        else
+            break; // password is correct
+    }
+}

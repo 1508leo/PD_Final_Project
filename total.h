@@ -124,12 +124,12 @@ int set_check_account_re(char account[]); //need to print error message
 
 void add_reader(char name[], int id, char grade[], char email[], char account[],char password[]); //add into linked list
 
-void sign_in_administrator(int option_entry, char account[], char password[]);
+void sign_in_administrator();
 
 /* Check account first. If account doeasn't exist will not check password */
-void in_check_account_ad(char account[]); //need to print error message
+int in_check_account_ad(char account[]); //need to print error message
 
-void in_check_password_ad(char password[]); //need to print error message
+int in_check_password_ad(char account[], char password[]); //need to print error message
 
 void sign_in_reader(char account[], char password[]);
 
