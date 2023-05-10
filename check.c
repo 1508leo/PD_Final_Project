@@ -19,20 +19,21 @@ int set_check_account_re(char account[])
     return YES;
 }
 
+/* Add a node for new reader */
 void add_reader(char name[], int id, char grade[], char email[], char account[],char password[])
 {
     struct readers *new_reader;
 
     new_reader = malloc(sizeof(struct readers));
 
-    /* The type in struct is pointer */
+    /* The type in linked list is pointer */
     new_reader -> re_name = name;
     new_reader -> student_id = id;
     new_reader -> grade = grade;
     new_reader -> email = email;
     new_reader -> re_account = account;
     new_reader -> re_password = password;
-    new_reader -> credit = 100;
+    new_reader -> credit = 100; // initailize
     new_reader -> next = NULL;
     new_reader -> link = NULL;
     
@@ -42,6 +43,7 @@ void add_reader(char name[], int id, char grade[], char email[], char account[],
     }
     else
     {
+        /* Push back */
         struct readers *cur;
         cur = first;
         while(cur -> link != NULL)
