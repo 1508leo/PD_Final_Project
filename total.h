@@ -93,7 +93,7 @@ struct readers
     struct readers *link;
 };
 
-struct readers *first;
+struct readers *first = NULL;
 
 void sort_publish_year();
 
