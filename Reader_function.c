@@ -415,8 +415,3 @@ void reserve_book(int number, int number_book, int option_reserve)
     printf("| Error: Book %d not found. |\n", number);
     printf("=====================================\n");
 }
-int main()
-{
-    reader_mode();
-    return 0;
-}
