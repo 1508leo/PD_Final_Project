@@ -9,6 +9,7 @@ int set_check_account_re(char account[])
     {
         if(strcmp(check -> re_account, account) == 0)
         {
+            printf("\033[H\033[2J"); // clear the screen
             printf("The account has been registered!\n");
             printf("Please enter another one.\n");
             return NO;
