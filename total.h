@@ -131,12 +131,12 @@ int in_check_account_ad(char account[]); //need to print error message
 
 int in_check_password_ad(char account[], char password[]); //need to print error message
 
-void sign_in_reader(char account[], char password[]);
+void sign_in_reader();
 
 /* Check account first. If account doeasn't exist will not check password */
-void in_check_account_re(char account[]); //need to print error message
+int in_check_account_re(char account[]); //need to print error message
 
-void in_check_password_re(char password[]); //need to print error message
+int in_check_password_re(char account[], char password[]); //need to print error message
 
 /* Administrator mode */
 void administrator_mode(); //if mode == ADMINISTRATOR_MODE

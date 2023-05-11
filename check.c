@@ -117,3 +117,68 @@ void sign_in_administrator()
             break; // password is correct
     }
 }
+
+/* Check whether the account is existent */
+int in_check_account_re(char account[])
+{
+    struct readers *cur;
+    cur = first;
+    while(cur != NULL)
+    {
+        if(strcmp(cur -> re_account, account) == 0) // the account exist
+            return YES;
+        cur = cur -> link;
+    }
+    /* Account doesn't exist */
+    printf("\033[H\033[2J"); // clear the screen
+    printf("The account doesn't exist!\n\n");
+
+    return NO;
+}
+
+int in_check_password_re(char account[], char password[])
+{
+    struct readers *cur;
+    cur = first;
+    while(cur != NULL)
+    {
+        if(strcmp(cur -> re_password, password) == 0)
+            return YES;
+        cur = cur -> link;
+    }
+    /* Password isn't correct */
+    printf("\033[H\033[2J"); // clear the screen
+    printf("Your password isn't correct!\n\n");
+    printf("Account: %s\n", account);
+    
+    return NO; // ask to enter again
+}
+
+void sign_in_reader()
+{
+    char account[MAX_BUF], password[MAX_BUF];
+    int success = 0;
+    while(1)
+    {
+        printf("Please enter your account: ");
+        scanf("%s", account);
+        success = in_check_account_re(account);
+
+        if(success == NO) // "No" means the account doesn't exist
+            continue;
+        else
+            break; // account exist
+    }
+
+    while(1)
+    {
+        printf("Please enter your password: ");
+        scanf("%s", password);
+        success = in_check_password_re(account, password);
+
+        if(success == NO) // "No" means the account doesn't exist
+            continue;
+        else
+            break; // account exist
+    }
+}
