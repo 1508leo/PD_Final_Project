@@ -2,6 +2,7 @@
 1.return_book 跟 lend_book這兩個函數的功能是不是重複了？
 2.total.h中能不能幫我添加管理員編號？modify_ad_information 這個函數中需要用到。
 3.account是否有存在的必要？我覺得只要有讀者名字跟密碼就夠了，account 的功能看起來只是像另一組密碼。
+4.delete_book這個函數中需要呼叫review_library跟自己，但編譯不過，可能的原因是什麼?
 */
 #include "total.h"
 void administrator_mode(){
@@ -27,6 +28,7 @@ void administrator_mode(){
 void review_library(int option_ad, int option_sort){ //印出所有的書
     for (int i = 0; i < MAX_BUF; i++)
     {
+        if(book[i].book_name == 'deleted') continue;//已被刪除的書書名會是deleted，若遇到，跳過
         if (book[i].book_name != NULL)
         {
             printf("=================================================================================================================\n");
@@ -64,8 +66,32 @@ void add_book(char book_name[], char aurthor[], char translator[],char publisher
     scanf(" %s",book[i].isbn);
 }
 
-void delete_book(char book_name[], int optiont_shure); //show every book first(use search_book_name()). To make sure whether the book you want to delete
-
+void delete_book(char book_name[], int optiont_shure){ //show every book first(use search_book_name()). To make sure whether the book you want to delete
+    review_library();//先印出所有的書
+    printf("enter the book name which book you want to delete");
+    char tmp_book_name[30];
+    scanf(" %s",tmp_book_name);
+    for (int i = 0; i < MAX_BUF; i++)
+    {
+        if(strcmp(book[i].book_name,tmp_book_name)==0){
+            gotolable://輸入錯誤訊息時跳至這裡
+            printf("Warning! Are you sure you want to deleted this book? y/n");
+            char oper[2];
+            scanf("%c",oper);
+            if(oper == 'y'){
+                book[i].book_name = 'deleted';//將書籍名稱設為已被刪除
+                break;
+            }
+            else if(oper == 'n'){
+                delete_book();//重新開啟這個function
+            }
+            else{
+                printf("wrong operation!\n");
+                goto gotolable;
+            }
+        }
+    }
+}
 /* While checking borrowing, you can return book */
 void check_borrowing(int option_ad, int number_book){//印出所有已被借出的書
     for (int i = 0; i < MAX_BUF; i++)
