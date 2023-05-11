@@ -37,6 +37,7 @@ void add_reader(char name[], int id, char grade[], char email[], char account[],
     new_reader -> credit = 100; // initailize
     new_reader -> next = NULL;
     new_reader -> link = NULL;
+    amount_re++;
     
     if(first == NULL)
     {
