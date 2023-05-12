@@ -53,6 +53,11 @@ int amount_re = 0; // trace the amount of reader
 #define BUTTON_POPULAR 480
 #define BUTTON_RESERVE 400
 
+#define BUTTON_SORT_YEAR 510
+#define BUTTON_SORT_CALL 520
+#define BUTTON_SORT_VIEWER 530
+#define BUTTON_SORT_ACCESSION 540
+
 struct books 
 {
     char *book_name;
@@ -96,7 +101,7 @@ struct readers *first = NULL;
 
 void sort_publish_year();
 
-void sort_amount();
+//void sort_amount();
 
 void sort_call_number();
 
