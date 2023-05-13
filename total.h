@@ -7,12 +7,15 @@
 #include <ctype.h>
 
 int number_ad = 4; //trace the amount of administrator initialize 4 administrator
-int index_books = 0; // trace the amount of books
+int amount_books = 0; // trace the amount of books
 int accession_numer = 0; //record accession_number
 int amount_re = 0; // trace the amount of reader
 
 #define NO -1
 #define YES 1
+
+#define LARGE 10
+#define SMALL 11
 
 #define MAX_BUF 4096
 #define ADMINISTRATOR_MODE 2
