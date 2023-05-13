@@ -3,9 +3,7 @@ TODO:
     1)Check personal information
     2)Testing all functions
 */
-#include "fp_headerfile.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "total.h"
 
 void reader_mode()
 {
