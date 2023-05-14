@@ -126,6 +126,7 @@ void check_re_information(int option_ad){
         printf("================================================================================================= \n");
         printf(" %s | %d | %s | %s | %s | %s | %s | %d",current->re_name,current->student_id,current->grade,current->email,
                current->re_account,current->re_password,current->borrow_history,current->credit);
+        current = current->next;
     }
 }
 
