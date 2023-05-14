@@ -96,7 +96,7 @@ void delete_book(char book_name[], int optiont_shure){ //show every book first(u
 void check_borrowing(int option_ad, int number_book){//印出所有已被借出的書
     for (int i = 0; i < MAX_BUF; i++)
     {
-        if (book[i].book_name != NULL && book[i].borrower != NULL)
+        if (book[i].book_name != NULL && book[i].accession_number != NULL)
         {
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
