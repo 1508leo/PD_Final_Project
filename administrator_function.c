@@ -7,7 +7,7 @@
 #include "total.h"
 void administrator_mode(){
     int option_ad; // 這裡的變數是用來選擇要做什麼事情的
-    printf("=====================================");
+    printf("=====================================\n");
     printf("|What would you like to do?         |\n");
     printf("|1. review_library                  |\n");
     printf("|2. add book or delete book         |\n");
@@ -17,7 +17,7 @@ void administrator_mode(){
     printf("|6. lend book                       |\n");
     printf("|7. add administrator               |\n");
     printf("|8. Exit                            |\n");
-    printf("=====================================");
+    printf("=====================================\n");
     printf("Please enter an option: ");
     scanf("%d", &option_ad); // 輸入要做什麼事情
     interface_re(option_ad); // 請開始做事情
