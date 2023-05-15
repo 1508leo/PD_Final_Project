@@ -68,12 +68,12 @@ struct books
     char *translator;
     char *publisher;
     int publish_year;
-    int amount;        //amount might larger than 1
+    int amount;        //amount 
     float call_number;
     char *isbn;
     int viewer_count;
     int accession_number;
-    char **borrower;
+    char *borrower;
     int expiry_date[MAX_BUF];
 
 }book[MAX_BUF];
@@ -94,7 +94,7 @@ struct readers
     char *email;
     char *re_account;
     char *re_password;
-    char **borrow_history;
+    char *borrow_history;
     int credit;
     struct readers *next;
     struct readers *link;
@@ -149,30 +149,30 @@ int in_check_password_re(char account[], char password[]); //need to print error
 /* Administrator mode */
 void administrator_mode(); //if mode == ADMINISTRATOR_MODE
 
-void interface_ad(int option_ad); // contain 8 buttons ( include exit button )
+void interface_ad(); // contain 8 buttons ( include exit button )
 
-void review_library(int option_ad, int option_sort); //show every book, can decide the way to 
+void review_library(int option_sort); //show every book, can decide the way to 
 
-void interface_add_delete(int option_ad, int option_crease); //add or delete
+void interface_add_delete(int option_crease); //add or delete
 
 void add_book(char book_name[], char aurthor[], char translator[],char publisher[], int publish_year, float call_number, char isbn[]);
 
 void delete_book(char book_name[], int optiont_shure); //show every book first(use search_book_name()). To make sure whether the book you want to delete
 
 /* While checking borrowing, you can return book */
-void check_borrowing(int option_ad, int number_book); //show every borrowed books
+void check_borrowing( int number_book); //show every borrowed books
 
 void return_book(int number, int number_book); // use number to choose the book to return
 
-void check_re_information(int option_ad);
+void check_re_information();
 
 void modify_re_information(int option_number); // modify or delete reader information
 
-void check_ad_information(int option_ad); 
+void check_ad_information(); 
 
 void modify_ad_information(int number, int option_number); // delete administrator information
 
-void interface_set_administrator(int option_ad, char name[], char account[], char password[]); //get the information
+void interface_set_administrator(char name[], char account[], char password[]); //get the information
 
 void set_check_account_ad(char account[]); // need to print error message
 
@@ -180,14 +180,14 @@ void set_check_account_ad(char account[]); // need to print error message
 
 void add_administrator(char name[], char account[],char password[]); // add into structure
 
-void lend_book(int option_ad, char book_name[], char name[]); // change the status of book
+void lend_book(char book_name[], char name[]); // change the status of book
 
 /* Reader mode*/
 void reader_mode(); // if mode == READER_MODE
 
 void interface_re(int option_re); // contain 9 buttons ( include exit button )
 
-void check_personal_information(int option_re);
+void check_personal_information();
 
 /* Search every book which contain the same string in searching */
 /* Decided by option_re */
