@@ -17,6 +17,7 @@ int amount_re = 0; // trace the amount of reader
 #define LARGE 10
 #define SMALL 11
 
+#define SPACE 100
 #define MAX_BUF 4096
 #define ADMINISTRATOR_MODE 2
 #define READER_MODE 3
@@ -63,41 +64,40 @@ int amount_re = 0; // trace the amount of reader
 
 struct books 
 {
-    char *book_name;
-    char *author;
-    char *translator;
-    char *publisher;
+    char book_name[SPACE];
+    char author[SPACE];
+    char translator[SPACE];
+    char publisher[SPACE];
     int publish_year;
     int amount;        //amount 
     float call_number;
-    char *isbn;
+    char isbn[SPACE];
     int viewer_count;
     int accession_number;
-    char *borrower;
-    int expiry_date[MAX_BUF];
+    char borrower[SPACE];
+    int expiry_date;
 
 }book[MAX_BUF];
 
 struct administrators
 {
-    char *ad_name;
-    char *ad_account;
-    char *ad_password;
-} administrator[MAX_BUF];
+    char ad_name[SPACE];
+    char ad_account[SPACE];
+    char ad_password[SPACE];
+} administrator[SPACE];
 
 
 struct readers
 {
-    char *re_name;
+    char re_name[SPACE];
     int student_id;
-    char *grade; 
-    char *email;
-    char *re_account;
-    char *re_password;
-    char *borrow_history;
+    char grade[SPACE]; 
+    char email[SPACE];
+    char re_account[SPACE];
+    char re_password[SPACE];
+    char borrow_history[SPACE];
     int credit;
     struct readers *next;
-    struct readers *link;
 };
 
 struct readers *first = NULL;
