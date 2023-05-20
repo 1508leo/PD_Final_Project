@@ -11,6 +11,8 @@ int amount_books = 0; // trace the amount of books
 int accession_numer = 0; //record accession_number
 int amount_re = 0; // trace the amount of reader
 
+FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
+
 #define NO -1
 #define YES 1
 
