@@ -6,11 +6,12 @@
 | WISHING Due date: 5.28.2023 Sunday (Myself) |
 -----------------------------------------------
 */
-#include "total.h"
+
+ #include "total.h"
 
 void reader_mode()
 {
-    int option_re; // 這裡的變數是用來選擇要做什麼事情的
+    int option_re; 
     printf("=============================\n");
     printf("| What would you like to do?|\n");
     printf("| 1. Search by book name    |\n");
@@ -24,8 +25,8 @@ void reader_mode()
     printf("| 9. Exit                   |\n");
     printf("=============================\n");
     printf("Please enter an option: ");
-    scanf("%d", &option_re); // 輸入要做什麼事情
-    interface_re(option_re); // 請開始做事情
+    scanf("%d", &option_re); 
+    interface_re(option_re); // 輸入
 }
 
 void search_book_name(char book_name[])
@@ -46,23 +47,30 @@ void search_book_name(char book_name[])
             }
         }
     }
+    int variable = 0;
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_book_name[i], book_name) != NULL)
         {
-            book[i].viewer_count++;
+            variable = i;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
+                   book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
             printf("=================================================================================================================\n");
-            a = 1; // 有找到書
+            a = 1;
         }
     }
+
+    for (int j = 0; j < variable; j++)
+    {
+        book[j].viewer_count = book[j].viewer_count--;
+    }
+
     if (a == 0)
-    { // 沒找到書
+    {
         printf("===================================\n");
         printf("| Sorry, There is no books found. |\n");
         printf("===================================\n");
@@ -71,7 +79,7 @@ void search_book_name(char book_name[])
 
 void search_popular(void)
 {
-    int most_viewer_count = viewer_count;
+    int most_viewer_count = 0;
     for (int i = 0; i < MAX_BUF; i++)
     {
         if (book[i].viewer_count >= most_viewer_count)
@@ -107,12 +115,12 @@ void check_personal_information(void)
 void interface_re(int option_re)
 {
     if (option_re == BUTTON_BOOK_NAME)
-    { // 410是用來判斷是否為搜尋書籍的選項
+    { // 410??��?��????��?��?��?��?��??�???��???????��??
         printf("Enter book name: ");
         char search[MAX_BUF];
         fflush(stdin);
         while (fgets(search, MAX_BUF, stdin) != NULL)
-        { // 預防空格
+        { // ?????�空???
             if (search[strlen(search) - 1] == '\n')
                 search[strlen(search) - 1] = '\0';
             break;
@@ -133,7 +141,7 @@ void interface_re(int option_re)
         char author[MAX_BUF];
         fflush(stdin);
         while (fgets(author, MAX_BUF, stdin) != NULL)
-        { // 預防空格
+        { // ?????�空???
             if (author[strlen(author) - 1] == '\n')
                 author[strlen(author) - 1] = '\0';
             break;
@@ -153,7 +161,7 @@ void interface_re(int option_re)
         char publisher[MAX_BUF];
         fflush(stdin);
         while (fgets(publisher, MAX_BUF, stdin) != NULL)
-        { // 預防空格
+        { // ?????�空???
             if (publisher[strlen(publisher) - 1] == '\n')
                 publisher[strlen(publisher) - 1] = '\0';
             break;
@@ -173,7 +181,7 @@ void interface_re(int option_re)
         char call_number[SPACE];
         fflush(stdin);
         while (fgets(call_number, MAX_BUF, stdin) != NULL)
-        { // 預防空格
+        { // ?????�空???
             if (call_number[strlen(call_number) - 1] == '\n')
                 call_number[strlen(call_number) - 1] = '\0';
             break;
@@ -193,7 +201,7 @@ void interface_re(int option_re)
         fflush(stdin);
         char isbn[MAX_BUF];
         while (fgets(isbn, MAX_BUF, stdin) != NULL)
-        { // 預防空格
+        { // ?????�空???
             if (isbn[strlen(isbn) - 1] == '\n')
                 isbn[strlen(isbn) - 1] = '\0';
             break;
@@ -214,10 +222,10 @@ void interface_re(int option_re)
     if (option_re == BUTTON_RESERVE)
     {
         printf("Enter book name: ");
-        fflush(stdin);
+        fflush(stdin);//清除鍵盤輸入
         char book_name_reserve[MAX_BUF];
         while (fgets(book_name_reserve, MAX_BUF, stdin) != NULL)
-        { // 預防空格
+        { // 避免空白輸入
             if (book_name_reserve[strlen(book_name_reserve) - 1] == '\n')
                 book_name_reserve[strlen(book_name_reserve) - 1] = '\0';
             break;
@@ -265,23 +273,27 @@ void search_author(char author[])
             }
         }
     }
-    int error = 0;
+    int error = 0, var = 0;
     // search for books with matching authors
 
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_author[i], author) != NULL)
         {
-            book[i].viewer_count++;
+            var = i;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
+                   book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
             printf("=================================================================================================================\n");
             error = 1;
         }
+    }
+    for(int j = 0; j < var; j++)
+    {
+        book[j].viewer_count--;
     }
     // print message if no matches found
     if (error == 0)
@@ -311,22 +323,25 @@ void search_publisher(char publisher[])
     }
     int error = 0;
     // count the number of books that match the search criteria
+    int var = 0;
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_publisher[i], publisher) != NULL)
         {
-            book[i].viewer_count++;
+            var = i;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
+                   book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
             printf("=================================================================================================================\n");
             error = 1;
         }
     }
-
+    for(int j=0; j < var; j++){
+        book[j].viewer_count--;
+    }
     // check if any books were found
     if (error == 0)
     {
@@ -353,24 +368,27 @@ void search_call_number(char call_number[])
             }
         }
     }
-    int num_books = 0;
+    int num_books = 0, var = 0;
     // count the number of books that match the search criteria
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_call[i], call_number) != NULL)
         {
-            book[i].viewer_count++;
+            var = i;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
             printf("|%s|%s|%s|%d|%d|%s|%s|%d|%d|\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
+                   book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
             printf("=================================================================================================================\n");
             num_books = 1;
         }
     }
 
+    for(int j=0; j < var; j++){
+        book[j].viewer_count--;
+    }
     // check if any books were found
     if (num_books == 0)
     {
@@ -397,7 +415,7 @@ void search_isbn(char isbn[])
             }
         }
     }
-    int error = 0;
+    int error = 0, var = 0;
     // count the number of books that match the search criteria
     for (int i = 0; i < SPACE; i++)
     {
@@ -409,12 +427,14 @@ void search_isbn(char isbn[])
             printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
+                   book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
             printf("=================================================================================================================\n");
             error = 1;
         }
     }
-
+    for(int j=0; j < var; j++){
+        book[j].viewer_count--;
+    }
     // check if any books were found
     if (error == 0)
     {
