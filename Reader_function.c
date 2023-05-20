@@ -50,6 +50,7 @@ void search_book_name(char book_name[])
     {
         if (strstr(temporary_book_name[i], book_name) != NULL)
         {
+            book[i].viewer_count++;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
@@ -68,23 +69,20 @@ void search_book_name(char book_name[])
     }
 }
 
-void search_viewer_count(void)
+void search_popular(void)
 {
-    int most_viewer_count;
-    scanf("%d", &most_viewer_count);
-    int most_viewer_count_index;
-    scanf("%d", &most_viewer_count_index);
+    int most_viewer_count = viewer_count;
     for (int i = 0; i < MAX_BUF; i++)
     {
-        if (book[i].viewer_count > most_viewer_count)
+        if (book[i].viewer_count >= most_viewer_count)
         {
             most_viewer_count = book[i].viewer_count;
-            most_viewer_count_index = i;
+            printf("========================================================================\n");
+            printf("| The most viewer count is %d, and the book name is %s! |\n", most_viewer_count, book[i].book_name);
+            printf("========================================================================\n");
         }
     }
-    printf("========================================================================\n");
-    printf("| The most viewer count is %d, and the book name is %s! |\n", most_viewer_count, book[most_viewer_count_index].book_name);
-    printf("========================================================================\n");
+
     return;
 }
 
@@ -209,11 +207,7 @@ void interface_re(int option_re)
     }
     if (option_re == BUTTON_POPULAR)
     {
-        printf("Enter viewer count: ");
-        fflush(stdin);
-        int viewer_count;
-        scanf("%d", &viewer_count);
-        search_viewer_count();
+        search_popular();
     }
     if (option_re == BUTTON_RESERVE)
     {
@@ -276,6 +270,7 @@ void search_author(char author[])
     {
         if (strstr(temporary_author[i], author) != NULL)
         {
+            book[i].viewer_count++;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
@@ -318,6 +313,7 @@ void search_publisher(char publisher[])
     {
         if (strstr(temporary_publisher[i], publisher) != NULL)
         {
+            book[i].viewer_count++;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
@@ -361,6 +357,7 @@ void search_call_number(char call_number[])
     {
         if (strstr(temporary_call[i], call_number) != NULL)
         {
+            book[i].viewer_count++;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
@@ -404,6 +401,7 @@ void search_isbn(char isbn[])
     {
         if (strstr(temporary_isbn[i], isbn) != NULL)
         {
+            book[i].viewer_count++;
             printf("=================================================================================================================\n");
             printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
             printf("=================================================================================================================\n");
