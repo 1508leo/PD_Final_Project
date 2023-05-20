@@ -1,63 +1,3 @@
-/*
-=========================================================
-| TODO: Ensuring without "ANY" bugs  and errors appear. |
-=========================================================
-
------------------------------------------------
-| WISHING Due date: 5.28.2023 Sunday (Myself) |
------------------------------------------------
-
-=============================
-reader_mode()
-search_book_name()
-search_publisher()
-search_author()
-search_ISBN()
-show_book()
-search_viewer_count()
-interface_re()
-check_personal_information()
-reserve_book()
-=============================
-進度：
-  小目標：使用者輸入“任意”大小寫都可以找到書 (已測試成功)
-  測資：
-    strcpy(book[0].book_name, "The C Programming"); // book[0].book_name = "The C Programming";
-    strcpy(book[1].book_name, "The Java Programming");
-    strcpy(book[2].book_name, "The Swift Programming");
-    strcpy(book[0].author, "K&R");
-    strcpy(book[1].author, "Bjarne Stroustrup");
-    strcpy(book[2].author, "James Gosling");
-    strcpy(book[0].publisher, "Prentice Hall");
-    strcpy(book[1].publisher, "Addison-Wesley");
-    strcpy(book[2].publisher, "Addison-Wesley");
-    book[0].publish_year = 1978;
-    book[1].publish_year = 1985;
-    book[2].publish_year = 1995;
-    book[0].amount = 10;
-    book[1].amount = 20;
-    book[2].amount = 30;
-    strcpy(book[0].isbn, "0-13-110163-3");
-    strcpy(book[1].isbn, "0-201-12078-X");
-    strcpy(book[2].isbn, "0-201-54834-8");
-    strcpy(book[0].call_number, "QA76.73C15K45");
-    strcpy(book[1].call_number, "QA76.73J38S77");
-    strcpy(book[2].call_number, "QA76.73J38S77");
-    book[0].viewer_count = 0;
-    book[1].viewer_count = 0;
-    book[2].viewer_count = 0;
-    book[0].accession_number = 0;
-    book[1].accession_number = 1;
-    book[2].accession_number = 2;
-    (這裡有三本程式書籍的資料)
-====================================
-誌謝：
-  謝謝翔鈞的二維陣列，讓使用者輸入“任意”大小寫都可以找到書，萬分感謝！🫡
-====================================
-  最近早上六點趕工，晚上十二點睡覺，我真的很累，但我還是會繼續努力的，我會繼續加油的！(2023.5.19)感謝Copilot胃蟲!!!
-      5.19.2023 Friday 23:30
-*/
-
 #include "total.h"
 
 void reader_mode()
@@ -149,9 +89,10 @@ void check_personal_information(void)
         printf("=================================================================================================\n");
         printf("| Reader name | student_id | grade | email | re_account | re_password | borrow_history | credit |\n");
         printf("================================================================================================= \n");
-        printf(" %s | %d | %s | %s | %s | %s | %s | %d", current->re_name, current->student_id, current->grade, current->email,
+        printf("| %s | %d | %s | %s | %s | %s | %s | %d |", current->re_name, current->student_id, current->grade, current->email,
                current->re_account, current->re_password, current->borrow_history, current->credit);
         current = current->next;
+        printf("=================================================================================================\n");
     }
     return;
 }
