@@ -78,12 +78,14 @@ void search_popular(void)
         {
             most_viewer_count = book[i].viewer_count;
             printf("========================================================================\n");
-            printf("| The most viewer count is %d, and the book name is %s! |\n", most_viewer_count, book[i].book_name);
+            printf("| Book name | Author | Publisher | Publish year | Amount | Call number |\n");
+            printf("========================================================================\n");
+            printf("| %s | %s | %s | %d | %d | %s |\n", book[i].book_name, book[i].author,
+                   book[i].publisher, book[i].publish_year, book[i].amount,
+                   book[i].call_number);
             printf("========================================================================\n");
         }
     }
-
-    return;
 }
 
 void check_personal_information(void)
