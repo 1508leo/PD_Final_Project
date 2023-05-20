@@ -1,3 +1,8 @@
+/*5/20更新問題
+未完成:
+1.return_book 和lend_book
+2.set_check_account_ad 和 set_check_password_ad
+*/
 #include "total.h"
 void administrator_mode(){
     int option_ad; // 這裡的變數是用來選擇要做什麼事情的
@@ -46,7 +51,6 @@ void add_book(){
         printf("Library is full. Cannot add more books.\n");
         return;
     }
-
     printf("enter the book_name: ");
     scanf(" %s",book[i].book_name);
 
@@ -140,45 +144,67 @@ void check_re_information(int option_ad){
     }
 }
 
-void modify_re_information(int option_number){//這個函數目前還缺刪除讀者的功能
+void modify_re_information(int option_number){
     struct readers *current = first;
-
+    struct readers *prev = NULL;
     printf("enter the reader name which you want to modify:\n");
     char temp_reader_name[30];
     scanf(" %s",temp_reader_name);//輸入想查找的名稱
 
     int oper = 0; // 選擇器，0 表示找不到目標名字
     while (current != NULL) {
-        if (strcmp(current->re_name, temp_reader_name) == 0) { // 若找到，則進行修改
-            printf("Enter the new information for the reader:\n");
-            printf("please enter re_name: ");
-            scanf(" %s",current->re_name);
+        if (strcmp(current->re_name, temp_reader_name) == 0) { // 尋找指定讀者
+            printf("Enter 1 if you want to modify information for the reader\n");
+            printf("Enter 2 if you want to delete information for the reader: ");
 
-            printf("please enter student_id: ");
-            scanf(" %d",&(current->student_id));
+            int operation ;//選擇器 選擇要修該資料還刪除資料
+            scanf("%d",&operation);
+            if(operation == 1){//修改資料
+                printf("Enter the new information for the reader:\n");
+                printf("please enter reader name: ");
+                scanf(" %s",current->re_name);
 
-            printf("please enter grade: ");
-            scanf(" %s",current->grade);
+                printf("please enter student id: ");
+                scanf(" %d",&(current->student_id));
 
-            printf("please enter email: ");
-            scanf(" %s",current->email);
+                printf("please enter grade: ");
+                scanf(" %s",current->grade);
 
-            printf("please enter re_account: ");
-            scanf(" %s",current->re_account);
+                printf("please enter email: ");
+                scanf(" %s",current->email);
 
-            printf("please enter re_password: ");
-            scanf(" %s",current->re_password);
+                printf("please enter reader account: ");
+                scanf(" %s",current->re_account);
 
-            printf("please enter borrow_history: ");
-            scanf(" %s",current->borrow_history);
+                printf("please enter reader password: ");
+                scanf(" %s",current->re_password);
 
-            printf("please enter credit: ");
-            scanf("%d",&(current->credit));
+                printf("please enter borrow history: ");
+                scanf(" %s",current->borrow_history);
 
-            oper = 1; // 找到目標名字
-            break;
+                printf("please enter credit: ");
+                scanf("%d",&(current->credit));
+
+                oper = 1; // 找到目標名字
+                break;
+            }
+            else if(operation == 2){//刪除讀者
+                if (prev == NULL)  first = current->next;//要刪除的是第一位讀者
+                else prev->next = current->next;
+                free(current);
+                oper = 1; // 找到目標名字並修改成功
+                printf("delete OK!\n");
+                break;
+            }
+            else{//錯誤輸入
+                printf("wrong operation!\n");
+                break;
+            }
         }
-        else  current = current->next;
+        else{
+            prev = current;
+            current = current->next;
+        }
     }
 
     if (oper == 0)  printf("No such reader!\n"); //若整個迴圈跑完都沒找到目標名字
@@ -201,21 +227,44 @@ void modify_ad_information(int number, int option_number){ // 這個函數目前
     scanf("%d",&id);
 
     if (id >= 0 && id < number_ad) {
-        printf("information of this administrator\n");
+        printf("information of this administrator\n");//列出資料
         printf("======================================\n");
         printf("| ad_name | ad_account | ad_password |\n");
         printf("======================================\n");
         printf("%s | %s | %s\n", administrator[id].ad_name, administrator[id].ad_account, administrator[id].ad_password);
 
-        printf("Enter the new information for the administrator:\n");
-        printf("New name: ");
-        scanf(" %s", administrator[id].ad_name);
 
-        printf("New account: ");
-        scanf(" %s", administrator[id].ad_account);
+        printf("Enter 1 if you want to modify information for the administrator\n");//選擇修改or刪除
+        printf("Enter 2 if you want to delete information for the administrator: ");
 
-        printf("New password: ");
-        scanf(" %s", administrator[id].ad_password);
+        int operation ;//選擇器 選擇要修該資料還刪除資料
+        scanf("%d",&operation);
+        if(operation == 1){//修該資料
+            printf("Enter the new information for the administrator:\n");
+            printf("New name: ");
+            scanf(" %s", administrator[id].ad_name);
+
+            printf("New account: ");
+            scanf(" %s", administrator[id].ad_account);
+
+            printf("New password: ");
+            scanf(" %s", administrator[id].ad_password);
+        }
+        else if(operation == 2){//刪除資料
+            number_ad--;//管理員總人數減1
+            for (int i = id; i < number_ad - 1; i++) { // 往前移一格
+                strcpy(administrator[i].ad_name, administrator[i + 1].ad_name);
+                strcpy(administrator[i].ad_account, administrator[i + 1].ad_account);
+                strcpy(administrator[i].ad_password, administrator[i + 1].ad_password);
+            }
+            strcpy(administrator[number_ad].ad_name, "");
+            strcpy(administrator[number_ad].ad_account, "");
+            strcpy(administrator[number_ad].ad_password, "");
+        }
+        else {//錯誤輸入
+            printf("wrong operation!\n");
+            //break;
+        }
     }
     else  printf("Invalid administrator ID!\n");
 }
