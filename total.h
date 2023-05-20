@@ -197,7 +197,7 @@ void search_author(char author[]);
 
 void search_publisher(char publisher[]);
 
-void search_call_number(float call_number[]);
+void search_call_number(char call_number[]);
 
 void search_isbn(char isbn[]);
 
