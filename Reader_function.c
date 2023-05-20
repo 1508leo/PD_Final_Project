@@ -290,7 +290,7 @@ void search_author(char author[])
             error = 1;
         }
     }
-    for(int j = 0; j < var; j++)
+    for (int j = 0; j < var; j++)
     {
         book[j].viewer_count--;
     }
@@ -338,7 +338,8 @@ void search_publisher(char publisher[])
             error = 1;
         }
     }
-    for(int j=0; j < var; j++){
+    for (int j = 0; j < var; j++)
+    {
         book[j].viewer_count--;
     }
     // check if any books were found
@@ -385,7 +386,8 @@ void search_call_number(char call_number[])
         }
     }
 
-    for(int j=0; j < var; j++){
+    for (int j = 0; j < var; j++)
+    {
         book[j].viewer_count--;
     }
     // check if any books were found
@@ -431,7 +433,8 @@ void search_isbn(char isbn[])
             error = 1;
         }
     }
-    for(int j=0; j < var; j++){
+    for (int j = 0; j < var; j++)
+    {
         book[j].viewer_count--;
     }
     // check if any books were found
@@ -477,46 +480,62 @@ void reserve_book(char number_book[], int option_reserve)
     char temporary_number_book[SPACE][SPACE];
     for (int i = 0; i < SPACE; i++)
     {
-        strcpy(temporary_number_book[i], number_book);
+        strcpy(temporary_number_book[i], book[i].book_name);
     }
-    // reserve book 1:�???? 2:�?�????
-    //  search for the book to be reserved
     for (int i = 0; i < SPACE; i++)
     {
-        if (option_reserve == 1)
+        for (int j = 0; j < SPACE; j++)
         {
-            if (book[i].amount > 0)
+            if (temporary_number_book[i][j] >= 'A' && temporary_number_book[i][j] <= 'Z')
             {
-                book[i].amount--;
+                temporary_number_book[i][j] += 32;
+            }
+        }
+    }
+    if (option_reserve == 1)
+    {
+        for (int i = 0; i < SPACE; i++)
+        {
+            if (strstr(temporary_number_book[i], number_book) != NULL)
+            {
                 printf("==================================================================\n");
                 printf("| Book  %s  reserved successfully. |\n", book[i].book_name);
                 printf("==================================================================\n");
+                book[i].amount = 1;
             }
             else
             {
-                printf("===========================================================================\n");
-                printf("| Error: Book %s is currently unavailable. |\n", book[i].book_name);
-                printf("===========================================================================\n");
+                printf("=====================================\n");
+                printf("| Error: Book %s not found. |\n", number_book);
+                printf("=====================================\n");
+                break;
             }
         }
-        else if (option_reserve == 2)
+    }
+    if (option_reserve == 2)
+    {
+        for (int i = 0; i < SPACE; i++)
         {
-            book[i].amount++;
-            printf("===================================================================\n");
-            printf("| Book %s unreserved successfully. |\n", book[i].book_name);
-            printf("===================================================================\n");
+            if (strstr(temporary_number_book[i], number_book) != NULL)
+            {
+                printf("===================================================================\n");
+                printf("| Book %s unreserved successfully. |\n", book[i].book_name);
+                printf("===================================================================\n");
+                book[i].amount = 0;
+            }
+            else
+            {
+                printf("=====================================\n");
+                printf("| Error: Book %s not found. |\n", number_book);
+                printf("=====================================\n");
+                break;
+            }
         }
-        else if (option_reserve > 2 || option_reserve < 1)
-        {
-            printf("=================================\n");
-            printf("| Your option is not available. |\n");
-            printf("=================================\n");
-        }
-        else
-        {
-            printf("=====================================\n");
-            printf("| Error: Book %s not found. |\n", temporary_number_book[i]);
-            printf("=====================================\n");
-        }
+    }
+    if (option_reserve > 2 || option_reserve < 1)
+    {
+        printf("=================================\n");
+        printf("| Your option is not available. |\n");
+        printf("=================================\n");
     }
 }
