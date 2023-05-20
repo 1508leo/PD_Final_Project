@@ -27,7 +27,7 @@ void add_reader(char name[], int id, char grade[], char email[], char account[],
 
     new_reader = malloc(sizeof(struct readers));
 
-    /* The type in linked list is pointer */
+    /* The type in linked list is array */
     strcpy(new_reader -> re_name, name);
     new_reader -> student_id = id;
     strcpy(new_reader -> grade, grade);
