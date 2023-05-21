@@ -144,7 +144,8 @@ void return_book()
     }
 } // use number to choose the book to return
 
-void check_re_information(int option_ad){
+void check_re_information(int option_ad)
+{
     /*char *re_name;
         int student_id;
         char *grade;
