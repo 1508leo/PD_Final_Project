@@ -5,7 +5,7 @@ FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
 void input_file()
 {
     /* Open the amount.txt. Which store the amount of administrators, books, accession number, and readers */
-    if((fp_amount = fopen("amount.txt", "r+")) == NULL) // r+ can read and write.  
+    if((fp_amount = fopen("amount.txt", "r+")) == NULL) // r+ can read and write. The file needs to exist 
     {
         printf("Open amount.txt fail\n"); // Error message
         exit(0);
@@ -15,7 +15,7 @@ void input_file()
     fscanf(fp_amount ,"%d %d %d %d", &number_ad, &amount_books, &accession_numer, &number_ad);
 
     /* Open administrator.txt. Which store the information of every administrator */
-    if((fp_administrator = fopen("administrator.txt", "r+")) == NULL) // r+ can read and write
+    if((fp_administrator = fopen("administrator.txt", "r+")) == NULL) // r+ can read and write. The file needs to exist 
     {
         printf("Open administrator.txt fail\n"); // Error message
         exit(0);
@@ -25,7 +25,7 @@ void input_file()
     fread(administrator, sizeof(struct administrators), number_ad, fp_administrator);
 
     /* Open book.txt. Which store the information of every book */
-    if((fp_book = fopen("book.txt", "r+")) == NULL) // r+ can read and write
+    if((fp_book = fopen("book.txt", "r+")) == NULL) // r+ can read and write. The file needs to exist 
     {
         printf("Open book.txt fail\n"); // Error message
         exit(0);
@@ -35,7 +35,7 @@ void input_file()
     fread(book, sizeof(struct books), amount_books, fp_book); 
 
     /* Open reader.txt. Which store the information of every reader */
-    if((fp_reader = fopen("reader.txt", "r+")) == NULL) // r+ can read and write
+    if((fp_reader = fopen("reader.txt", "r+")) == NULL) // r+ can read and write. The file needs to exist 
     {
         printf("Open reader.txt fail\n"); // Error message
     }
