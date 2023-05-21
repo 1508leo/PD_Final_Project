@@ -47,14 +47,14 @@ void search_book_name(char book_name[])
         }
     }
     int variable = 0;
+    printf("=================================================================================================================\n");
+    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
+    printf("=================================================================================================================\n");
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_book_name[i], book_name) != NULL)
         {
             variable = i;
-            printf("=================================================================================================================\n");
-            printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-            printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
                    book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
@@ -79,14 +79,14 @@ void search_book_name(char book_name[])
 void search_popular(void)
 {
     int most_viewer_count = 0;
+    printf("========================================================================\n");
+    printf("| Book name | Author | Publisher | Publish year | Amount | Call number |\n");
+    printf("========================================================================\n");
     for (int i = 0; i < MAX_BUF; i++)
     {
         if (book[i].viewer_count > most_viewer_count)
         {
             most_viewer_count = book[i].viewer_count;
-            printf("========================================================================\n");
-            printf("| Book name | Author | Publisher | Publish year | Amount | Call number |\n");
-            printf("========================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
                    book[i].call_number);
@@ -99,11 +99,11 @@ void check_personal_information(void)
 {
     struct readers *current;
     current = first;
+    printf("=================================================================================================\n");
+    printf("| Reader name | student_id | grade | email | re_account | re_password | borrow_history | credit |\n");
+    printf("================================================================================================= \n");
     while (current != NULL)
     {
-        printf("=================================================================================================\n");
-        printf("| Reader name | student_id | grade | email | re_account | re_password | borrow_history | credit |\n");
-        printf("================================================================================================= \n");
         printf("| %s | %d | %s | %s | %s | %s | %s | %d |", current->re_name, current->student_id, current->grade, current->email,
                current->re_account, current->re_password, current->borrow_history, current->credit);
         current = current->next;
@@ -220,26 +220,15 @@ void interface_re(int option_re)
     }
     if (option_re == BUTTON_RESERVE)
     {
-        printf("Enter book name: ");
+        show_book();
         fflush(stdin);
-        char book_name_reserve[MAX_BUF];
-        while (fgets(book_name_reserve, MAX_BUF, stdin) != NULL)
-        { // ?????�空???
-            if (book_name_reserve[strlen(book_name_reserve) - 1] == '\n')
-                book_name_reserve[strlen(book_name_reserve) - 1] = '\0';
-            break;
-        }
-        for (int i = 0; i < MAX_BUF; i++)
-        {
-            if (book_name_reserve[i] >= 'A' && book_name_reserve[i] <= 'Z')
-            {
-                book_name_reserve[i] = book_name_reserve[i] + 32;
-            }
-        }
+        int number;
+        printf("Enter the accession number of the book you want to reserve: ");
+        scanf("%d", &number);
         int option_reserve;
         printf("Enter 1 to reserve book, 2 to cancel reservation: ");
         scanf("%d", &option_reserve);
-        reserve_book(book_name_reserve, option_reserve);
+        reserve_book(&number, option_reserve);
     }
     if (option_re == BUTTON_EXIT)
     {
@@ -274,15 +263,14 @@ void search_author(char author[])
     }
     int error = 0, var = 0;
     // search for books with matching authors
-
+    printf("=================================================================================================================\n");
+    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
+    printf("=================================================================================================================\n");
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_author[i], author) != NULL)
         {
             var = i;
-            printf("=================================================================================================================\n");
-            printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-            printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
                    book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
@@ -323,14 +311,14 @@ void search_publisher(char publisher[])
     int error = 0;
     // count the number of books that match the search criteria
     int var = 0;
+    printf("=================================================================================================================\n");
+    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
+    printf("=================================================================================================================\n");
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_publisher[i], publisher) != NULL)
         {
             var = i;
-            printf("=================================================================================================================\n");
-            printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-            printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
                    book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
@@ -370,14 +358,14 @@ void search_call_number(char call_number[])
     }
     int num_books = 0, var = 0;
     // count the number of books that match the search criteria
+    printf("=================================================================================================================\n");
+    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
+    printf("=================================================================================================================\n");
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_call[i], call_number) != NULL)
         {
             var = i;
-            printf("=================================================================================================================\n");
-            printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-            printf("=================================================================================================================\n");
             printf("|%s|%s|%s|%d|%d|%s|%s|%d|%d|\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
                    book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
@@ -418,14 +406,14 @@ void search_isbn(char isbn[])
     }
     int error = 0, var = 0;
     // count the number of books that match the search criteria
+    printf("=================================================================================================================\n");
+    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
+    printf("=================================================================================================================\n");
     for (int i = 0; i < SPACE; i++)
     {
         if (strstr(temporary_isbn[i], isbn) != NULL)
         {
             book[i].viewer_count++;
-            printf("=================================================================================================================\n");
-            printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-            printf("=================================================================================================================\n");
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
                    book[i].call_number, book[i].isbn, book[i].viewer_count++, book[i].accession_number);
@@ -475,63 +463,56 @@ void show_book()
     }
 }
 
-void reserve_book(char number_book[], int option_reserve)
+void reserve_book(int *number_book, int option_reserve)
 {
-     char temporary_number_book[SPACE][SPACE];
-    for (int i = 0; i < SPACE; i++)
+   for (int i = 0; i < SPACE; i++)
     {
-        strcpy(temporary_number_book[i], book[i].book_name);
-    }
-    for (int i = 0; i < SPACE; i++)
-    {
-        for (int j = 0; j < SPACE; j++)
+        if (book[i].accession_number == *number_book)
         {
-            if (temporary_number_book[i][j] >= 'A' && temporary_number_book[i][j] <= 'Z')
+            if (option_reserve == 1)
             {
-                temporary_number_book[i][j] += 32;
+                if (book[i].amount == 0)
+                {
+                    printf("==================================================================\n");
+                    printf("| Book  %s  reserved successfully. |\n", book[i].book_name);
+                    printf("==================================================================\n");
+                    book[i].amount = 1;
+                }
+                else
+                {
+                    printf("==================================================================\n");
+                    printf("| Book  %s  is already reserved. |\n", book[i].book_name);
+                    printf("==================================================================\n");
+                }
+            }
+            else if (option_reserve == 2)
+            {
+                if (book[i].amount == 1)
+                {
+                    printf("==================================================================\n");
+                    printf("| Book  %s  returned successfully. |\n", book[i].book_name);
+                    printf("==================================================================\n");
+                    book[i].amount = 0;
+                }
+                else
+                {
+                    printf("==================================================================\n");
+                    printf("| Book  %s  is already returned. |\n", book[i].book_name);
+                    printf("==================================================================\n");
+                }
             }
         }
     }
-    if (option_reserve == 1)
+    if (option_reserve < 1 || option_reserve > 2)
     {
-        for (int i = 0; i < SPACE; i++)
-        {
-            if (strstr(temporary_number_book[i], number_book) != NULL)
-            {
-                printf("==================================================================\n");
-                printf("| Book  %s  reserved successfully. |\n", book[i].book_name);
-                printf("==================================================================\n");
-                book[i].amount = 1;
-            }
-        }
+        printf("===================\n");
+        printf("| Invalid option! |\n");
+        printf("===================\n");
     }
-    if (option_reserve == 2)
+    if (*number_book < 1 || *number_book > 100)
     {
-        for (int i = 0; i < SPACE; i++)
-        {
-            if (strstr(temporary_number_book[i], number_book) != NULL)
-            {
-                printf("===================================================================\n");
-                printf("| Book %s unreserved successfully. |\n", book[i].book_name);
-                printf("===================================================================\n");
-                book[i].amount = 0;
-            }
-        }
-    }
-    if (option_reserve > 2 || option_reserve < 1)
-    {
-        printf("=================================\n");
-        printf("| Your option is not available. |\n");
-        printf("=================================\n");
-    }
-    for (int i = 0; i < SPACE; i++)
-    {
-        if (strstr(temporary_number_book[i], number_book) == NULL)
-        {
-            printf("================================\n");
-            printf("| Your book is not exist here. |\n");
-            printf("================================\n");
-            break;
-        }
+        printf("===================\n");
+        printf("| Invalid option! |\n");
+        printf("===================\n");
     }
 }
