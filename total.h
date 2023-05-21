@@ -10,6 +10,7 @@ extern int number_ad; //trace the amount of administrator initialize 4 administr
 extern int amount_books; // trace the amount of books
 extern int accession_numer; //record accession_number
 extern int amount_re; // trace the amount of reader
+extern int status; // the status of the book
 
 extern FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
 
