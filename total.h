@@ -154,26 +154,26 @@ void administrator_mode(); //if mode == ADMINISTRATOR_MODE
 
 void interface_ad(); // contain 8 buttons ( include exit button )
 
-void review_library(int option_sort); //show every book, can decide the way to 
+void review_library(); //show every book, can decide the way to 
 
-void interface_add_delete(int option_crease); //add or delete
+void interface_add_delete(); //add or delete
 
-void add_book(char book_name[], char aurthor[], char translator[],char publisher[], int publish_year, float call_number, char isbn[]);
+void add_book();
 
-void delete_book(char book_name[], int optiont_shure); //show every book first(use search_book_name()). To make sure whether the book you want to delete
+void delete_book(); //show every book first(use search_book_name()). To make sure whether the book you want to delete
 
 /* While checking borrowing, you can return book */
-void check_borrowing( int number_book); //show every borrowed books
+void check_borrowing(); //show every borrowed books
 
-void return_book(int number, int number_book); // use number to choose the book to return
+void return_book(); // use number to choose the book to return
 
 void check_re_information();
 
-void modify_re_information(int option_number); // modify or delete reader information
+void modify_re_information(); // modify or delete reader information
 
 void check_ad_information(); 
 
-void modify_ad_information(int number, int option_number); // delete administrator information
+void modify_ad_information(); // delete administrator information
 
 void interface_set_administrator(char name[], char account[], char password[]); //get the information
 
@@ -181,9 +181,9 @@ void set_check_account_ad(char account[]); // need to print error message
 
 //void set_check_password_ad(char password[]); // need to print error message
 
-void add_administrator(char name[], char account[],char password[]); // add into structure
+void add_administrator(); // add into structure
 
-void lend_book(char book_name[], char name[]); // change the status of book
+void lend_book(); // change the status of book
 
 /* Reader mode*/
 void reader_mode(); // if mode == READER_MODE
