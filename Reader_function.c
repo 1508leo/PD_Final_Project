@@ -524,10 +524,14 @@ void reserve_book(char number_book[], int option_reserve)
         printf("| Your option is not available. |\n");
         printf("=================================\n");
     }
-    else
+    for (int i = 0; i < SPACE; i++)
     {
-        printf("================================\n");
-        printf("| Your book is not exist here. |\n");
-        printf("================================\n");
+        if (strstr(temporary_number_book[i], number_book) == NULL)
+        {
+            printf("================================\n");
+            printf("| Your book is not exist here. |\n");
+            printf("================================\n");
+            break;
+        }
     }
 }
