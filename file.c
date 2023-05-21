@@ -1,5 +1,7 @@
 #include "total.h"
 
+FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
+
 void input_file()
 {
     /* Open the amount.txt. Which store the amount of administrators, books, accession number, and readers */
