@@ -477,7 +477,7 @@ void show_book()
 
 void reserve_book(char number_book[], int option_reserve)
 {
-    char temporary_number_book[SPACE][SPACE];
+     char temporary_number_book[SPACE][SPACE];
     for (int i = 0; i < SPACE; i++)
     {
         strcpy(temporary_number_book[i], book[i].book_name);
@@ -503,13 +503,6 @@ void reserve_book(char number_book[], int option_reserve)
                 printf("==================================================================\n");
                 book[i].amount = 1;
             }
-            else
-            {
-                printf("=====================================\n");
-                printf("| Error: Book %s not found. |\n", number_book);
-                printf("=====================================\n");
-                break;
-            }
         }
     }
     if (option_reserve == 2)
@@ -523,13 +516,6 @@ void reserve_book(char number_book[], int option_reserve)
                 printf("===================================================================\n");
                 book[i].amount = 0;
             }
-            else
-            {
-                printf("=====================================\n");
-                printf("| Error: Book %s not found. |\n", number_book);
-                printf("=====================================\n");
-                break;
-            }
         }
     }
     if (option_reserve > 2 || option_reserve < 1)
@@ -537,5 +523,11 @@ void reserve_book(char number_book[], int option_reserve)
         printf("=================================\n");
         printf("| Your option is not available. |\n");
         printf("=================================\n");
+    }
+    else
+    {
+        printf("================================\n");
+        printf("| Your book is not exist here. |\n");
+        printf("================================\n");
     }
 }
