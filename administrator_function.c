@@ -1,9 +1,10 @@
 /*5/20更新問題
-未完成:
-1.set_check_account_ad 和 set_check_password_ad
+要求:暫無
+未完成:暫無
 */
 #include "total.h"
-void administrator_mode(){
+void administrator_mode()
+{
     int option_ad; // 這裡的變數是用來選擇要做什麼事情的
     printf("=====================================\n");
     printf("|What would you like to do?         |\n");
@@ -23,7 +24,8 @@ void administrator_mode(){
 
 //void interface_ad(int option_ad); //按鈕
 
-void review_library(){ //印出所有的書
+void review_library()//印出所有的書
+{
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
@@ -43,10 +45,12 @@ void review_library(){ //印出所有的書
 
 //void interface_add_delete(int option_ad, int option_crease); //按鈕
 
-void add_book(){
+void add_book()
+{
     int i=5;//i暫時代表有幾本書
 
-    if (i == MAX_BUF) { //已達最大值時拒絕添加
+    if (i == MAX_BUF)
+    { //已達最大值時拒絕添加
         printf("Library is full. Cannot add more books.\n");
         return;
     }
@@ -72,28 +76,33 @@ void add_book(){
     scanf(" %s",book[i].isbn);
 }
 
-void delete_book( ){ //show every book first(use search_book_name()). To make sure whether the book you want to delete
+void delete_book( )//show every book first(use search_book_name()). To make sure whether the book you want to delete
+{
     review_library();//先印出所有的書
     printf("enter the book name which book you want to delete");
     char tmp_book_name[30];
     scanf(" %s",tmp_book_name);
     for (int i = 0; i < MAX_BUF; i++)
     {
-        if(strcmp(book[i].book_name,tmp_book_name)==0){
+        if(strcmp(book[i].book_name,tmp_book_name)==0)
+        {
             gotolable://輸入錯誤訊息時跳至這裡
             printf("Warning! Are you sure you want to deleted this book? y/n");
             char oper;//再次確認是否要刪
             scanf(" %c",&oper);
-            if(oper == 'y'){
+            if(oper == 'y')
+            {
                 book[i].book_name[0] = '\0';//將書籍名稱設為已被刪除
-                printf("Delete OK\n");
+                printf("Delete successful.\n");
                 break;
             }
-            else if(oper == 'n'){
+            else if(oper == 'n')
+            {
                 printf("Delete failed\n");
                 break;
             }
-            else{
+            else
+            {
                 printf("wrong operation!\n");
                 goto gotolable;
             }
@@ -101,7 +110,8 @@ void delete_book( ){ //show every book first(use search_book_name()). To make su
     }
 }
 /* While checking borrowing, you can return book */
-void check_borrowing( ){//印出所有已被借出的書
+void check_borrowing()//印出所有已被借出的書
+{
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
@@ -117,7 +127,8 @@ void check_borrowing( ){//印出所有已被借出的書
     }
 }
 
-void return_book(){
+void return_book()
+{
     check_borrowing();
     printf("Which book do you want to return?\n");
     int number_book;
@@ -157,7 +168,8 @@ void check_re_information(int option_ad){
     }
 }
 
-void modify_re_information(int option_number){
+void modify_re_information()
+{
     struct readers *current = first;
     struct readers *prev = NULL;
     printf("enter the reader name which you want to modify:\n");
@@ -165,14 +177,17 @@ void modify_re_information(int option_number){
     scanf(" %s",temp_reader_name);//輸入想查找的名稱
 
     int oper = 0; // 選擇器，0 表示找不到目標名字
-    while (current != NULL) {
-        if (strcmp(current->re_name, temp_reader_name) == 0) { // 尋找指定讀者
+    while (current != NULL)
+    {
+        if (strcmp(current->re_name, temp_reader_name) == 0) // 尋找指定讀者
+        {
             printf("Enter 1 if you want to modify information for the reader\n");
             printf("Enter 2 if you want to delete information for the reader: ");
 
             int operation ;//選擇器 選擇要修該資料還刪除資料
             scanf("%d",&operation);
-            if(operation == 1){//修改資料
+            if(operation == 1)
+            {//修改資料
                 printf("Enter the new information for the reader:\n");
                 printf("please enter reader name: ");
                 scanf(" %s",current->re_name);
@@ -201,29 +216,32 @@ void modify_re_information(int option_number){
                 oper = 1; // 找到目標名字
                 break;
             }
-            else if(operation == 2){//刪除讀者
+            else if(operation == 2)
+            {//刪除讀者
                 if (prev == NULL)  first = current->next;//要刪除的是第一位讀者
                 else prev->next = current->next;
                 free(current);
                 oper = 1; // 找到目標名字並修改成功
-                printf("delete OK!\n");
+                printf("Deleted successful.!\n");
                 break;
             }
-            else{//錯誤輸入
+            else//錯誤輸入
+            {
                 printf("wrong operation!\n");
                 break;
             }
         }
-        else{
+        else
+        {
             prev = current;
             current = current->next;
         }
     }
-
     if (oper == 0)  printf("No such reader!\n"); //若整個迴圈跑完都沒找到目標名字
 } // modify or delete reader information
 
-void check_ad_information(int option_ad){
+void check_ad_information()
+{
     printf("======================================\n");
     printf("| ad_name | ad_account | ad_password |\n");
     printf("======================================\n");
@@ -234,12 +252,14 @@ void check_ad_information(int option_ad){
     }
 }
 
-void modify_ad_information(int number, int option_number){ // 這個函數目前還缺刪除管理員的功能
+void modify_ad_information(int number, int option_number)
+{ // 這個函數目前還缺刪除管理員的功能
     int id;//管理員編號
     printf("Enter the administrator ID: ");
     scanf("%d",&id);
 
-    if (id >= 0 && id < number_ad) {
+    if (id >= 0 && id < number_ad)
+    {
         printf("information of this administrator\n");//列出資料
         printf("======================================\n");
         printf("| ad_name | ad_account | ad_password |\n");
@@ -250,7 +270,7 @@ void modify_ad_information(int number, int option_number){ // 這個函數目前
         printf("Enter 1 if you want to modify information for the administrator\n");//選擇修改or刪除
         printf("Enter 2 if you want to delete information for the administrator: ");
 
-        int operation ;//選擇器 選擇要修該資料還刪除資料
+        int operation;//選擇器 選擇要修該資料還刪除資料
         scanf("%d",&operation);
         if(operation == 1){//修該資料
             printf("Enter the new information for the administrator:\n");
@@ -284,18 +304,18 @@ void modify_ad_information(int number, int option_number){ // 這個函數目前
 
 //void interface_set_administrator(int option_ad, char name[], char account[], char password[]); //按鈕
 
-void set_check_account_ad(char account[]); // need to print error message
-
-void set_check_password_ad(char password[]); // need to print error message
-
-void lend_book(char book_name[], char name[]){
+void lend_book()
+{
     check_borrowing();
     printf("Which book do you want to lend?\n");
     int number_book;
     scanf("%d",&number_book);
-    for(int i = 0; i < MAX_BUF; i++){
-        if (book[i].book_name[0] != '\0' && book[i].status != 1){
-            if(number_book == book[i].call_number){
+    for(int i = 0; i < MAX_BUF; i++)
+    {
+        if (book[i].book_name[0] != '\0' && book[i].status != 1)
+        {
+            if(number_book == book[i].call_number)
+            {
                 book[i].status = 1;
                 printf("Lend successful.\n");
                 return;
@@ -304,7 +324,8 @@ void lend_book(char book_name[], char name[]){
     }
 } // change the status of book
 
-void add_administrator( ){//number_ad的初始值在total.h中設為4，代表陣列中的第五格
+void add_administrator()//number_ad的初始值在total.h中設為4，代表陣列中的第五格
+{
     printf("enter your name: ");
     scanf(" %s",administrator[number_ad].ad_name);
 
