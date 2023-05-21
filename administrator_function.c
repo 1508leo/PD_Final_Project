@@ -1,7 +1,6 @@
 /*5/20更新問題
 未完成:
-1.return_book 和lend_book
-2.set_check_account_ad 和 set_check_password_ad
+1.set_check_account_ad 和 set_check_password_ad
 */
 #include "total.h"
 void administrator_mode(){
@@ -102,13 +101,13 @@ void delete_book( ){ //show every book first(use search_book_name()). To make su
     }
 }
 /* While checking borrowing, you can return book */
-void check_borrowing( int number_book){//印出所有已被借出的書
+void check_borrowing( ){//印出所有已被借出的書
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
     for (int i = 0; i < MAX_BUF; i++)
     {
-        if (book[i].book_name[0] != '\0' && book[i].accession_number != 0)
+        if (book[i].book_name[0] != '\0' && book[i].status != 0)
         {
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
@@ -118,7 +117,21 @@ void check_borrowing( int number_book){//印出所有已被借出的書
     }
 }
 
-void return_book(int number, int number_book); // use number to choose the book to return
+void return_book(){
+    check_borrowing();
+    printf("Which book do you want to return?\n");
+    int number_book;
+    scanf("%d",&number_book);
+    for(int i = 0; i < MAX_BUF; i++){
+        if (book[i].book_name[0] != '\0' && book[i].status != 0){
+            if(number_book == book[i].call_number){
+                book[i].status = 0;
+                printf("return successful.\n");
+                return;
+            }
+        }
+    }
+} // use number to choose the book to return
 
 void check_re_information(int option_ad){
     /*char *re_name;
@@ -275,7 +288,21 @@ void set_check_account_ad(char account[]); // need to print error message
 
 void set_check_password_ad(char password[]); // need to print error message
 
-void lend_book(char book_name[], char name[]); // change the status of book
+void lend_book(char book_name[], char name[]){
+    check_borrowing();
+    printf("Which book do you want to lend?\n");
+    int number_book;
+    scanf("%d",&number_book);
+    for(int i = 0; i < MAX_BUF; i++){
+        if (book[i].book_name[0] != '\0' && book[i].status != 1){
+            if(number_book == book[i].call_number){
+                book[i].status = 1;
+                printf("Lend successful.\n");
+                return;
+            }
+        }
+    }
+} // change the status of book
 
 void add_administrator( ){//number_ad的初始值在total.h中設為4，代表陣列中的第五格
     printf("enter your name: ");
