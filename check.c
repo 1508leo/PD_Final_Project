@@ -200,3 +200,19 @@ void sign_in_reader()
             break; // account exist
     }
 }
+
+int set_check_account_ad(char name[], char account[])
+{
+    for(int i = 0; i < number_ad; i++)
+    {
+        if(strcmp(administrator[i].ad_account, account) == 0) // compare
+        {
+            printf("\033[H\033[2J"); // clear the screen
+            printf("The account has been reginsted!\n");
+            printf("Please enter another one.\n\n");
+            printf("Name: %s\n", name);
+            return NO;
+        }
+    }
+    return YES;
+}

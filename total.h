@@ -77,6 +77,7 @@ struct books
     char isbn[SPACE];
     int viewer_count;
     int accession_number;
+    int status;
     char borrower[SPACE];
     int expiry_date;
 
@@ -177,7 +178,7 @@ void modify_ad_information(); // delete administrator information
 
 void interface_set_administrator(char name[], char account[], char password[]); //get the information
 
-void set_check_account_ad(char account[]); // need to print error message
+int set_check_account_ad(char name[], char account[]); // need to print error message
 
 //void set_check_password_ad(char password[]); // need to print error message
 

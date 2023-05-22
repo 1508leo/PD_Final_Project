@@ -325,16 +325,29 @@ void lend_book()
     }
 } // change the status of book
 
-void add_administrator()//number_ad的初始值在total.h中設為4，代表陣列中的第五格
+/* Add new administrator */
+void add_administrator()
 {
-    printf("enter your name: ");
-    scanf(" %s",administrator[number_ad].ad_name);
+    char account[SPACE];
+    int success=0;
 
-    printf("enter your account: ");
-    scanf(" %s",administrator[number_ad].ad_account);
+    printf("Please enter the name: ");
+    scanf("%s", administrator[number_ad].ad_name); // store into database
 
-    printf("enter your password: ");
-    scanf(" %s",administrator[number_ad].ad_password);
+    while(1)
+    {
+        printf("Please enter the account: ");
+        scanf("%s", account);
+        success = set_check_account_ad(administrator[number_ad].ad_name, account); // check whether the account has been registed
+        if(success == YES)
+            break;
+    }
+
+    printf("Please enter the password: ");
+    scanf("%s", administrator[number_ad].ad_password); // store into database
+
+    strcpy(administrator[number_ad].ad_account, account); // store into database
 
     number_ad++;
+    
 }
