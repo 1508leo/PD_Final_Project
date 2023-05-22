@@ -129,11 +129,11 @@ void interface_re_entry(int option_entry); //sign in or sign up
 /* Explain and fill in information */
 void interface_set_reader(int option_entry, char name[], int id, char grade[], char email[], char account[],char password[]); //get the information
 
-int set_check_account_re(char account[]); //need to print error message
+int set_check_account_re(char name[], int id, char email[], char account[]); //need to print error message
 
 //int set_check_password_re(char password[]); //need to print error message
 
-void add_reader(char name[], int id, char grade[], char email[], char account[],char password[]); //add into linked list
+void add_reader(); //add into linked list
 
 void sign_in_administrator();
 

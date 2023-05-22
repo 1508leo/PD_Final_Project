@@ -1,7 +1,6 @@
 #include "total.h"
 
-/* Checking whether the account has been registed */
-int set_check_account_re(char account[])
+int set_check_account_re(char name[], int id, char email[], char account[])
 {
     struct readers *check;
     check = first;
@@ -10,8 +9,11 @@ int set_check_account_re(char account[])
         if(strcmp(check -> re_account, account) == 0)
         {
             printf("\033[H\033[2J"); // clear the screen
-            printf("The account has been registered!\n");
-            printf("Please enter another one.\n");
+            printf("The account had been registered!\n");
+            printf("Please enter another one.\n\n");
+            printf("Your name: %s\n", name);
+            printf("Your student id: %d\n", id);
+            printf("Your email: %s\n", email);
             return NO;
         }
         check = check -> next;
@@ -21,19 +23,36 @@ int set_check_account_re(char account[])
 }
 
 /* Add a node for new reader */
-void add_reader(char name[], int id, char grade[], char email[], char account[],char password[])
+void add_reader()
 {
+    int success=0;
+    char account[SPACE];
     struct readers *new_reader;
 
     new_reader = malloc(sizeof(struct readers));
 
-    /* The type in linked list is array */
-    strcpy(new_reader -> re_name, name);
-    new_reader -> student_id = id;
-    strcpy(new_reader -> grade, grade);
-    strcpy(new_reader -> email, email);
+    printf("Please enter your name: ");
+    scanf("%s", new_reader -> re_name);
+
+    printf("Please enter your student id: ");
+    scanf("%d", &new_reader -> student_id);
+
+    printf("Please enter your email: ");
+    scanf("%s", new_reader -> email);
+
+    while (1)
+    {
+        printf("Please enter your account: ");
+        scanf("%s", account);
+        success = set_check_account_re(new_reader -> re_name, new_reader -> student_id, new_reader -> email, account);
+        if(success == YES)
+            break;
+    }
     strcpy(new_reader -> re_account, account);
-    strcpy(new_reader -> re_password, password);
+
+    printf("Please enter your password: ");
+    scanf("%s", new_reader -> re_password);
+
     new_reader -> credit = 100; // initailize
     new_reader -> next = NULL;
     amount_re++;
