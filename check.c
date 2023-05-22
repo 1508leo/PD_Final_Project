@@ -1,5 +1,9 @@
 #include "total.h"
 
+int position = 0;
+char name_re[SPACE];
+char name_ad[SPACE];
+
 int set_check_account_re(char name[], int id, char email[], char account[])
 {
     struct readers *check;
@@ -95,7 +99,10 @@ int in_check_password_ad(char account[], char password[])
     for(int i = 0; i < number_ad; i++)
     {
         if(strcmp(administrator[i].ad_password, password) == 0) // the password is correct
+        {
+            strcpy(name_ad, administrator[i].ad_name); // user name
             return YES;
+        }
     }
     /* Password isn't correct */
     printf("\033[H\033[2J"); // clear the screen
@@ -161,7 +168,10 @@ int in_check_password_re(char account[], char password[])
     while(cur != NULL)
     {
         if(strcmp(cur -> re_password, password) == 0)
+        {
+            strcpy(name_re, cur -> re_name);
             return YES;
+        }
         cur = cur -> next;
     }
     /* Password isn't correct */

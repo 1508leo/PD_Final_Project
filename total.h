@@ -6,11 +6,17 @@
 #include <string.h>
 #include <ctype.h>
 
+#define SPACE 100
+#define MAX_BUF 4096
+
 extern int number_ad; //trace the amount of administrator initialize 4 administrator
 extern int amount_books; // trace the amount of books
 extern int accession_numer; //record accession_number
 extern int amount_re; // trace the amount of reader
 extern int status; // the status of the book
+extern char name_re[SPACE]; // current user
+extern char name_ad[SPACE]; // current user
+
 
 extern FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
 
@@ -20,8 +26,6 @@ extern FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
 #define LARGE 10
 #define SMALL 11
 
-#define SPACE 100
-#define MAX_BUF 4096
 #define ADMINISTRATOR_MODE 2
 #define READER_MODE 3
 
