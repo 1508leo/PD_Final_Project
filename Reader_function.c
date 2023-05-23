@@ -104,10 +104,15 @@ void check_personal_information(void)
     printf("================================================================================================= \n");
     while (current != NULL)
     {
-        printf("| %s | %d | %s | %s | %s | %s | %s | %d |", current->re_name, current->student_id, current->grade, current->email,
+        if(strcmp(name_re, current -> re_name) == 0)
+        {
+            printf("| %s | %d | %s | %s | %s | %s | %s | %d |", current->re_name, current->student_id, current->grade, current->email,
                current->re_account, current->re_password, current->borrow_history, current->credit);
+            printf("=================================================================================================\n");
+            break;
+        }
         current = current->next;
-        printf("=================================================================================================\n");
+        
     }
 }
 
