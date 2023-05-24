@@ -1,6 +1,6 @@
 /*5/20更新問題
-要求:暫無
-未完成:暫無
+要求:書籍新曾status(借閱狀態)
+未完成:
 */
 #include "total.h"
 void administrator_mode()
@@ -55,16 +55,16 @@ void add_book()
         return;
     }
     printf("enter the book_name: ");
-    scanf(" %s",book[i].book_name);
+    fgets(book[i].book_name,  SPACE, stdin);
 
     printf("enter the aurthor: ");
-    scanf(" %s",book[i].author);
+    fgets(book[i].author,  SPACE, stdin);
 
     printf("enter the translator: ");
-    scanf(" %s",book[i].translator);
+    fgets(book[i].translator,  SPACE, stdin);
 
     printf("enter the publisher: ");
-    scanf(" %s",book[i].publisher);
+    fgets(book[i].publisher,  SPACE, stdin);
 
     printf("enter the publish_year: ");
     scanf("%d",&book[i].publish_year);
@@ -73,7 +73,7 @@ void add_book()
     scanf("%f",&book[i].call_number);
 
     printf("enter the isbn: ");
-    scanf(" %s",book[i].isbn);
+    fgets(book[i].isbn,  SPACE, stdin);
 }
 
 void delete_book( )//show every book first(use search_book_name()). To make sure whether the book you want to delete
@@ -81,7 +81,7 @@ void delete_book( )//show every book first(use search_book_name()). To make sure
     review_library();//先印出所有的書
     printf("enter the book name which book you want to delete");
     char tmp_book_name[30];
-    scanf(" %s",tmp_book_name);
+    fgets(tmp_book_name,  SPACE, stdin);
     for (int i = 0; i < MAX_BUF; i++)
     {
         if(strcmp(book[i].book_name,tmp_book_name)==0)
@@ -175,7 +175,7 @@ void modify_re_information()
     struct readers *prev = NULL;
     printf("enter the reader name which you want to modify:\n");
     char temp_reader_name[30];
-    scanf(" %s",temp_reader_name);//輸入想查找的名稱
+    fgets(temp_reader_name,  SPACE, stdin);//輸入想查找的名稱
 
     int oper = 0; // 選擇器，0 表示找不到目標名字
     while (current != NULL)
@@ -191,25 +191,25 @@ void modify_re_information()
             {//修改資料
                 printf("Enter the new information for the reader:\n");
                 printf("please enter reader name: ");
-                scanf(" %s",current->re_name);
+                fgets(current->re_name,  SPACE, stdin);
 
                 printf("please enter student id: ");
                 scanf(" %d",&(current->student_id));
 
                 printf("please enter grade: ");
-                scanf(" %s",current->grade);
+                fgets(current->grade,  SPACE, stdin);
 
                 printf("please enter email: ");
-                scanf(" %s",current->email);
+                fgets(current->email,  SPACE, stdin);
 
                 printf("please enter reader account: ");
-                scanf(" %s",current->re_account);
+                fgets(current->re_account,  SPACE, stdin);
 
                 printf("please enter reader password: ");
-                scanf(" %s",current->re_password);
+                fgets(current->re_password,  SPACE, stdin);
 
                 printf("please enter borrow history: ");
-                scanf(" %s",current->borrow_history);
+                fgets(current->borrow_history,  SPACE, stdin);
 
                 printf("please enter credit: ");
                 scanf("%d",&(current->credit));
@@ -273,20 +273,25 @@ void modify_ad_information(int number, int option_number)
 
         int operation;//選擇器 選擇要修該資料還刪除資料
         scanf("%d",&operation);
-        if(operation == 1){//修該資料
+        if(operation == 1)
+        {//修該資料
             printf("Enter the new information for the administrator:\n");
             printf("New name: ");
-            scanf(" %s", administrator[id].ad_name);
+
+            fgets(administrator[id].ad_name,  SPACE, stdin);
 
             printf("New account: ");
-            scanf(" %s", administrator[id].ad_account);
+            fgets(administrator[id].ad_account,  SPACE, stdin);
 
             printf("New password: ");
-            scanf(" %s", administrator[id].ad_password);
+            fgets(administrator[id].ad_password,  SPACE, stdin);
+            return;
         }
-        else if(operation == 2){//刪除資料
+        else if(operation == 2)//刪除資料
+        {
             number_ad--;//管理員總人數減1
-            for (int i = id; i < number_ad - 1; i++) { // 往前移一格
+            for (int i = id; i < number_ad - 1; i++) // 往前移一格
+            {
                 strcpy(administrator[i].ad_name, administrator[i + 1].ad_name);
                 strcpy(administrator[i].ad_account, administrator[i + 1].ad_account);
                 strcpy(administrator[i].ad_password, administrator[i + 1].ad_password);
@@ -294,10 +299,12 @@ void modify_ad_information(int number, int option_number)
             strcpy(administrator[number_ad].ad_name, "");
             strcpy(administrator[number_ad].ad_account, "");
             strcpy(administrator[number_ad].ad_password, "");
+            return;
         }
-        else {//錯誤輸入
+        else //錯誤輸入
+        {
             printf("wrong operation!\n");
-            //break;
+            return;
         }
     }
     else  printf("Invalid administrator ID!\n");
@@ -358,5 +365,5 @@ void add_administrator()
     strcpy(administrator[number_ad].ad_password, password);
 
     number_ad++;
-    
+
 }
