@@ -328,25 +328,34 @@ void lend_book()
 /* Add new administrator */
 void add_administrator()
 {
-    char account[SPACE];
+    char name[SPACE], account[SPACE], password[SPACE];
     int success=0;
 
     printf("Please enter the name: ");
-    scanf("%s", administrator[number_ad].ad_name); // store into database
+    fgets(name, SPACE, stdin);
+    if(name[strlen(name) - 1] == '\n')
+        name[strlen(name) - 1] = '\0';
 
     while(1)
     {
         printf("Please enter the account: ");
-        scanf("%s", account);
+        fgets(account, SPACE, stdin);
+        if(account[strlen(account) - 1] == '\n')
+            account[strlen(account) - 1] = '\0';
         success = set_check_account_ad(administrator[number_ad].ad_name, account); // check whether the account has been registed
         if(success == YES)
             break;
     }
 
     printf("Please enter the password: ");
-    scanf("%s", administrator[number_ad].ad_password); // store into database
+    fgets(password, SPACE, stdin);
+    if(password[strlen(password) - 1] == '\n')
+        password[strlen(password) - 1] = '\0';
 
-    strcpy(administrator[number_ad].ad_account, account); // store into database
+    /* Store into database */
+    strcpy(administrator[number_ad].ad_name, name);
+    strcpy(administrator[number_ad].ad_account, account);
+    strcpy(administrator[number_ad].ad_password, password);
 
     number_ad++;
     

@@ -30,24 +30,33 @@ int set_check_account_re(char name[], int id, char email[], char account[])
 void add_reader()
 {
     int success=0;
-    char account[SPACE];
+    char name[SPACE], email[SPACE], account[SPACE], password[SPACE];
     struct readers *new_reader;
 
     new_reader = malloc(sizeof(struct readers));
 
     printf("Please enter your name: ");
-    scanf("%s", new_reader -> re_name);
+    fgets(name, SPACE, stdin);
+    if(name[strlen(name) - 1] == '\n')
+        name[strlen(name) - 1] = '\0';
 
     printf("Please enter your student id: ");
     scanf("%d", &new_reader -> student_id);
 
+    fflush(stdin);
+
     printf("Please enter your email: ");
-    scanf("%s", new_reader -> email);
+    fgets(email, SPACE, stdin);
+    if(email[strlen(email) - 1] == '\n')
+        email[strlen(email) - 1] = '\0';
 
     while (1)
     {
         printf("Please enter your account: ");
-        scanf("%s", account);
+        fgets(account, SPACE, stdin);
+        if(account[strlen(account) - 1] == '\n')
+            account[strlen(account) - 1] = '\0';
+
         success = set_check_account_re(new_reader -> re_name, new_reader -> student_id, new_reader -> email, account);
         if(success == YES)
             break;
@@ -55,7 +64,15 @@ void add_reader()
     strcpy(new_reader -> re_account, account);
 
     printf("Please enter your password: ");
-    scanf("%s", new_reader -> re_password);
+    fgets(password, SPACE, stdin);
+    if(password[strlen(password) - 1] == '\n')
+        password[strlen(password) - 1] = '\0';
+
+    /* Store it */
+    strcpy(new_reader -> re_name, name);
+    strcpy(new_reader -> email, email);
+    strcpy(new_reader -> re_account, account);
+    strcpy(new_reader -> re_password, password);
 
     new_reader -> credit = 100; // initailize
     new_reader -> next = NULL;
@@ -98,7 +115,7 @@ int in_check_password_ad(char account[], char password[])
 {
     for(int i = 0; i < number_ad; i++)
     {
-        if(strcmp(administrator[i].ad_password, password) == 0) // the password is correct
+        if(strcmp(administrator[i].ad_account, account) == 0 && strcmp(administrator[i].ad_password, password) == 0) // the password is correct
         {
             strcpy(name_ad, administrator[i].ad_name); // user name
             return YES;
@@ -120,7 +137,10 @@ void sign_in_administrator()
     while(1)
     {
         printf("Please enter your account: ");
-        scanf("%s", account);
+        fgets(account, SPACE, stdin);
+        if(account[strlen(account) - 1] == '\n')
+            account[strlen(account) - 1] = '\0';
+        
         success = in_check_account_ad(account); // check
 
         if(success == NO) // "No" means the account doesn't exist
@@ -133,7 +153,10 @@ void sign_in_administrator()
     {
         
         printf("Please enter your password: ");
-        scanf("%s", password);
+        fgets(password, SPACE, stdin);
+        if(password[strlen(password) - 1] == '\n')
+            password[strlen(password) - 1] = '\0';
+        
         success = in_check_password_ad(account, password);
 
         if(success == NO) // "No" means the password isn't correct
@@ -167,9 +190,9 @@ int in_check_password_re(char account[], char password[])
     cur = first;
     while(cur != NULL)
     {
-        if(strcmp(cur -> re_password, password) == 0)
+        if(strcmp(cur -> re_account, account) == 0 && strcmp(cur -> re_password, password) == 0) // password correct
         {
-            strcpy(name_re, cur -> re_name);
+            strcpy(name_re, cur -> re_name); // user name
             return YES;
         }
         cur = cur -> next;
@@ -189,7 +212,10 @@ void sign_in_reader()
     while(1)
     {
         printf("Please enter your account: ");
-        scanf("%s", account);
+        fgets(account, SPACE, stdin);
+        if(account[strlen(account) - 1] == '\n')
+            account[strlen(account) - 1] = '\0';
+
         success = in_check_account_re(account);
 
         if(success == NO) // "No" means the account doesn't exist
@@ -201,7 +227,9 @@ void sign_in_reader()
     while(1)
     {
         printf("Please enter your password: ");
-        scanf("%s", password);
+        if(password[strlen(password) - 1] == '\n')
+            password[strlen(password) - 1] = '\0';
+        
         success = in_check_password_re(account, password);
 
         if(success == NO) // "No" means the account doesn't exist
