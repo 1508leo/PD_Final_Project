@@ -79,7 +79,7 @@ struct books
     int amount;        //amount 
     char call_number[SPACE];
     char isbn[SPACE];
-    int viewer_count;
+    float viewer_count;
     int accession_number;
     int status;
     char borrower[SPACE];
