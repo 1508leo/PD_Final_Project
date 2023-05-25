@@ -69,21 +69,17 @@ void search_book_name(char book_name[])
     }
 }
 
-int cmp(const void*a, const void*b) return ((int*)b) - ((int*)a);
-
 void search_popular(void)
 {
-    int temp[SPACE];
-    for (int i = 0; i < SPACE; i++){
-            temp[i] = book[i].viewer_count;
-    }
+    sort_call_number();
+
     printf("========================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number |\n");
     printf("========================================================================\n");
-    qsort(temp, sizeof(temp), cmp);//排序
+
     for (int i = 0; i < amount_books; i++)
     {
-        if (temp[i] > 0)
+        if (book[i].call_number > 0)
         {
             printf("| %s | %s | %s | %d | %d | %s |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
@@ -273,7 +269,6 @@ void search_author(char author[])
     {
         if (strstr(temporary_author[i], author) != NULL)
         {
-            var = i;
             printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
                    book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
