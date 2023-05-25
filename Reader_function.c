@@ -71,7 +71,9 @@ void search_book_name(char book_name[])
 
 void search_popular(void)
 {
-    sort_call_number();
+    sort_viewer_number();
+    if(book[0].viewer_count < book[amount_books - 1].viewer_count)
+        sort_viewer_number();
 
     printf("========================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number |\n");
@@ -79,7 +81,7 @@ void search_popular(void)
 
     for (int i = 0; i < amount_books; i++)
     {
-        if (book[i].call_number > 0)
+        if (book[i].viewer_count > 0)
         {
             printf("| %s | %s | %s | %d | %d | %s |\n", book[i].book_name, book[i].author,
                    book[i].publisher, book[i].publish_year, book[i].amount,
