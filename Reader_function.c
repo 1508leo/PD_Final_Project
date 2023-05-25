@@ -31,12 +31,12 @@ void reader_mode()
 void search_book_name(char book_name[])
 {
     int a = 0;
-    char temporary_book_name[SPACE][SPACE];
-    for (int i = 0; i < SPACE; i++)
+    char temporary_book_name[amount_books][SPACE];
+    for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_book_name[i], book[i].book_name);
     }
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         for (int j = 0; j < SPACE; j++)
         {
@@ -50,7 +50,7 @@ void search_book_name(char book_name[])
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_book_name[i], book_name) != NULL)
         {
@@ -82,7 +82,7 @@ void search_popular(void)
     printf("========================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number |\n");
     printf("========================================================================\n");
-    for (int i = 0; i < MAX_BUF; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         if (book[i].viewer_count > most_viewer_count)
         {
@@ -121,16 +121,16 @@ void interface_re(int option_re)
     if (option_re == BUTTON_BOOK_NAME)
     { // 410??��?��????��?��?��?��?��??�???��???????��??
         printf("Enter book name: ");
-        char search[MAX_BUF];
+        char search[SPACE];
         fflush(stdin);
-        while (fgets(search, MAX_BUF, stdin) != NULL)
+        while (fgets(search, SPACE, stdin) != NULL)
         { // ?????�空???
             if (search[strlen(search) - 1] == '\n')
                 search[strlen(search) - 1] = '\0';
             break;
         }
 
-        for (int i = 0; i < MAX_BUF; i++)
+        for (int i = 0; i < SPACE; i++)
         {
             if (search[i] >= 'A' && search[i] <= 'Z')
             {
@@ -142,15 +142,15 @@ void interface_re(int option_re)
     if (option_re == BUTTON_AUTHOR)
     {
         printf("Enter author: ");
-        char author[MAX_BUF];
+        char author[SPACE];
         fflush(stdin);
-        while (fgets(author, MAX_BUF, stdin) != NULL)
+        while (fgets(author, SPACE, stdin) != NULL)
         { // ?????�空???
             if (author[strlen(author) - 1] == '\n')
                 author[strlen(author) - 1] = '\0';
             break;
         }
-        for (int i = 0; i < MAX_BUF; i++)
+        for (int i = 0; i < SPACE; i++)
         {
             if (author[i] >= 'A' && author[i] <= 'Z')
             {
@@ -162,15 +162,15 @@ void interface_re(int option_re)
     if (option_re == BUTTON_PUBLISHER)
     {
         printf("Enter publisher: ");
-        char publisher[MAX_BUF];
+        char publisher[SPACE];
         fflush(stdin);
-        while (fgets(publisher, MAX_BUF, stdin) != NULL)
+        while (fgets(publisher, SPACE, stdin) != NULL)
         { // ?????�空???
             if (publisher[strlen(publisher) - 1] == '\n')
                 publisher[strlen(publisher) - 1] = '\0';
             break;
         }
-        for (int i = 0; i < MAX_BUF; i++)
+        for (int i = 0; i < SPACE; i++)
         {
             if (publisher[i] >= 'A' && publisher[i] <= 'Z')
             {
@@ -184,13 +184,13 @@ void interface_re(int option_re)
         printf("Enter call number: ");
         char call_number[SPACE];
         fflush(stdin);
-        while (fgets(call_number, MAX_BUF, stdin) != NULL)
+        while (fgets(call_number, SPACE, stdin) != NULL)
         { // ?????�空???
             if (call_number[strlen(call_number) - 1] == '\n')
                 call_number[strlen(call_number) - 1] = '\0';
             break;
         }
-        for (int i = 0; i < MAX_BUF; i++)
+        for (int i = 0; i < SPACE; i++)
         {
             if (call_number[i] >= 'A' && call_number[i] <= 'Z')
             {
@@ -203,14 +203,14 @@ void interface_re(int option_re)
     {
         printf("Enter ISBN: ");
         fflush(stdin);
-        char isbn[MAX_BUF];
-        while (fgets(isbn, MAX_BUF, stdin) != NULL)
+        char isbn[SPACE];
+        while (fgets(isbn, SPACE, stdin) != NULL)
         { // ?????�空???
             if (isbn[strlen(isbn) - 1] == '\n')
                 isbn[strlen(isbn) - 1] = '\0';
             break;
         }
-        for (int i = 0; i < MAX_BUF; i++)
+        for (int i = 0; i < SPACE; i++)
         {
             if (isbn[i] >= 'A' && isbn[i] <= 'Z')
             {
@@ -251,12 +251,12 @@ void interface_re(int option_re)
 
 void search_author(char author[])
 {
-    char temporary_author[SPACE][SPACE];
-    for (int i = 0; i < SPACE; i++)
+    char temporary_author[amount_books][SPACE];
+    for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_author[i], book[i].author);
     }
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         for (int j = 0; j < SPACE; j++)
         {
@@ -271,7 +271,7 @@ void search_author(char author[])
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_author[i], author) != NULL)
         {
@@ -298,12 +298,12 @@ void search_author(char author[])
 
 void search_publisher(char publisher[])
 {
-    char temporary_publisher[SPACE][SPACE];
-    for (int i = 0; i < SPACE; i++)
+    char temporary_publisher[amount_books][SPACE];
+    for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_publisher[i], book[i].publisher);
     }
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         for (int j = 0; j < SPACE; j++)
         {
@@ -319,7 +319,7 @@ void search_publisher(char publisher[])
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_publisher[i], publisher) != NULL)
         {
@@ -346,12 +346,12 @@ void search_publisher(char publisher[])
 
 void search_call_number(char call_number[])
 {
-    char temporary_call[SPACE][SPACE];
-    for (int i = 0; i < SPACE; i++)
+    char temporary_call[amount_books][SPACE];
+    for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_call[i], book[i].call_number);
     }
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         for (int j = 0; j < SPACE; j++)
         {
@@ -366,7 +366,7 @@ void search_call_number(char call_number[])
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_call[i], call_number) != NULL)
         {
@@ -394,12 +394,12 @@ void search_call_number(char call_number[])
 
 void search_isbn(char isbn[])
 {
-    char temporary_isbn[SPACE][SPACE];
-    for (int i = 0; i < SPACE; i++)
+    char temporary_isbn[amount_books][SPACE];
+    for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_isbn[i], book[i].isbn);
     }
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         for (int j = 0; j < SPACE; j++)
         {
@@ -414,7 +414,7 @@ void search_isbn(char isbn[])
     printf("=================================================================================================================\n");
     printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
     printf("=================================================================================================================\n");
-    for (int i = 0; i < SPACE; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_isbn[i], isbn) != NULL)
         {
@@ -444,7 +444,7 @@ void show_book()
     int num_books = 0;
 
     // count the number of books
-    for (int i = 0; i < MAX_BUF; i++)
+    for (int i = 0; i < amount_books; i++)
     {
         if (strlen(book[i].book_name) > 0)
         {
@@ -470,7 +470,7 @@ void show_book()
 
 void reserve_book(int *number_book, int option_reserve)
 {
-   for (int i = 0; i < SPACE; i++)
+   for (int i = 0; i < amount_books; i++)
     {
         if (book[i].accession_number == *number_book)
         {

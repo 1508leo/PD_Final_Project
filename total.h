@@ -213,6 +213,6 @@ void search_viewer_count(); // print every book that amount of viewer is greater
 
 void show_book(); // print the result into table. If doesn't search the books return the message
 
-void reserve_book(int number_book, int option_reserve); // change the status of book
+void reserve_book(int *number_book, int option_reserve); // change the status of book
 
 #endif /* TOTAL_H */
