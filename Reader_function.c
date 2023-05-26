@@ -46,17 +46,17 @@ void search_book_name(char book_name[])
             }
         }
     }
-    printf("=================================================================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-    printf("=================================================================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
     for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_book_name[i], book_name) != NULL)
         {
-            printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
             a = 1;
         }
     }
@@ -71,22 +71,22 @@ void search_book_name(char book_name[])
 
 void search_popular(void)
 {
-    sort_viewer_number();
+    sort_viewer_number(); // here will show the error message. Cause the function is in sort.c
     if(book[0].viewer_count < book[amount_books - 1].viewer_count)
         sort_viewer_number();
 
-    printf("========================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number |\n");
-    printf("========================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
 
     for (int i = 0; i < amount_books; i++)
     {
         if (book[i].viewer_count > 0)
         {
-            printf("| %s | %s | %s | %d | %d | %s |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number);
-            printf("========================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
         }
     }
 }
@@ -264,17 +264,17 @@ void search_author(char author[])
     }
     int error = 0;
     // search for books with matching authors
-    printf("=================================================================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-    printf("=================================================================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
     for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_author[i], author) != NULL)
         {
-            printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
             error = 1;
         }
     }
@@ -306,17 +306,17 @@ void search_publisher(char publisher[])
     }
     int error = 0;
     // count the number of books that match the search criteria
-    printf("=================================================================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-    printf("=================================================================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
     for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_publisher[i], publisher) != NULL)
         {
-            printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
             error = 1;
         }
     }
@@ -349,17 +349,17 @@ void search_call_number(char call_number[])
     }
     int num_books = 0;
     // count the number of books that match the search criteria
-    printf("=================================================================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-    printf("=================================================================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
     for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_call[i], call_number) != NULL)
         {
-            printf("|%s|%s|%s|%d|%d|%s|%s|%d|%d|\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
             num_books = 1;
         }
     }
@@ -391,16 +391,16 @@ void search_isbn(char isbn[])
     }
     int error = 0;
     // count the number of books that match the search criteria
-    printf("=================================================================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-    printf("=================================================================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
     for (int i = 0; i < amount_books; i++)
     {
         if (strstr(temporary_isbn[i], isbn) != NULL){
-            printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
             error = 1;
         }
     }
@@ -422,13 +422,13 @@ void show_book()
     {
         if (strlen(book[i].book_name) > 0)
         {
-            printf("=================================================================================================================\n");
-            printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-            printf("=================================================================================================================\n");
-            printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
             num_books = 1;
         }
     }

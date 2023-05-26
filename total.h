@@ -78,7 +78,7 @@ struct books
     int publish_year;
     int amount;        //amount 
     char call_number[SPACE];
-    char isbn[SPACE];
+    long int isbn;
     float viewer_count;
     int accession_number;
     int status;

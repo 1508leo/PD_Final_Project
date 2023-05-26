@@ -26,19 +26,19 @@ void administrator_mode()
 
 void review_library()//印出所有的書
 {
-    printf("=================================================================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-    printf("=================================================================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
 
     for (int i = 0; i < MAX_BUF; i++)
     {
         if(book[i].book_name[0] == '\0') continue;//已被刪除的書書名會是'\0'
         else
         {
-            printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
         }
     }
 }
@@ -112,17 +112,17 @@ void delete_book( )//show every book first(use search_book_name()). To make sure
 /* While checking borrowing, you can return book */
 void check_borrowing()//印出所有已被借出的書
 {
-    printf("=================================================================================================================\n");
-    printf("| Book name | Author | Publisher | Publish year | Amount | Call number | ISBN | Viewer count | Accession number |\n");
-    printf("=================================================================================================================\n");
+    printf("====================================================================================================================================================================================\n");
+    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+    printf("====================================================================================================================================================================================\n");
     for (int i = 0; i < MAX_BUF; i++)
     {
         if (book[i].book_name[0] != '\0' && book[i].status != 0)
         {
-            printf("| %s | %s | %s | %d | %d | %s | %s | %d | %d |\n", book[i].book_name, book[i].author,
-                   book[i].publisher, book[i].publish_year, book[i].amount,
-                   book[i].call_number, book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("=================================================================================================================\n");
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
+            printf("====================================================================================================================================================================================\n");
         }
     }
 }
