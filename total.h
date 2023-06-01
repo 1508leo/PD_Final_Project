@@ -73,7 +73,6 @@ struct books
 {
     char book_name[SPACE];
     char author[SPACE];
-    char translator[SPACE];
     char publisher[SPACE];
     int publish_year;
     int amount;        //amount 
