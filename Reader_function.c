@@ -398,28 +398,26 @@ void show_book()
 {
     int num_books = 0;
 
-    // count the number of books
-    for (int i = 0; i < amount_books; i++)
-    {
-        if (strlen(book[i].book_name) > 0)
-        {
-            printf("====================================================================================================================================================================================\n");
+    printf("\033[H\033[2J"); // clear screen
+    // show every books
+    printf("====================================================================================================================================================================================\n");
     printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
     printf("====================================================================================================================================================================================\n");
-            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14s| %-14.0f| %-17d|\n", 
-                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
-                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("====================================================================================================================================================================================\n");
-            num_books = 1;
-        }
+    for (int i = 0; i < amount_books; i++)
+    {
+        printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14s| %-14.0f| %-17d|\n", 
+                book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                book[i].isbn, book[i].viewer_count, book[i].accession_number);
+        printf("====================================================================================================================================================================================\n");
+        num_books = 1;
     }
 
-    // check if any books were found
-    if (num_books == 0)
+    // If there is no book in library
+    if(num_books == 0)
     {
-        printf("============================\n");
-        printf("|      No books found.     |\n");
-        printf("============================\n");
+        printf("=======================================\n");
+        printf("|     There is no book in library.    |\n");
+        printf("=======================================\n");
     }
 }
 
