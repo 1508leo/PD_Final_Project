@@ -324,43 +324,37 @@ void search_publisher(char publisher[])
 
 void search_call_number(char call_number[])
 {
-    char temporary_call[amount_books][SPACE];
+   char temporary_call_number[SPACE];
+    int found=0;
+    lowwer(call_number); // to lower case
+
+    printf("\033[H\033[2J"); // clear screen
     for (int i = 0; i < amount_books; i++)
     {
-        strcpy(temporary_call[i], book[i].call_number);
-    }
-    for (int i = 0; i < amount_books; i++)
-    {
-        for (int j = 0; j < SPACE; j++)
+        strcpy(temporary_call_number, book[i].call_number);
+        lowwer(call_number); // to lower case
+        
+        if (strstr(temporary_call_number, call_number) != NULL)
         {
-            if (temporary_call[i][j] >= 'A' && temporary_call[i][j] <= 'Z')
+            if(found == 0)
             {
-                temporary_call[i][j] += 32;
+                printf("====================================================================================================================================================================================\n");
+                printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+                printf("====================================================================================================================================================================================\n");
             }
-        }
-    }
-    int num_books = 0;
-    // count the number of books that match the search criteria
-    printf("====================================================================================================================================================================================\n");
-    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
-    printf("====================================================================================================================================================================================\n");
-    for (int i = 0; i < amount_books; i++)
-    {
-        if (strstr(temporary_call[i], call_number) != NULL)
-        {
             printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14s| %-14.0f| %-17d|\n", 
                     book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
                     book[i].isbn, book[i].viewer_count, book[i].accession_number);
             printf("====================================================================================================================================================================================\n");
-            num_books = 1;
+            found = 1;
         }
     }
-    // check if any books were found
-    if (num_books == 0)
+
+    if (found == 0)
     {
-        printf("============================\n");
-        printf("|      No books found.     |\n");
-        printf("============================\n");
+        printf("===================================\n");
+        printf("| Sorry, There is no book found. |\n");
+        printf("===================================\n");
     }
 }
 
