@@ -421,57 +421,80 @@ void show_book()
     }
 }
 
-void reserve_book(int *number_book, int option_reserve)
+void reserve_book()
 {
-   for (int i = 0; i < amount_books; i++)
-    {
-        if (book[i].accession_number == *number_book)
+   int number_book=0, option_reserve=0;
+   printf("\033[H\033[2J"); // clear screen
+   while(1)
+   {
+        printf("======================================================================\n");
+        printf("| Please enter the accession number of the book you want to reserve. |\n");
+        printf("| Enter -1 to go back.                                               |\n");
+        printf("======================================================================\n");
+        printf("Enter the accession number: ");
+        scanf(" %d", &number_book);
+   
+        if(number_book == -1)
+            return;
+        else
         {
-            if (option_reserve == 1)
+            int find=0;
+            for (int i = 0; i < amount_books; i++)
             {
-                if (book[i].amount == 0)
+                if (book[i].accession_number == number_book)
                 {
-                    book[i].viewer_count++;
-                    printf("==================================================================\n");
-                    printf("| Book  %s  reserved successfully. |\n", book[i].book_name);
-                    printf("==================================================================\n");
-                    book[i].amount = 1;
-                }
-                else
-                {
-                    printf("==================================================================\n");
-                    printf("| Book  %s  is already reserved. |\n", book[i].book_name);
-                    printf("==================================================================\n");
+                    find = 1;
+                    printf("\033[H\033[2J"); // clear screen
+                    printf("====================================================================================================================================================================================\n");
+                    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+                    printf("====================================================================================================================================================================================\n");
+                    printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14s| %-14.0f| %-17d|\n", 
+                        book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                        book[i].isbn, book[i].viewer_count, book[i].accession_number);
+                    printf("====================================================================================================================================================================================\n");
+                    if(book[i].status == 1)
+                    {
+                        printf("========================================\n");
+                        printf("| Sorry, the book is already reserved. |\n");
+                        printf("========================================\n");
+                        break;
+                    }
+
+                    printf("======================================\n");
+                    printf("| Do you want to reserved the book ? |\n");
+                    printf("| 1. YES                             |\n");
+                    printf("| 2. NO                              |\n");
+                    printf("======================================\n");
+                    scanf(" %d", &option_reserve); // Use buttom
+
+                    if (option_reserve == 1)
+                    {
+                        book[i].viewer_count++;
+                        printf("==========================\n");
+                        printf("| Reserved successfully. |\n");
+                        printf("==========================\n");
+                        book[i].status = 1;
+                        break;
+                    }
+                    else if (option_reserve == 2)
+                    {
+                        printf("\033[H\033[2J"); // clear screen
+                        break;
+                    }
+                    else if (option_reserve < 1 || option_reserve > 2)
+                    {
+                        printf("===================\n");
+                        printf("| Invalid option! |\n");
+                        printf("===================\n");
+                        break;
+                    }
                 }
             }
-            else if (option_reserve == 2)
+            if(find == 0)
             {
-                if (book[i].amount == 1)
-                {
-                    printf("==================================================================\n");
-                    printf("| Book  %s  returned successfully. |\n", book[i].book_name);
-                    printf("==================================================================\n");
-                    book[i].amount = 0;
-                }
-                else
-                {
-                    printf("==================================================================\n");
-                    printf("| Book  %s  is already returned. |\n", book[i].book_name);
-                    printf("==================================================================\n");
-                }
+                printf("\033[H\033[2J"); // clear screen
+                printf("Sorry, there is no book with accession number %d in the library!\n", number_book);
             }
-        }
-    }
-    if (option_reserve < 1 || option_reserve > 2)
-    {
-        printf("===================\n");
-        printf("| Invalid option! |\n");
-        printf("===================\n");
-    }
-    if (*number_book < 1 || *number_book > 100)
-    {
-        printf("===================\n");
-        printf("| Invalid option! |\n");
-        printf("===================\n");
-    }
+        }   
+   }
 }

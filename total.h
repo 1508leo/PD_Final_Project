@@ -13,7 +13,6 @@ extern int number_ad; //trace the amount of administrator initialize 4 administr
 extern int amount_books; // trace the amount of books
 extern int accession_numer; //record accession_number
 extern int amount_re; // trace the amount of reader
-extern int status; // the status of the book
 extern char name_re[SPACE]; // current user
 extern char name_ad[SPACE]; // current user
 
@@ -80,7 +79,7 @@ struct books
     char isbn[SPACE];
     float viewer_count;
     int accession_number;
-    int status;
+    int status; // to know whether the book is borrowed
     char borrower[SPACE];
     int expiry_date;
 
@@ -214,6 +213,6 @@ void search_viewer_count(); // print every book that amount of viewer is greater
 
 void show_book(); // print the result into table. If doesn't search the books return the message
 
-void reserve_book(int *number_book, int option_reserve); // change the status of book
+void reserve_book(); // change the status of book
 
 #endif /* TOTAL_H */
