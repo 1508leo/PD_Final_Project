@@ -196,6 +196,8 @@ void interface_re(int option_re); // contain 9 buttons ( include exit button )
 
 void check_personal_information();
 
+void lowwer(char string[]);
+
 /* Search every book which contain the same string in searching */
 /* Decided by option_re */
 void search_book_name(char book_name[]);
