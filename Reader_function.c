@@ -28,43 +28,45 @@ void reader_mode()
     interface_re(option_re); // �????�????�????
 }
 
+void lowwer(char string[])
+{
+    int i=0;
+    while(string[i] != '\0')
+    {
+        string[i] = tolower(string[i]);
+        i++;
+    }
+}
+
 void search_book_name(char book_name[])
 {
-    int a = 0;
-    char temporary_book_name[amount_books][SPACE];
+    char temporary_book_name[SPACE];
+    int found=0;
     for (int i = 0; i < amount_books; i++)
     {
-        strcpy(temporary_book_name[i], book[i].book_name);
-    }
-    for (int i = 0; i < amount_books; i++)
-    {
-        for (int j = 0; j < SPACE; j++)
+        strcpy(temporary_book_name, book[i].book_name);
+        lowwer(temporary_book_name);
+        printf("\033[H\033[2J"); // clear screen
+        if (strstr(temporary_book_name, book_name) != NULL)
         {
-            if (temporary_book_name[i][j] >= 'A' && temporary_book_name[i][j] <= 'Z')
+            if(found == 0)
             {
-                temporary_book_name[i][j] += 32;
+                printf("====================================================================================================================================================================================\n");
+                printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+                printf("====================================================================================================================================================================================\n");
             }
-        }
-    }
-    printf("====================================================================================================================================================================================\n");
-    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
-    printf("====================================================================================================================================================================================\n");
-    for (int i = 0; i < amount_books; i++)
-    {
-        if (strstr(temporary_book_name[i], book_name) != NULL)
-        {
             printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14s| %-14.0f| %-17d|\n", 
                     book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
                     book[i].isbn, book[i].viewer_count, book[i].accession_number);
             printf("====================================================================================================================================================================================\n");
-            a = 1;
+            found = 1;
         }
     }
 
-    if (a == 0)
+    if (found == 0)
     {
         printf("===================================\n");
-        printf("| Sorry, There is no books found. |\n");
+        printf("| Sorry, There is no book found. |\n");
         printf("===================================\n");
     }
 }
