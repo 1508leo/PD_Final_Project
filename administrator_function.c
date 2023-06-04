@@ -201,20 +201,33 @@ void check_borrowing() // print every book which is borrowed
 
 void return_book()
 {
-    check_borrowing();
-    printf("Which book do you want to return?\n");
-    int number_book;
-    scanf("%d",&number_book);
-    for(int i = 0; i < MAX_BUF; i++){
-        if (book[i].book_name[0] != '\0' && book[i].status != 0){
-            if(number_book == book[i].call_number){
-                book[i].status = 0;
-                printf("return successful.\n");
+    check_borrowing(); // show the borrowing books
+    printf("\nWhich book do you want to return?\n");
+    printf("Please enter the accession number of the book: ");
+    int return_book=0, find=0;
+    scanf("%d",&return_book);
+    for(int i = 0; i < amount_books; i++)
+    {
+        if (book[i].accession_number == return_book)
+        {
+            find = 1;
+            if(book[i].status == 0)
+            {
+                printf("\nThe book is in the library.\n");
                 return;
+            }
+            else // status = 1
+            {
+                printf("\nReturn %s successfully.\n", book[i].book_name);
+                book[i].status = 0;
             }
         }
     }
-} // use number to choose the book to return
+
+    if(find == 0)
+        printf("\nThere is no book with the accession number %d in the library.\n", return_book);
+} 
+
 
 void check_re_information(int option_ad)
 {
