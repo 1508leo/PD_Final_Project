@@ -116,7 +116,7 @@ void check_personal_information(void)
         
     }
 }
-
+/*
 void interface_re(int option_re)
 {
     if (option_re == BUTTON_BOOK_NAME)
@@ -249,7 +249,7 @@ void interface_re(int option_re)
     }
     reader_mode();
 }
-
+*/
 void search_author(char author[])
 {
     char temporary_author[SPACE];
@@ -470,6 +470,7 @@ void reserve_book()
                     if (option_reserve == 1)
                     {
                         book[i].viewer_count++;
+                        strcpy(book[i].borrower, name_re);
                         printf("==========================\n");
                         printf("| Reserved successfully. |\n");
                         printf("==========================\n");
