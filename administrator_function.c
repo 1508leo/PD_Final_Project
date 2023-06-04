@@ -108,37 +108,69 @@ void add_book()
 
 void delete_book( )//show every book first(use search_book_name()). To make sure whether the book you want to delete
 {
-    review_library();//先印出所有的書
-    printf("enter the book name which book you want to delete");
-    char tmp_book_name[30];
-    fgets(tmp_book_name,  SPACE, stdin);
-    for (int i = 0; i < MAX_BUF; i++)
+    int delete_number=0, find=0;
+    review_library(); // print every book first
+    printf("Please enter the accession number of book you want to delete: ");
+    scanf(" %d", &delete_number);
+
+    for (int i = 0; i < amount_books; i++)
     {
-        if(strcmp(book[i].book_name,tmp_book_name)==0)
+        if(book[i].accession_number == delete_number)
         {
-            gotolable://輸入錯誤訊息時跳至這裡
-            printf("Warning! Are you sure you want to deleted this book? y/n");
-            char oper;//再次確認是否要刪
-            scanf(" %c",&oper);
-            if(oper == 'y')
+            int confirm=0;
+            find = 1;
+            while(1)
             {
-                book[i].book_name[0] = '\0';//將書籍名稱設為已被刪除
-                printf("Delete successful.\n");
-                break;
+                printf("========================================================\n");
+                printf("| Are you sure you want to delete %-20s |\n", book[i].book_name);
+                printf("| 1. Yes%46s |\n", " ");
+                printf("| 2. No%47s |\n", " ");
+                printf("========================================================\n");
+                printf("Please enter your option: ");
+                scanf(" %d", &confirm);
+                if(confirm > 2 || confirm < 1)
+                {
+                    printf("\033[H\033[2J"); // clear screen
+                    printf("Error Option\n\n");
+                    continue;
+                }
+                else if(confirm == 1)
+                {
+                    if(i == MAX_BUF - 1)
+                    {
+                        strcpy(book[i].book_name, "\0");
+                        strcpy(book[i].author, "\0");
+                        strcpy(book[i].publisher, "\0");
+                        book[i].publish_year = 0;
+                        strcpy(book[i].call_number, "\0");
+                        strcpy(book[i].isbn, "\0");
+                        book[i].viewer_count = 0;
+                        book[i].accession_number = 0;
+                    }
+                    else
+                    {
+                        for(int j = i; j < amount_books; j++)
+                        book[j] = book[j + 1];
+                    }
+
+                    printf("\nThe deletion of book is complete.\n");
+                    amount_books--;
+                    break;
+                }
+                else // confirm = 2
+                    break;
             }
-            else if(oper == 'n')
-            {
-                printf("Delete failed\n");
-                break;
-            }
-            else
-            {
-                printf("wrong operation!\n");
-                goto gotolable;
-            }
+            break;
+            
         }
     }
+
+    if(find == 0)
+        printf("\nThere is no book with accession number %d in the library.\n", delete_number);
+
+    return;
 }
+
 /* While checking borrowing, you can return book */
 void check_borrowing()//印出所有已被借出的書
 {
