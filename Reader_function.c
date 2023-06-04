@@ -100,6 +100,7 @@ void check_personal_information(void)
 {
     struct readers *current;
     current = first;
+    printf("\033[H\033[2J"); // clear screen
     printf("=========================================================================================================\n");
     printf("| %2s%-12s | %10s | %10s%-15s | %5s%-15s | %5s%-15s |\n", " ","Reader name", "student_id", " ", "email", " ", "re_account", " ", "re_password");
     printf("========================================================================================================= \n");

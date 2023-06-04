@@ -24,22 +24,30 @@ void administrator_mode()
 
 //void interface_ad(int option_ad); //按鈕
 
-void review_library()//印出所有的書
+void review_library() // print every book
 {
+    int num_books = 0;
+
+    printf("\033[H\033[2J"); // clear screen
+    // show every books
     printf("====================================================================================================================================================================================\n");
     printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
     printf("====================================================================================================================================================================================\n");
-
-    for (int i = 0; i < MAX_BUF; i++)
+    for (int i = 0; i < amount_books; i++)
     {
-        if(book[i].book_name[0] == '\0') continue;//已被刪除的書書名會是'\0'
-        else
-        {
-            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
-                    book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
-                    book[i].isbn, book[i].viewer_count, book[i].accession_number);
-            printf("====================================================================================================================================================================================\n");
-        }
+        printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14s| %-14.0f| %-17d|\n", 
+                book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
+                book[i].isbn, book[i].viewer_count, book[i].accession_number);
+        printf("====================================================================================================================================================================================\n");
+        num_books = 1;
+    }
+
+    // If there is no book in library
+    if(num_books == 0)
+    {
+        printf("=======================================\n");
+        printf("|     There is no book in library.    |\n");
+        printf("=======================================\n");
     }
 }
 
