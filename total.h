@@ -100,7 +100,6 @@ struct readers
     char email[SPACE];
     char re_account[SPACE];
     char re_password[SPACE];
-    char borrow_history[SPACE];
     struct readers *next;
 };
 
