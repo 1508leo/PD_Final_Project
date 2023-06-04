@@ -97,7 +97,6 @@ struct readers
 {
     char re_name[SPACE];
     int student_id;
-    char grade[SPACE]; 
     char email[SPACE];
     char re_account[SPACE];
     char re_password[SPACE];
