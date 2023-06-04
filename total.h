@@ -101,7 +101,6 @@ struct readers
     char re_account[SPACE];
     char re_password[SPACE];
     char borrow_history[SPACE];
-    int credit;
     struct readers *next;
 };
 
