@@ -229,26 +229,19 @@ void return_book()
 } 
 
 
-void check_re_information(int option_ad)
+void check_re_information()
 {
-    /*char *re_name;
-        int student_id;
-        char *grade;
-        char *email;
-        char *re_account;
-        char *re_password;
-        char **borrow_history;
-        int credit;*/
+    printf("\033[H\033[2J"); // clear screen
     struct readers *current = first;
 
-    printf("=================================================================================================\n");
-    printf("| Reader name | student_id | grade | email | re_account | re_password | borrow_history | credit |\n");
-    printf("================================================================================================= \n");
+    printf("=========================================================================================================\n");
+    printf("| %2s%-12s | %10s | %10s%-15s | %5s%-15s | %5s%-15s |\n", " ","Reader name", "student_id", " ", "email", " ", "re_account", " ", "re_password");
+    printf("========================================================================================================= \n");
 
     while(current != NULL){
-        printf(" %s | %d | %s | %s | %s | %s | %s | %d\n",
-               current->re_name, current->student_id, current->grade, current->email,
-               current->re_account, current->re_password, current->borrow_history, current->credit);
+        printf("| %-14s | %-10d | %-25s | %-20s | %-20s |\n", current->re_name, current->student_id, current->email,
+               current->re_account, current->re_password);
+        printf("=========================================================================================================\n");
 
         current = current->next;
     }

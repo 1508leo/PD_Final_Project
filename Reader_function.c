@@ -471,7 +471,6 @@ void reserve_book()
                     if (option_reserve == 1)
                     {
                         book[i].viewer_count++;
-                        strcpy(book[i].borrower, name_re);
                         printf("==========================\n");
                         printf("| Reserved successfully. |\n");
                         printf("==========================\n");
