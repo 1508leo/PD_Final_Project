@@ -74,7 +74,6 @@ void add_reader()
     strcpy(new_reader -> re_account, account);
     strcpy(new_reader -> re_password, password);
 
-    new_reader -> credit = 100; // initailize
     new_reader -> next = NULL;
     amount_re++;
     

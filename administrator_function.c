@@ -55,33 +55,55 @@ void review_library() // print every book
 
 void add_book()
 {
-    int i=5;//i暫時代表有幾本書
-
-    if (i == MAX_BUF)
-    { //已達最大值時拒絕添加
+    char book_name[SPACE], author[SPACE], publisher[SPACE], call_number[SPACE], isbn[SPACE];
+    if (amount_books == MAX_BUF)
+    { // The capacity of the library is full
         printf("Library is full. Cannot add more books.\n");
         return;
     }
-    printf("enter the book_name: ");
-    fgets(book[i].book_name,  SPACE, stdin);
 
-    printf("enter the aurthor: ");
-    fgets(book[i].author,  SPACE, stdin);
+    printf("\033[H\033[2J"); // clear screen
+    printf("Please enter the book_name: ");
+    fgets(book_name, SPACE, stdin);
+    if(book_name[strlen(book_name) - 1] == '\n')
+        book_name[strlen(book_name) - 1] = '\0';
 
-    printf("enter the translator: ");
-    fgets(book[i].translator,  SPACE, stdin);
+    printf("Please enter the aurthor: ");
+    fgets(author,  SPACE, stdin);
+    if(author[strlen(author) - 1] == '\n')
+        author[strlen(author) - 1] = '\0';
 
-    printf("enter the publisher: ");
-    fgets(book[i].publisher,  SPACE, stdin);
+    printf("Please enter the publisher: ");
+    fgets(publisher,  SPACE, stdin);
+    if(publisher[strlen(publisher) - 1] == '\n')
+        publisher[strlen(publisher) - 1] = '\0';
 
-    printf("enter the publish_year: ");
-    scanf("%d",&book[i].publish_year);
+    printf("Please enter the publish_year: ");
+    scanf("%d",&book[amount_books].publish_year);
 
-    printf("enter the call_number: ");
-    scanf("%f",&book[i].call_number);
+    fflush(stdin);
 
-    printf("enter the isbn: ");
-    fgets(book[i].isbn,  SPACE, stdin);
+    printf("Please enter the call_number: ");
+    fgets(call_number,  SPACE, stdin);
+    if(call_number[strlen(call_number) - 1] == '\n')
+        call_number[strlen(call_number) - 1] = '\0';
+
+    printf("Please enter the isbn: ");
+    fgets(isbn,  SPACE, stdin);
+    if(isbn[strlen(isbn) - 1] == '\n')
+        isbn[strlen(isbn) - 1] = '\0';
+
+    strcpy(book[amount_books].book_name, book_name);
+    strcpy(book[amount_books].author, author);
+    strcpy(book[amount_books].publisher, publisher);
+    strcpy(book[amount_books].call_number, call_number);
+    strcpy(book[amount_books].isbn, isbn);
+    book[amount_books].accession_number = accession_numer;
+
+    printf("\nThe book addition is complete.\n");
+
+    accession_numer++;
+    amount_books++;
 }
 
 void delete_book( )//show every book first(use search_book_name()). To make sure whether the book you want to delete
