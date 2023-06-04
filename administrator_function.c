@@ -146,6 +146,7 @@ void delete_book( )//show every book first(use search_book_name()). To make sure
                         strcpy(book[i].isbn, "\0");
                         book[i].viewer_count = 0;
                         book[i].accession_number = 0;
+                        book[i].status = 0;
                     }
                     else
                     {
@@ -171,22 +172,31 @@ void delete_book( )//show every book first(use search_book_name()). To make sure
     return;
 }
 
-/* While checking borrowing, you can return book */
-void check_borrowing()//印出所有已被借出的書
+void check_borrowing() // print every book which is borrowed
 {
-    printf("====================================================================================================================================================================================\n");
-    printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
-    printf("====================================================================================================================================================================================\n");
-    for (int i = 0; i < MAX_BUF; i++)
+    int find=0;
+    printf("\033[H\033[2J"); // clear screen
+    
+    for (int i = 0; i < amount_books; i++)
     {
-        if (book[i].book_name[0] != '\0' && book[i].status != 0)
+        if (book[i].status != 0)
         {
-            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14ld| %-14.0f| %-17d|\n", 
+            if(find == 0)
+            {
+                printf("====================================================================================================================================================================================\n");
+                printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
+                printf("====================================================================================================================================================================================\n");
+            }
+            find = 1;
+            printf("| %-50s| %-20s| %-20s| %-13d| %-15s| %-14s| %-14.0f| %-17d|\n", 
                     book[i].book_name, book[i].author, book[i].publisher, book[i].publish_year, book[i].call_number,
                     book[i].isbn, book[i].viewer_count, book[i].accession_number);
             printf("====================================================================================================================================================================================\n");
         }
     }
+
+    if(find == 0)
+        printf("Every book in the library is not borrowed.\n");
 }
 
 void return_book()

@@ -80,9 +80,6 @@ struct books
     float viewer_count;
     int accession_number;
     int status; // to know whether the book is borrowed
-    char borrower[SPACE];
-    int expiry_date;
-
 }book[MAX_BUF];
 
 struct administrators
