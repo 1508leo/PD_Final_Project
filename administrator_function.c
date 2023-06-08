@@ -531,6 +531,7 @@ void lend_book()
                 book[i].status = 1;
                 printf("\033[H\033[2J"); // clear screan
                 printf("Lend %s successfully.\n", book[i].book_name);
+                book[i].viewer_count++; // viewer plus 1
                 return;
             }
             else if(book[i].status == 1)

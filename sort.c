@@ -34,12 +34,12 @@ void sort_publish_year()
     
 }
 
-// Need to change
+/* Need to change
 void sort_call_number()
 {
     static int order = SMALL;
 
-    /* Large first */
+    /* Large first 
     for(int i = 0; i < amount_books - 1; i++)
     {
         for(int j = 0; j < amount_books - i; j++)
@@ -58,7 +58,7 @@ void sort_call_number()
     else if(order == LARGE)
     {
         order = SMALL;
-        /* Small first, reverse the structure */
+        /* Small first, reverse the structure 
         for(int i = 0; i < (amount_books / 2); i++)
         {
             struct books temp = book[i];
@@ -68,7 +68,7 @@ void sort_call_number()
     }
     
 }
-
+*/
 
 void sort_viewer_number()
 {

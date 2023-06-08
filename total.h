@@ -105,13 +105,13 @@ struct readers *first = NULL;
 
 void sort_publish_year();
 
-//void sort_amount();
-
-void sort_call_number();
+//void sort_call_number();
 
 void sort_viewer_count();
 
 void sort_accession_number();
+
+void free_reader(struct readers *list);
 
 void input_file();
 

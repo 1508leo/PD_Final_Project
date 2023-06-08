@@ -2,6 +2,17 @@
 
 FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
 
+void free_reader(struct readers *list)
+{
+    struct readers *temp;
+    while(list != NULL)
+    {
+        temp = list;
+        list = list -> next;
+        free(temp);
+    }
+}
+
 void input_file()
 {
     /* Open the amount.txt. Which store the amount of administrators, books, accession number, and readers */
@@ -94,6 +105,8 @@ void output_file()
         fwrite(cur, sizeof(struct readers) - sizeof(struct readers *), 1, fp_reader);
         cur = cur -> next; // To next node
     }
+
+    free_reader(first);
 
     /* Back to the beginning of the file */
     fclose(fp_amount);
