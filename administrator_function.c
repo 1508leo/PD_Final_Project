@@ -247,67 +247,109 @@ void check_re_information()
     }
 }
 
-void modify_re_information()
+void modify_re_information() // Modify or delete reader information
 {
     struct readers *current = first;
     struct readers *prev = NULL;
-    printf("enter the reader name which you want to modify:\n");
+    check_re_information();
+    printf("Please enter the reader name which you want to modify: ");
     char temp_reader_name[30];
-    fgets(temp_reader_name,  SPACE, stdin);//輸入想查找的名稱
+    fgets(temp_reader_name,  sizeof(temp_reader_name), stdin); // The reader name that is going to be modified
+    if(temp_reader_name[strlen(temp_reader_name) - 1] == '\n')
+        temp_reader_name[strlen(temp_reader_name) - 1] = '\0';
 
-    int oper = 0; // 選擇器，0 表示找不到目標名字
+    int oper = 0; // Represent whether tje name is exist
     while (current != NULL)
     {
-        if (strcmp(current->re_name, temp_reader_name) == 0) // 尋找指定讀者
+        if (strcmp(current->re_name, temp_reader_name) == 0) // reader_name exist
         {
-            printf("Enter 1 if you want to modify information for the reader\n");
-            printf("Enter 2 if you want to delete information for the reader: ");
-
-            int operation ;//選擇器 選擇要修該資料還刪除資料
-            scanf("%d",&operation);
-            if(operation == 1)
-            {//修改資料
-                printf("Enter the new information for the reader:\n");
-                printf("please enter reader name: ");
-                fgets(current->re_name,  SPACE, stdin);
-
-                printf("please enter student id: ");
-                scanf(" %d",&(current->student_id));
-
-                printf("please enter grade: ");
-                fgets(current->grade,  SPACE, stdin);
-
-                printf("please enter email: ");
-                fgets(current->email,  SPACE, stdin);
-
-                printf("please enter reader account: ");
-                fgets(current->re_account,  SPACE, stdin);
-
-                printf("please enter reader password: ");
-                fgets(current->re_password,  SPACE, stdin);
-
-                printf("please enter borrow history: ");
-                fgets(current->borrow_history,  SPACE, stdin);
-
-                printf("please enter credit: ");
-                scanf("%d",&(current->credit));
-
-                oper = 1; // 找到目標名字
-                break;
-            }
-            else if(operation == 2)
-            {//刪除讀者
-                if (prev == NULL)  first = current->next;//要刪除的是第一位讀者
-                else prev->next = current->next;
-                free(current);
-                oper = 1; // 找到目標名字並修改成功
-                printf("Deleted successful.!\n");
-                break;
-            }
-            else//錯誤輸入
+            oper = 1; // Find the reader
+            jmp_buf	jmpbuffer;
+            int error=0;
+            error = setjmp(jmpbuffer);
+            if(error == 1) // If user enter wrong option
             {
-                printf("wrong operation!\n");
+                printf("\033[H\033[2J"); // clear screan
+                printf("Wrong operation!\n\n");
+            }
+
+            printf("================================\n");
+            printf("| What do you prefer to do?    |\n");
+            printf("| 1. Modify reader information |\n");
+            printf("| 2. Delete reader             |\n");
+            printf("================================\n");
+            printf("Please enter your option: ");
+
+            int operation=0; // Decide operation
+            scanf("%d",&operation);
+            if(operation == 1) // Modify reader information
+            {
+                
+                char name[SPACE], email[SPACE], account[SPACE], password[SPACE];
+                int id=0;
+                printf("\033[H\033[2J"); // clear screan
+                printf("============================================\n");
+                printf("| Enter the new information for the reader |\n");
+                printf("============================================\n\n");
+
+                fflush(stdin);
+
+                printf("Old name: %s\n", current -> re_name);
+                printf("Please enter the new reader name: ");
+                fgets(name,  sizeof(name), stdin);
+                if(name[strlen(name) - 1] == '\n')
+                    name[strlen(name) - 1] = '\0';
+
+                printf("Old student id: %d\n", current -> student_id);
+                printf("Please enter the new student id: ");
+                scanf(" %d", &id);
+
+                fflush(stdin);
+
+                printf("Old email: %s\n", current -> email);
+                printf("Please enter the new email: ");
+                fgets(email,  sizeof(email), stdin);
+                if(email[strlen(email) - 1] == '\n')
+                    email[strlen(email) - 1] = '\0';
+
+                printf("Old account: %s\n", current -> re_account);
+                printf("Please enter the new reader account: ");
+                fgets(account,  sizeof(account), stdin);
+                if(account[strlen(account) - 1] == '\n')
+                    account[strlen(account) - 1] = '\0';
+
+                printf("Old password: %s\n", current -> re_password);
+                printf("Please enter reader password: ");
+                fgets(password,  sizeof(password), stdin);
+                if(password[strlen(password) - 1] == '\n')
+                    password[strlen(password) - 1] = '\0';
+
+                strcpy(current -> re_name, name);
+                current -> student_id = id;
+                strcpy(current -> email, email);
+                strcpy(current -> re_account, account);
+                strcpy(current -> re_password, password);
+
+                printf("\033[H\033[2J"); // clear screan
+                printf("Update successful!\n");
+
                 break;
+            }
+            else if(operation == 2) // Delete reader
+            {
+                if (prev == NULL)  // Remove the first reader
+                    first = current->next;
+                else 
+                    prev->next = current->next; // Remove the reader that is not the first
+                free(current);
+
+                printf("\033[H\033[2J"); // clear screan
+                printf("Deletion successful!\n");
+                break;
+            }
+            else // error option
+            {
+                longjmp(jmpbuffer, 1); // to the error message
             }
         }
         else
@@ -316,8 +358,9 @@ void modify_re_information()
             current = current->next;
         }
     }
-    if (oper == 0)  printf("No such reader!\n"); //若整個迴圈跑完都沒找到目標名字
-} // modify or delete reader information
+    if (oper == 0)  
+        printf("No such reader!\n"); //Can't find the reader
+}
 
 void check_ad_information()
 {

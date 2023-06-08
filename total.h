@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <setjmp.h>
 
 #define SPACE 100
 #define MAX_BUF 4096
