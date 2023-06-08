@@ -234,14 +234,14 @@ void check_re_information()
     printf("\033[H\033[2J"); // clear screen
     struct readers *current = first;
 
-    printf("=========================================================================================================\n");
-    printf("| %2s%-12s | %10s | %10s%-15s | %5s%-15s | %5s%-15s |\n", " ","Reader name", "student_id", " ", "email", " ", "re_account", " ", "re_password");
-    printf("========================================================================================================= \n");
+    printf("===============================================================================================================\n");
+    printf("| %5s%-15s | %10s | %10s%-15s | %5s%-15s | %5s%-15s |\n", " ","Reader Name", "Student_id", " ", "Email", " ", "Re_account", " ", "Re_password");
+    printf("=============================================================================================================== \n");
 
     while(current != NULL){
-        printf("| %-14s | %-10d | %-25s | %-20s | %-20s |\n", current->re_name, current->student_id, current->email,
+        printf("| %-20s | %-10d | %-25s | %-20s | %-20s |\n", current->re_name, current->student_id, current->email,
                current->re_account, current->re_password);
-        printf("=========================================================================================================\n");
+        printf("===============================================================================================================\n");
 
         current = current->next;
     }
@@ -364,13 +364,14 @@ void modify_re_information() // Modify or delete reader information
 
 void check_ad_information()
 {
-    printf("======================================\n");
-    printf("| ad_name | ad_account | ad_password |\n");
-    printf("======================================\n");
+    printf("\033[H\033[2J"); // clear screen
+    printf("======================================================================\n");
+    printf("| %1s%-19s | %5s%-15s | %5s%-15s |\n", " ", "Administrator Name", " ", "ad_account", " ", "ad_password");
+    printf("======================================================================\n");
     for (int i = 0; i < number_ad; i++)
     {
-        printf("%s | %s | %s\n", administrator[i].ad_name, administrator[i].ad_account, administrator[i].ad_password);
-        printf("======================================\n");
+        printf("| %-20s | %-20s | %-20s |\n", administrator[i].ad_name, administrator[i].ad_account, administrator[i].ad_password);
+        printf("======================================================================\n");
     }
 }
 
