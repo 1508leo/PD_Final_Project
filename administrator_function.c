@@ -1,8 +1,10 @@
-/*5/20更新問題
-要求:書籍新曾status(借閱狀態)
-未完成:
-*/
 #include "total.h"
+
+int number_ad = 4; //trace the amount of administrator initialize 4 administrator
+int amount_books = 0; // trace the amount of books
+int accession_numer = 0; //record accession_number
+int amount_re = 0; // trace the amount of reader
+
 void administrator_mode()
 {
     int option_ad; // 這裡的變數是用來選擇要做什麼事情的
