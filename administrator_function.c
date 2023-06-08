@@ -258,15 +258,15 @@ void modify_re_information() // Modify or delete reader information
     if(temp_reader_name[strlen(temp_reader_name) - 1] == '\n')
         temp_reader_name[strlen(temp_reader_name) - 1] = '\0';
 
-    int oper = 0; // Represent whether tje name is exist
+    int oper = 0; // Represent whether the name is exist
     while (current != NULL)
     {
         if (strcmp(current->re_name, temp_reader_name) == 0) // reader_name exist
         {
             oper = 1; // Find the reader
-            jmp_buf	jmpbuffer;
+            jmp_buf	rebuffer;
             int error=0;
-            error = setjmp(jmpbuffer);
+            error = setjmp(rebuffer);
             if(error == 1) // If user enter wrong option
             {
                 printf("\033[H\033[2J"); // clear screan
@@ -300,25 +300,25 @@ void modify_re_information() // Modify or delete reader information
                 if(name[strlen(name) - 1] == '\n')
                     name[strlen(name) - 1] = '\0';
 
-                printf("Old student id: %d\n", current -> student_id);
+                printf("\nOld student id: %d\n", current -> student_id);
                 printf("Please enter the new student id: ");
                 scanf(" %d", &id);
 
                 fflush(stdin);
 
-                printf("Old email: %s\n", current -> email);
+                printf("\nOld email: %s\n", current -> email);
                 printf("Please enter the new email: ");
                 fgets(email,  sizeof(email), stdin);
                 if(email[strlen(email) - 1] == '\n')
                     email[strlen(email) - 1] = '\0';
 
-                printf("Old account: %s\n", current -> re_account);
+                printf("\nOld account: %s\n", current -> re_account);
                 printf("Please enter the new reader account: ");
                 fgets(account,  sizeof(account), stdin);
                 if(account[strlen(account) - 1] == '\n')
                     account[strlen(account) - 1] = '\0';
 
-                printf("Old password: %s\n", current -> re_password);
+                printf("\nOld password: %s\n", current -> re_password);
                 printf("Please enter reader password: ");
                 fgets(password,  sizeof(password), stdin);
                 if(password[strlen(password) - 1] == '\n')
@@ -349,7 +349,7 @@ void modify_re_information() // Modify or delete reader information
             }
             else // error option
             {
-                longjmp(jmpbuffer, 1); // to the error message
+                longjmp(rebuffer, 1); // jump to the error message
             }
         }
         else
@@ -359,7 +359,11 @@ void modify_re_information() // Modify or delete reader information
         }
     }
     if (oper == 0)  
+    {
+        printf("\033[H\033[2J"); // clear screan
         printf("No such reader!\n"); //Can't find the reader
+    }
+        
 }
 
 void check_ad_information()
@@ -375,61 +379,95 @@ void check_ad_information()
     }
 }
 
-void modify_ad_information(int number, int option_number)
-{ // 這個函數目前還缺刪除管理員的功能
-    int id;//管理員編號
-    printf("Enter the administrator ID: ");
-    scanf("%d",&id);
+void modify_ad_information()
+{ 
+    check_ad_information();
+    char temp_ad_name[30];
+    printf("Please enter the administrator name which you want to modify: ");
+    fgets(temp_ad_name,  sizeof(temp_ad_name), stdin); // The reader name that is going to be modified
+    if(temp_ad_name[strlen(temp_ad_name) - 1] == '\n')
+        temp_ad_name[strlen(temp_ad_name) - 1] = '\0';
 
-    if (id >= 0 && id < number_ad)
+    int oper = 0; // Represent whether tje name is exist
+    for(int i = 0; i < number_ad; i++)
     {
-        printf("information of this administrator\n");//列出資料
-        printf("======================================\n");
-        printf("| ad_name | ad_account | ad_password |\n");
-        printf("======================================\n");
-        printf("%s | %s | %s\n", administrator[id].ad_name, administrator[id].ad_account, administrator[id].ad_password);
-
-
-        printf("Enter 1 if you want to modify information for the administrator\n");//選擇修改or刪除
-        printf("Enter 2 if you want to delete information for the administrator: ");
-
-        int operation;//選擇器 選擇要修該資料還刪除資料
-        scanf("%d",&operation);
-        if(operation == 1)
-        {//修該資料
-            printf("Enter the new information for the administrator:\n");
-            printf("New name: ");
-
-            fgets(administrator[id].ad_name,  SPACE, stdin);
-
-            printf("New account: ");
-            fgets(administrator[id].ad_account,  SPACE, stdin);
-
-            printf("New password: ");
-            fgets(administrator[id].ad_password,  SPACE, stdin);
-            return;
-        }
-        else if(operation == 2)//刪除資料
+        if(strcmp(administrator[i].ad_name, temp_ad_name) == 0) // Find administrator
         {
-            number_ad--;//管理員總人數減1
-            for (int i = id; i < number_ad - 1; i++) // 往前移一格
+            oper = 1;
+            jmp_buf	adbuffer;
+            int error=0;
+            error = setjmp(adbuffer);
+            printf("================================\n");
+            printf("| What do you prefer to do?    |\n");
+            printf("| 1. Modify reader information |\n");
+            printf("| 2. Delete reader             |\n");
+            printf("================================\n");
+            printf("Please enter your option: ");
+
+            int operation=0; // Decide operation
+            scanf("%d",&operation);
+
+            if(operation == 1)
             {
-                strcpy(administrator[i].ad_name, administrator[i + 1].ad_name);
-                strcpy(administrator[i].ad_account, administrator[i + 1].ad_account);
-                strcpy(administrator[i].ad_password, administrator[i + 1].ad_password);
+                char name[SPACE], account[SPACE], password[SPACE];
+                printf("\033[H\033[2J"); // clear screan
+                printf("============================================\n");
+                printf("| Enter the new information for the reader |\n");
+                printf("============================================\n\n");
+
+                fflush(stdin);
+
+                printf("Old name: %s\n", administrator[i].ad_name);
+                printf("Please enter the new administrator name: ");
+                fgets(name,  sizeof(name), stdin);
+                if(name[strlen(name) - 1] == '\n')
+                    name[strlen(name) - 1] = '\0';
+
+                printf("\nOld account: %s\n", administrator[i].ad_account);
+                printf("Please enter the new reader account: ");
+                fgets(account,  sizeof(account), stdin);
+                if(account[strlen(account) - 1] == '\n')
+                    account[strlen(account) - 1] = '\0';
+
+                printf("\nOld password: %s\n", administrator[i].ad_password);
+                printf("Please enter reader password: ");
+                fgets(password,  sizeof(password), stdin);
+                if(password[strlen(password) - 1] == '\n')
+                    password[strlen(password) - 1] = '\0';
+
+                strcpy(administrator[i].ad_name, name);
+                strcpy(administrator[i].ad_account, account);
+                strcpy(administrator[i].ad_password, password);
+
+                printf("\033[H\033[2J"); // clear screan
+                printf("Update successful!\n");
+
+                break;
             }
-            strcpy(administrator[number_ad].ad_name, "");
-            strcpy(administrator[number_ad].ad_account, "");
-            strcpy(administrator[number_ad].ad_password, "");
-            return;
-        }
-        else //錯誤輸入
-        {
-            printf("wrong operation!\n");
-            return;
+            else if(operation == 2) // Delete reader
+            {
+                for(int j = i; j < number_ad; j++)
+                {
+                    administrator[j] = administrator[j + 1];
+                }
+
+                number_ad--;
+                printf("\033[H\033[2J"); // clear screan
+                printf("Deletion successful!\n");
+                break;
+            }
+            else
+            {
+                longjmp(adbuffer, 1); // jump to the error message
+            }
         }
     }
-    else  printf("Invalid administrator ID!\n");
+    if (oper == 0)  
+    {
+        printf("\033[H\033[2J"); // clear screen
+        printf("No such administrator!\n"); //Can't find the administrator
+    }
+        
 }
 
 //void interface_set_administrator(int option_ad, char name[], char account[], char password[]); //按鈕
