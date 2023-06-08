@@ -397,6 +397,12 @@ void modify_ad_information()
             jmp_buf	adbuffer;
             int error=0;
             error = setjmp(adbuffer);
+            if(error == 1) // If user enter wrong option
+            {
+                printf("\033[H\033[2J"); // clear screan
+                printf("Wrong operation!\n\n");
+            }
+
             printf("================================\n");
             printf("| What do you prefer to do?    |\n");
             printf("| 1. Modify reader information |\n");
@@ -474,23 +480,72 @@ void modify_ad_information()
 
 void lend_book()
 {
-    check_borrowing();
-    printf("Which book do you want to lend?\n");
-    int number_book;
-    scanf("%d",&number_book);
-    for(int i = 0; i < MAX_BUF; i++)
+    review_library();
+    printf("\n===================================================================\n");
+    printf("| Please enter the accession number of the book you want to lend. |\n");
+    printf("| Enter -1 to go back.                                            |\n");
+    printf("===================================================================\n");
+    printf("Enter the accession number: ");
+    int number_book=0; // the accession number of the book you want lend
+    scanf(" %d",&number_book);
+    if(number_book == -1)
+        return;
+    else
     {
-        if (book[i].book_name[0] != '\0' && book[i].status != 1)
+        for(int i = 0; i < amount_books; i++)
+    {
+        if (book[i].accession_number == number_book)
         {
-            if(number_book == book[i].call_number)
+            fflush(stdin);
+            
+            jmp_buf	lendbuffer;
+            char reader_name[SPACE];
+            int error=0;
+            error = setjmp(lendbuffer);
+            if(error == 1)
+            {
+                printf("\033[H\033[2J"); // clear screan
+                printf("The reader doesn't exist!\n");
+            }
+
+            printf("Please enter the borrower name: ");
+            fgets(reader_name, sizeof(reader_name), stdin);
+            if(reader_name[strlen(reader_name) - 1] == '\n')
+                reader_name[strlen(reader_name) - 1] = '\0';
+
+            struct readers *current;
+            current = first;
+            while(current != NULL) // find whether the reader is exist
+            {
+                if(strcmp(current -> re_name, reader_name) == 0)
+                    break;
+                else
+                    current = current -> next;
+            }
+            if(current == NULL)
+            {
+                longjmp(lendbuffer, 1); // jump to the error message
+            }
+            if(book[i].status == 0)
             {
                 book[i].status = 1;
-                printf("Lend successful.\n");
+                printf("\033[H\033[2J"); // clear screan
+                printf("Lend %s successfully.\n", book[i].book_name);
+                return;
+            }
+            else if(book[i].status == 1)
+            {
+                printf("\033[H\033[2J"); // clear screen
+                printf("The book has been borrowed!\n");
                 return;
             }
         }
     }
-} // change the status of book
+        // Doesn't find the book in library
+        printf("The book with %d accession number doesn't exist.\n", number_book);
+    }
+    
+}
 
 /* Add new administrator */
 void add_administrator()
