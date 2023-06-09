@@ -103,6 +103,21 @@ struct readers
 
 struct readers *first = NULL;
 
+struct history // Queue
+{
+    char re_name[SPACE];
+    char book_name[SPACE];
+    struct history *next;
+};
+
+struct Queue
+{
+    struct history *front; // Points to the front of the queue
+    struct history *rear; // Points to the rear of the queue
+};
+
+struct Queue *queue;
+
 void sort_publish_year();
 
 //void sort_call_number();

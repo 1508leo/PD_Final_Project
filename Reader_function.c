@@ -455,6 +455,7 @@ void reserve_book()
                     printf("====================================================================================================================================================================================\n");
                     if(book[i].status == 1)
                     {
+                        printf("\033[H\033[2J"); // clear screen
                         printf("========================================\n");
                         printf("| Sorry, the book is already reserved. |\n");
                         printf("========================================\n");
@@ -471,10 +472,12 @@ void reserve_book()
                     if (option_reserve == 1)
                     {
                         book[i].viewer_count++;
+                        printf("\033[H\033[2J"); // clear screen
                         printf("==========================\n");
                         printf("| Reserved successfully. |\n");
                         printf("==========================\n");
                         book[i].status = 1;
+                        enqueue(queue, name_re, book[i].book_name);
                         break;
                     }
                     else if (option_reserve == 2)
@@ -484,6 +487,7 @@ void reserve_book()
                     }
                     else if (option_reserve < 1 || option_reserve > 2)
                     {
+                        printf("\033[H\033[2J"); // clear screen
                         printf("===================\n");
                         printf("| Invalid option! |\n");
                         printf("===================\n");
