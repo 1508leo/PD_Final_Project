@@ -118,6 +118,14 @@ struct Queue
 
 struct Queue *queue;
 
+int empty(struct Queue *queue);
+
+struct Queue *createQueue();
+
+void enqueue(struct Queue *queue, char re_name[], char book_name[]);
+
+void dequeue(struct Queue* queue);
+
 void sort_publish_year();
 
 //void sort_call_number();
