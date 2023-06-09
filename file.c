@@ -100,7 +100,7 @@ void input_file()
     rewind(fp_amount);
     rewind(fp_administrator);
     rewind(fp_book);
-    rewind(fp_book);
+    rewind(fp_reader);
     rewind(fp_history);
 }
 
@@ -149,5 +149,6 @@ void output_file()
     fclose(fp_amount);
     fclose(fp_administrator);
     fclose(fp_book);
-    fclose(fp_book);
+    fclose(fp_reader);
+    fclose(fp_history);
 }
