@@ -154,7 +154,7 @@ void interface_set_reader(int option_entry, char name[], int id, char grade[], c
 
 int set_check_account_re(char name[], int id, char email[], char account[]); //need to print error message
 
-//int set_check_password_re(char password[]); //need to print error message
+void check_email(char email[]);
 
 void add_reader(); //add into linked list
 
