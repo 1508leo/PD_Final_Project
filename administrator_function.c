@@ -544,6 +544,7 @@ void lend_book()
                 printf("Lend %s successfully.\n", book[i].book_name);
                 book[i].viewer_count++; // viewer plus 1
                 enqueue(queue, reader_name, book[i].book_name);
+                amount_history++;
                 return;
             }
             else if(book[i].status == 1)

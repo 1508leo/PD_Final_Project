@@ -555,6 +555,7 @@ void reserve_book()
                         printf("==========================\n");
                         book[i].status = 1;
                         enqueue(queue, name_re, book[i].book_name);
+                        amount_history++;
                         break;
                     }
                     else if (option_reserve == 2)
