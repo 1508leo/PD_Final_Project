@@ -19,7 +19,8 @@ extern char name_ad[SPACE]; // current user
 extern int amount_history;
 
 
-extern FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader;
+extern FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader, *fp_history;
+extern jmp_buf	emailbuffer;
 
 #define NO -1
 #define YES 1

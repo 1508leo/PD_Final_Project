@@ -3,6 +3,80 @@
 int position = 0;
 char name_re[SPACE];
 char name_ad[SPACE];
+jmp_buf	emailbuffer;
+
+void check_email(char email[]) 
+{
+    int error = 0;
+    int counter = 0;
+    char* cptr;
+    char* temp;
+
+    printf("\n===================================================\n");
+
+    if ((cptr = strchr(email, '@')) == NULL) {
+        printf("| Email format error: at least one @              |\n");
+        printf("===================================================\n");
+        error++;
+    }
+    else
+    {
+        temp = cptr;
+        while ((cptr = strchr(temp, '@')) != NULL) {
+            counter++;
+            temp = cptr + 1;
+        }
+
+        if (counter > 1) {
+            printf("Email format error: more than one @               |\n");
+            printf("===================================================\n");
+            error++;
+        }
+    }
+
+    char* sharp;
+    sharp = strchr(email, '#');
+    while (sharp != NULL) {
+        printf("| Email format error: can't exist #               |\n");
+        printf("===================================================\n");
+        error++;
+        sharp = strchr(sharp + 1, '#');
+    }
+
+    char* asterisk;
+    asterisk = strchr(email, '*');
+    while (asterisk != NULL) {
+        printf("| Email format error: can't exist *               |\n");
+        printf("===================================================\n");
+        error++;
+        asterisk = strchr(asterisk + 1, '*');
+    }
+
+    char* doubledot;
+    doubledot = strstr(email, "..");
+    while (doubledot != NULL) {
+        printf("| Email format error: can't exist ..              |\n");
+        printf("===================================================\n");
+        error++;
+        doubledot = strstr(doubledot + 1, "..");
+    }
+
+    char* at = NULL;
+    char* dot = NULL;
+    if ((at = strchr(email, '@')) != NULL) {
+        dot = strchr(at + 1, '.');
+        if (dot == NULL) {
+            printf("| Email format error: at least one . behind the @ |\n");
+            printf("===================================================\n");
+            error++;
+        }
+    }
+
+    if (error != 0)
+        longjmp(emailbuffer, 1);
+    printf("| Email format correct!                           |\n");
+    printf("===================================================\n\n");
+}
 
 int set_check_account_re(char name[], int id, char email[], char account[])
 {
@@ -35,6 +109,7 @@ void add_reader()
 
     new_reader = malloc(sizeof(struct readers));
 
+    printf("\033[H\033[2J"); // clear the screen
     printf("Please enter your name: ");
     fgets(name, SPACE, stdin);
     if(name[strlen(name) - 1] == '\n')
@@ -45,10 +120,18 @@ void add_reader()
 
     fflush(stdin);
 
+    int detect=0;
+
+    detect = setjmp(emailbuffer);
+    if(detect == 1)
+        printf("\n");
+
     printf("Please enter your email: ");
     fgets(email, SPACE, stdin);
     if(email[strlen(email) - 1] == '\n')
         email[strlen(email) - 1] = '\0';
+
+    check_email(email);
 
     while (1)
     {
@@ -57,7 +140,7 @@ void add_reader()
         if(account[strlen(account) - 1] == '\n')
             account[strlen(account) - 1] = '\0';
 
-        success = set_check_account_re(new_reader -> re_name, new_reader -> student_id, new_reader -> email, account);
+        success = set_check_account_re(name, new_reader -> student_id, email, account);
         if(success == YES)
             break;
     }
