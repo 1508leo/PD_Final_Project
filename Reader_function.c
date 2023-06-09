@@ -104,7 +104,7 @@ void search_popular(void)
     }
 }
 
-void check_personal_information(void)
+void check_personal_information()
 {
     struct readers *current;
     current = first;
@@ -119,6 +119,21 @@ void check_personal_information(void)
             printf("| %-14s | %-10d | %-25s | %-20s | %-20s |\n", current->re_name, current->student_id, current->email,
                current->re_account, current->re_password);
             printf("=========================================================================================================\n");
+
+            printf("\n========================\n");
+            printf("|   Borrowing History  |\n");
+            printf("========================\n");
+            struct history *currentNode = queue->front;
+
+            while (currentNode != NULL) 
+            {
+                if (strcmp(currentNode -> re_name, name_re) == 0) 
+                {
+                    printf("| %-20s |\n", currentNode -> book_name);
+                    printf("========================\n");
+                }
+                currentNode = currentNode->next;
+            }
             break;
         }
         current = current->next;
