@@ -209,15 +209,15 @@ void lowwer(char string[]);
 
 /* Search every book which contain the same string in searching */
 /* Decided by option_re */
-void search_book_name(char book_name[]);
+void search_book_name();
 
-void search_author(char author[]);
+void search_author();
 
-void search_publisher(char publisher[]);
+void search_publisher();
 
-void search_call_number(char call_number[]);
+void search_call_number();
 
-void search_isbn(char isbn[]);
+void search_isbn();
 
 void search_viewer_count(); // print every book that amount of viewer is greater than 0 from the most popular
 
