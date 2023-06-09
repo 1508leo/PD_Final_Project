@@ -9,4 +9,6 @@
 3. Two modes (Reader, Administration).
 4. Choose one mode to enter.
 5. Sign up your account.
-Have fun in it !
+6. If you choose reader mode, you can search book or reserve book, otherwise, in administration mode, you can add or delete book, check the information about admins, readers and books. you can also quit if you want to switch your identity.
+
+### Hope you enjoy in the library !
