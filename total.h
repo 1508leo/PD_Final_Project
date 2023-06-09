@@ -7,6 +7,12 @@
 #include <ctype.h>
 #include <setjmp.h>
 
+#ifdef _WIN32
+    #define CLEARSCEARN system("cls")
+#elif defined(__APPLE__)
+    #define CLEARSCREAN system("clear")
+#endif
+
 #define SPACE 100
 #define MAX_BUF 4096
 
