@@ -1,6 +1,7 @@
 #include "total.h"
 
-struct Queue *createQueue() {
+struct Queue *createQueue() 
+{
     struct Queue *queue = malloc(sizeof(struct Queue));
     queue->front = NULL;
     queue->rear = NULL;
@@ -8,21 +9,26 @@ struct Queue *createQueue() {
 }
 
 // Function to check if the queue is empty
-int empty(struct Queue *queue) {
+int empty(struct Queue *queue) 
+{
     return (queue->front == NULL);
 }
 
 // Function to add an element to the rear of the queue
-void enqueue(struct Queue *queue, char re_name[], char book_name[]) {
+void enqueue(struct Queue *queue, char re_name[], char book_name[]) 
+{
     struct history *newNode = malloc(sizeof(struct history));
     strcpy(newNode->re_name, re_name);
     strcpy(newNode->book_name, book_name);
+    newNode -> next = NULL;
 
     // If the queue is empty, make the new node both the front and rear
-    if (empty(queue)) {
+    if (empty(queue)) 
+    {
         queue->front = newNode;
         queue->rear = newNode;
-    } else {
+    } else 
+    {
         // Otherwise, add the new node to the rear and update the rear pointer
         queue->rear->next = newNode;
         queue->rear = newNode;
@@ -30,7 +36,8 @@ void enqueue(struct Queue *queue, char re_name[], char book_name[]) {
 }
 
 // Function to remove an element from the front of the queue
-void dequeue(struct Queue* queue) {
+void dequeue(struct Queue* queue) 
+{
     // If the queue is empty
     if (empty(queue)) 
     {
