@@ -10,6 +10,13 @@
 #define SPACE 100
 #define MAX_BUF 4096
 
+/* To execute in different system */
+#if _WIN32
+    #define CLEARSCEARN system("cls")
+#elif (__APPLE__)
+    #define CLEARSCREAN system("clear")
+#endif
+
 extern int number_ad; //trace the amount of administrator initialize 4 administrator
 extern int amount_books; // trace the amount of books
 extern int accession_numer; //record accession_number
