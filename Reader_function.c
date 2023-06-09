@@ -43,13 +43,13 @@ void search_book_name()
     char temporary_book_name[SPACE];
     char book_name[SPACE];
     int found=0;
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("Please enter the name of the book: ");
     fgets(book_name, sizeof(book_name), stdin);
     if(book_name[strlen(book_name) - 1] == '\n')
         book_name[strlen(book_name) - 1] = '\0';
     lowwer(book_name); // to lower case
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_book_name, book[i].book_name);
@@ -89,7 +89,7 @@ void search_popular()
     if(book[0].viewer_count < book[amount_books - 1].viewer_count)
         sort_viewer_number();
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("=============================================================================================================================================================================================\n");
     printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s| Status |\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
     printf("=============================================================================================================================================================================================\n");
@@ -114,7 +114,7 @@ void check_personal_information()
 {
     struct readers *current;
     current = first;
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("=========================================================================================================\n");
     printf("| %2s%-12s | %10s | %10s%-15s | %5s%-15s | %5s%-15s |\n", " ","Reader name", "student_id", " ", "email", " ", "re_account", " ", "re_password");
     printf("========================================================================================================= \n");
@@ -293,7 +293,7 @@ void search_author()
         author[strlen(author) - 1] = '\0';
     lowwer(author); // to lower case
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_author, book[i].author);
@@ -333,14 +333,14 @@ void search_publisher()
     int found=0;
     char publisher[SPACE];
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("Please enter the name of the book: ");
     fgets(publisher, sizeof(publisher), stdin);
     if(publisher[strlen(publisher) - 1] == '\n')
         publisher[strlen(publisher) - 1] = '\0';
     lowwer(publisher); // to lower case
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_publisher, book[i].publisher);
@@ -380,14 +380,14 @@ void search_call_number()
     int found=0;
     char call_number[SPACE];
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("Please enter the name of the book: ");
     fgets(call_number, sizeof(call_number), stdin);
     if(call_number[strlen(call_number) - 1] == '\n')
         call_number[strlen(call_number) - 1] = '\0';
     lowwer(call_number); // to lower case
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_call_number, book[i].call_number);
@@ -427,14 +427,14 @@ void search_isbn()
     int found=0;
     char isbn[SPACE];
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("Please enter the name of the book: ");
     fgets(isbn, sizeof(isbn), stdin);
     if(isbn[strlen(isbn) - 1] == '\n')
         isbn[strlen(isbn) - 1] = '\0';
     lowwer(isbn); // to lower case
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     for (int i = 0; i < amount_books; i++)
     {
         strcpy(temporary_isbn, book[i].isbn);
@@ -472,7 +472,7 @@ void show_book()
 {
     int num_books = 0;
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     // show every books
     printf("=============================================================================================================================================================================================\n");
     printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s| Status |\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
@@ -502,7 +502,7 @@ void show_book()
 void reserve_book()
 {
    int number_book=0, option_reserve=0;
-   printf("\033[H\033[2J"); // clear screen
+   CLEARSCREAN; // clear screen
    while(1)
    {
         printf("======================================================================\n");
@@ -522,7 +522,7 @@ void reserve_book()
                 if (book[i].accession_number == number_book)
                 {
                     find = 1;
-                    printf("\033[H\033[2J"); // clear screen
+                    CLEARSCREAN; // clear screen
                     printf("====================================================================================================================================================================================\n");
                     printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s|\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
                     printf("====================================================================================================================================================================================\n");
@@ -532,7 +532,7 @@ void reserve_book()
                     printf("====================================================================================================================================================================================\n");
                     if(book[i].status == 1)
                     {
-                        printf("\033[H\033[2J"); // clear screen
+                        CLEARSCREAN; // clear screen
                         printf("========================================\n");
                         printf("| Sorry, the book is already reserved. |\n");
                         printf("========================================\n");

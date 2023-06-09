@@ -31,7 +31,7 @@ void review_library() // print every book
 {
     int num_books = 0;
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     // show every books
     printf("============================================================================================================================================================================================\n");
     printf("| %20s%-30s| %6s%-14s| %5s%-15s| %-13s| %2s%-13s| %4s%-10s| %-14s| %-17s| Status |\n", " ", "Book name", " ", "Author", " ", "Publisher", "Publish year", " ", "Call number", " ", "ISBN", "Viewer amount", "Accession number");
@@ -69,7 +69,7 @@ void add_book()
         return;
     }
 
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("Please enter the book_name: ");
     fgets(book_name, SPACE, stdin);
     if(book_name[strlen(book_name) - 1] == '\n')
@@ -137,7 +137,7 @@ void delete_book( )//show every book first(use search_book_name()). To make sure
                 scanf(" %d", &confirm);
                 if(confirm > 2 || confirm < 1)
                 {
-                    printf("\033[H\033[2J"); // clear screen
+                    CLEARSCREAN; // clear screen
                     printf("Error Option\n\n");
                     continue;
                 }
@@ -182,7 +182,7 @@ void delete_book( )//show every book first(use search_book_name()). To make sure
 void check_borrowing() // print every book which is borrowed
 {
     int find=0;
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     
     for (int i = 0; i < amount_books; i++)
     {
@@ -242,7 +242,7 @@ void return_book()
 
 void check_re_information()
 {
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     struct readers *current = first;
 
     printf("===============================================================================================================\n");
@@ -280,7 +280,7 @@ void modify_re_information() // Modify or delete reader information
             error = setjmp(rebuffer);
             if(error == 1) // If user enter wrong option
             {
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("Wrong operation!\n\n");
             }
 
@@ -298,7 +298,7 @@ void modify_re_information() // Modify or delete reader information
                 
                 char name[SPACE], email[SPACE], account[SPACE], password[SPACE];
                 int id=0;
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("============================================\n");
                 printf("| Enter the new information for the reader |\n");
                 printf("============================================\n\n");
@@ -341,7 +341,7 @@ void modify_re_information() // Modify or delete reader information
                 strcpy(current -> re_account, account);
                 strcpy(current -> re_password, password);
 
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("Update successful!\n");
 
                 break;
@@ -354,7 +354,7 @@ void modify_re_information() // Modify or delete reader information
                     prev->next = current->next; // Remove the reader that is not the first
                 free(current);
 
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("Deletion successful!\n");
                 break;
             }
@@ -371,7 +371,7 @@ void modify_re_information() // Modify or delete reader information
     }
     if (oper == 0)  
     {
-        printf("\033[H\033[2J"); // clear screan
+        CLEARSCREAN; // clear screan
         printf("No such reader!\n"); //Can't find the reader
     }
         
@@ -379,7 +379,7 @@ void modify_re_information() // Modify or delete reader information
 
 void check_ad_information()
 {
-    printf("\033[H\033[2J"); // clear screen
+    CLEARSCREAN; // clear screen
     printf("======================================================================\n");
     printf("| %1s%-19s | %5s%-15s | %5s%-15s |\n", " ", "Administrator Name", " ", "ad_account", " ", "ad_password");
     printf("======================================================================\n");
@@ -410,7 +410,7 @@ void modify_ad_information()
             error = setjmp(adbuffer);
             if(error == 1) // If user enter wrong option
             {
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("Wrong operation!\n\n");
             }
 
@@ -427,7 +427,7 @@ void modify_ad_information()
             if(operation == 1)
             {
                 char name[SPACE], account[SPACE], password[SPACE];
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("============================================\n");
                 printf("| Enter the new information for the reader |\n");
                 printf("============================================\n\n");
@@ -456,7 +456,7 @@ void modify_ad_information()
                 strcpy(administrator[i].ad_account, account);
                 strcpy(administrator[i].ad_password, password);
 
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("Update successful!\n");
 
                 break;
@@ -469,7 +469,7 @@ void modify_ad_information()
                 }
 
                 number_ad--;
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("Deletion successful!\n");
                 break;
             }
@@ -481,7 +481,7 @@ void modify_ad_information()
     }
     if (oper == 0)  
     {
-        printf("\033[H\033[2J"); // clear screen
+        CLEARSCREAN; // clear screen
         printf("No such administrator!\n"); //Can't find the administrator
     }
         
@@ -515,7 +515,7 @@ void lend_book()
             error = setjmp(lendbuffer);
             if(error == 1)
             {
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("The reader doesn't exist!\n");
             }
 
@@ -540,7 +540,7 @@ void lend_book()
             if(book[i].status == 0)
             {
                 book[i].status = 1;
-                printf("\033[H\033[2J"); // clear screan
+                CLEARSCREAN; // clear screan
                 printf("Lend %s successfully.\n", book[i].book_name);
                 book[i].viewer_count++; // viewer plus 1
                 enqueue(queue, reader_name, book[i].book_name);
@@ -549,7 +549,7 @@ void lend_book()
             }
             else if(book[i].status == 1)
             {
-                printf("\033[H\033[2J"); // clear screen
+                CLEARSCREAN; // clear screen
                 printf("The book has been borrowed!\n");
                 return;
             }
@@ -567,6 +567,7 @@ void add_administrator()
     char name[SPACE], account[SPACE], password[SPACE];
     int success=0;
 
+    CLEARSCREAN; // clear screan
     printf("Please enter the name: ");
     fgets(name, SPACE, stdin);
     if(name[strlen(name) - 1] == '\n')
