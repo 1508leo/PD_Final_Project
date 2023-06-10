@@ -1,6 +1,8 @@
 #include "total.h"
 
 FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader, *fp_history;
+struct readers *first = NULL;
+struct Queue *queue;
 
 void free_reader(struct readers *list)
 {

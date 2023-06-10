@@ -1,5 +1,6 @@
 #include "total.h"
 
+/*
 void reader_mode()
 {
     int option_re; // ???裡�??�???��?��?��????��??�????�?麼�????????
@@ -19,6 +20,7 @@ void reader_mode()
     scanf("%d", &option_re); // 輸�?��?????�?麼�?????
     interface_re(option_re); // �????�????�????
 }
+*/
 
 void lowwer(char string[])
 {
@@ -77,9 +79,9 @@ void search_book_name()
 
 void search_popular()
 {
-    sort_viewer_number(); // here will show the error message. Cause the function is in sort.c
+    sort_viewer_count(); // here will show the error message. Cause the function is in sort.c
     if(book[0].viewer_count < book[amount_books - 1].viewer_count)
-        sort_viewer_number();
+        sort_viewer_count();
 
     CLEARSCREAN; // clear screen
     printf("=============================================================================================================================================================================================\n");

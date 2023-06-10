@@ -6,6 +6,7 @@ int accession_numer = 0; //record accession_number
 int amount_re = 0; // trace the amount of reader
 int amount_history = 0;
 
+/*
 void administrator_mode()
 {
     int option_ad; // 這裡的變數是用來選擇要做什麼事情的
@@ -24,6 +25,7 @@ void administrator_mode()
     scanf("%d", &option_ad); // 輸入要做什麼事情
     interface_re(option_ad); // 請開始做事情
 }
+*/
 
 //void interface_ad(int option_ad); //按鈕
 

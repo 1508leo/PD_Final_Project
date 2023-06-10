@@ -34,7 +34,7 @@ void sort_publish_year()
     
 }
 
-void sort_viewer_number()
+void sort_viewer_count()
 {
     static int order = SMALL;
 

@@ -110,7 +110,7 @@ struct readers
     struct readers *next;
 };
 
-struct readers *first = NULL;
+extern struct readers *first;
 
 struct history // Queue
 {
@@ -125,7 +125,7 @@ struct Queue
     struct history *rear; // Points to the rear of the queue
 };
 
-struct Queue *queue;
+extern struct Queue *queue;
 
 int empty(struct Queue *queue);
 
