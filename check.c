@@ -86,7 +86,7 @@ int set_check_account_re(char name[], int id, char email[], char account[])
     {
         if(strcmp(check -> re_account, account) == 0)
         {
-            printf("\033[H\033[2J"); // clear the screen
+            CLEARSCREAN; // clear the screen
             printf("The account had been registered!\n");
             printf("Please enter another one.\n\n");
             printf("Your name: %s\n", name);
@@ -109,7 +109,7 @@ void add_reader()
 
     new_reader = malloc(sizeof(struct readers));
 
-    printf("\033[H\033[2J"); // clear the screen
+    CLEARSCREAN; // clear the screen
     printf("Please enter your name: ");
     fgets(name, SPACE, stdin);
     if(name[strlen(name) - 1] == '\n')
@@ -186,7 +186,7 @@ int in_check_account_ad(char account[])
             return YES;
     }
     /* Account doesn't exist */
-    printf("\033[H\033[2J"); // clear the screen
+    CLEARSCREAN; // clear the screen
     printf("The account doesn't exist!\n\n");
 
     return NO; // ask to enter again
@@ -204,7 +204,7 @@ int in_check_password_ad(char account[], char password[])
         }
     }
     /* Password isn't correct */
-    printf("\033[H\033[2J"); // clear the screen
+    CLEARSCREAN; // clear the screen
     printf("Your password isn't correct!\n\n");
     printf("Account: %s\n", account);
     
@@ -328,7 +328,7 @@ int set_check_account_ad(char name[], char account[])
     {
         if(strcmp(administrator[i].ad_account, account) == 0) // compare
         {
-            printf("\033[H\033[2J"); // clear the screen
+            CLEARSCREAN; // clear the screen
             printf("The account has been reginsted!\n");
             printf("Please enter another one.\n\n");
             printf("Name: %s\n", name);
