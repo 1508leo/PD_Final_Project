@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
 #include <stdbool.h>
 #include "total.h"
 const int SCREEN_WIDTH = 650;
@@ -36,7 +36,7 @@ void create_menu_window(const char* title) {
         printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
         return ;
     }
-    font = TTF_OpenFont("C:/Windows/WinSxS/amd64_microsoft-windows-font-truetype-cambria_31bf3856ad364e35_10.0.18362.1_none_c4ff0ed18149069c/cambriai.ttf", 18);
+    font = TTF_OpenFont("/Users/leo/Library/Group Containers/UBF8T346G9.Office/FontCache/4/CloudFonts/Noto Sans/29090505532.ttf", 18);
     if (font == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -145,7 +145,7 @@ void create_reader_Window(const char* title) {
         printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
         return ;
     }
-    font = TTF_OpenFont("C:/Windows/WinSxS/amd64_microsoft-windows-font-truetype-cambria_31bf3856ad364e35_10.0.18362.1_none_c4ff0ed18149069c/cambriai.ttf", 18);
+    font = TTF_OpenFont("/Users/leo/Library/Group Containers/UBF8T346G9.Office/FontCache/4/CloudFonts/Noto Sans/29090505532.ttf", 18);
     if (font == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -252,7 +252,7 @@ void create_admin_Window(const char* title) {
         printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
         return ;
     }
-    font = TTF_OpenFont("C:/Windows/WinSxS/amd64_microsoft-windows-font-truetype-cambria_31bf3856ad364e35_10.0.18362.1_none_c4ff0ed18149069c/cambriai.ttf", 18);
+    font = TTF_OpenFont("/Users/leo/Library/Group Containers/UBF8T346G9.Office/FontCache/4/CloudFonts/Noto Sans/29090505532.ttf", 18);
     if (font == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -335,7 +335,7 @@ void create_admin_Window(const char* title) {
     SDL_Quit();
 }
 
-SDL_main(int argc, char *argv[]){
+int main(int argc, char *argv[]){
     while(choose_menu!=3){
         if(choose_menu == 0){
             create_menu_window("Menu");

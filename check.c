@@ -260,7 +260,7 @@ int in_check_account_re(char account[])
         cur = cur -> next;
     }
     /* Account doesn't exist */
-    printf("\033[H\033[2J"); // clear the screen
+    CLEARSCREAN; // clear the screen
     printf("The account doesn't exist!\n\n");
 
     return NO;
@@ -280,7 +280,7 @@ int in_check_password_re(char account[], char password[])
         cur = cur -> next;
     }
     /* Password isn't correct */
-    printf("\033[H\033[2J"); // clear the screen
+    CLEARSCREAN; // clear the screen
     printf("Your password isn't correct!\n\n");
     printf("Account: %s\n", account);
     
@@ -309,6 +309,7 @@ void sign_in_reader()
     while(1)
     {
         printf("Please enter your password: ");
+        fgets(password, SPACE, stdin);
         if(password[strlen(password) - 1] == '\n')
             password[strlen(password) - 1] = '\0';
         

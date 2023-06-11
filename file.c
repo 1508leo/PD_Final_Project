@@ -24,36 +24,36 @@ void input_file()
         exit(0);
     } 
 
-    /* Get the information from amount.txt. Store the value into variable */
-    fscanf(fp_amount ,"%d %d %d %d %d", &number_ad, &amount_books, &accession_numer, &number_ad, &amount_history);
+    // Get the information from amount.txt. Store the value into variable 
+    fscanf(fp_amount ,"%d %d %d %d %d", &number_ad, &amount_books, &accession_numer, &amount_re, &amount_history);
 
-    /* Open administrator.txt. Which store the information of every administrator */
+    // Open administrator.txt. Which store the information of every administrator 
     if((fp_administrator = fopen("administrator.txt", "r+")) == NULL) // r+ can read and write. The file needs to exist 
     {
         printf("Open administrator.txt fail\n"); // Error message
         exit(0);
     } 
 
-    /* Get the information from administrator.txt. Store into administrator */
+    // Get the information from administrator.txt. Store into administrator 
     fread(administrator, sizeof(struct administrators), number_ad, fp_administrator);
 
-    /* Open book.txt. Which store the information of every book */
+    // Open book.txt. Which store the information of every book 
     if((fp_book = fopen("book.txt", "r+")) == NULL) // r+ can read and write. The file needs to exist 
     {
         printf("Open book.txt fail\n"); // Error message
         exit(0);
     } 
 
-    /* Get the information from book.txt. Store into book */
+    // Get the information from book.txt. Store into book 
     fread(book, sizeof(struct books), amount_books, fp_book); 
 
-    /* Open reader.txt. Which store the information of every reader */
+    // Open reader.txt. Which store the information of every reader 
     if((fp_reader = fopen("reader.txt", "r+")) == NULL) // r+ can read and write. The file needs to exist 
     {
         printf("Open reader.txt fail\n"); // Error message
     }
 
-    /* Readers' information is store in linked list */
+    // Readers' information is store in linked list 
     struct readers *cur;
     struct readers *new_node;
     cur = first;
@@ -64,7 +64,7 @@ void input_file()
         fread(new_node, sizeof(struct readers) - sizeof(struct readers *), 1, fp_reader); // store into new_node
         new_node -> next = NULL; // Let next point to NULL
         
-        /* Put into linked list*/
+        // Put into linked list
         if(first == NULL)
         {
             first = new_node;
@@ -79,8 +79,14 @@ void input_file()
         
     }
 
-    /* Borrowing history */
+    // Borrowing history 
     queue = createQueue();
+
+    if((fp_history = fopen("history.txt", "r+")) == NULL)
+    {
+        printf("Open history.txt fail\n"); // Error message
+        exit(0);
+    }
 
     for(int i = 0; i < amount_history; i++)
     {
@@ -109,7 +115,7 @@ void input_file()
 void output_file()
 {
     /* Use fprintf to write into file */
-    fprintf(fp_amount, "%d %d %d %d\n", number_ad, amount_books, accession_numer, amount_re);
+    fprintf(fp_amount, "%d %d %d %d %d\n", number_ad, amount_books, accession_numer, amount_re, amount_history);
 
     /* Use fwrite to write into file. Which is binary I/O */
     fwrite(administrator, sizeof(struct administrators), number_ad, fp_administrator); 

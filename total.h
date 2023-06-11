@@ -6,6 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <setjmp.h>
+#include <unistd.h>
 
 #define SPACE 100
 #define MAX_BUF 4096
@@ -127,6 +128,8 @@ struct Queue
 
 extern struct Queue *queue;
 
+void trash();
+
 int empty(struct Queue *queue);
 
 struct Queue *createQueue();
@@ -218,6 +221,8 @@ void lend_book(); // change the status of book
 /* Reader mode*/
 void reader_mode(); // if mode == READER_MODE
 
+void waiting();
+
 void interface_re(int option_re); // contain 9 buttons ( include exit button )
 
 void check_personal_information();
@@ -229,6 +234,8 @@ void lowwer(char string[]);
 void search_book_name();
 
 void search_author();
+
+void search_popular();
 
 void search_publisher();
 
