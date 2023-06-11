@@ -1,7 +1,9 @@
-#include <stdio.h>
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 #include <stdbool.h>
+//#include <mmsystem.h>
+//#pragma comment (lib,"winmm.lib")
 #include "total.h"
 const int SCREEN_WIDTH = 650;
 const int SCREEN_HEIGHT = 128; // width height
@@ -9,9 +11,19 @@ const int SCREEN_HEIGHT = 128; // width height
 int choose_menu=0;
 int choose_admin=0;
 int choose_reader = 0;
+int choose_sign_in_or_sign_up = 0;
+/*void music_system(){
+    int choose;
+    printf("Do you need background music?\n");
+    printf("1 : Yes   2 : NO \n");
+    scanf("%d",&choose);
+    if(choose==1){
+        mciSendString("open 0.mp3",NULL,0,NULL);
+        mciSendString("play 0.mp3",NULL,0,NULL);
+    }
+}*/
 
 void create_menu_window(const char* title) {
-
     SDL_Renderer *renderer = NULL;
     TTF_Font *font = NULL;
     SDL_Window* window =  SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 600, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -19,7 +31,6 @@ void create_menu_window(const char* title) {
         printf("無法創建視窗: %s\n", SDL_GetError());
         return ;
     }
-    
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -31,12 +42,13 @@ void create_menu_window(const char* title) {
         return ;
     }
     renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     if (renderer == NULL)
     {
         printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
         return ;
     }
-    font = TTF_OpenFont("/Users/leo/Library/Group Containers/UBF8T346G9.Office/FontCache/4/CloudFonts/Noto Sans/29090505532.ttf", 18);
+    font = TTF_OpenFont("C:/Windows/WinSxS/amd64_microsoft-windows-font-truetype-cambria_31bf3856ad364e35_10.0.18362.1_none_c4ff0ed18149069c/cambriai.ttf", 18);
     if (font == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -55,6 +67,9 @@ void create_menu_window(const char* title) {
     SDL_FreeSurface(surface_reader);
     SDL_FreeSurface(surface_admin);
     SDL_FreeSurface(surface_exit);
+    SDL_Surface* imageSurface = IMG_Load("E:/C/.vscode/finalproject2/1.png");
+    SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
+    SDL_FreeSurface(imageSurface);
     SDL_Rect rect_reader; //create rect
     SDL_Rect rect_admin;
     SDL_Rect button_exit;
@@ -104,6 +119,9 @@ void create_menu_window(const char* title) {
                         break;
                     }
             }
+            SDL_RenderClear(renderer);
+            // 渲染背景纹理到整个窗口
+            SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);            
             SDL_RenderCopy(renderer, texture_reader, NULL, &rect_reader);
             SDL_RenderCopy(renderer, texture_admin, NULL, &rect_admin);
             SDL_RenderCopy(renderer, texture_exit, NULL, &button_exit);
@@ -114,11 +132,128 @@ void create_menu_window(const char* title) {
     SDL_DestroyTexture(texture_reader);
     SDL_DestroyTexture(texture_admin);
     SDL_DestroyRenderer(renderer);
+    SDL_DestroyTexture(backgroundTexture);
+
     SDL_DestroyWindow(window);
     TTF_Quit();
     SDL_Quit();
 }
 
+void create_sign_in_or_upwindow(const char* title) {
+    SDL_Renderer *renderer = NULL;
+    TTF_Font *font = NULL;
+    SDL_Window* window =  SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 600, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    if (window == NULL) {
+        printf("無法創建視窗: %s\n", SDL_GetError());
+        return ;
+    }
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+        return ;
+    }
+    if (TTF_Init() < 0)
+    {
+        printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+        return ;
+    }
+    renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    if (renderer == NULL)
+    {
+        printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+        return ;
+    }
+    font = TTF_OpenFont("C:/Windows/WinSxS/amd64_microsoft-windows-font-truetype-cambria_31bf3856ad364e35_10.0.18362.1_none_c4ff0ed18149069c/cambriai.ttf", 18);
+    if (font == NULL)
+    {
+        printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
+        return ;
+    }
+    SDL_Texture *texture_reader = NULL;
+    SDL_Texture *texture_admin = NULL;
+    SDL_Texture *texture_exit = NULL;
+    SDL_Color textColor = {255, 255, 255, 255};
+    SDL_Surface *surface_reader = TTF_RenderText_Solid(font, "Sign in", textColor);
+    SDL_Surface *surface_admin = TTF_RenderText_Solid(font, "Sign up", textColor);
+    SDL_Surface *surface_exit = TTF_RenderText_Solid(font, "Exit", textColor);
+    texture_reader = SDL_CreateTextureFromSurface(renderer, surface_reader); 
+    texture_admin = SDL_CreateTextureFromSurface(renderer, surface_admin);
+    texture_exit = SDL_CreateTextureFromSurface(renderer, surface_exit);
+    SDL_FreeSurface(surface_reader);
+    SDL_FreeSurface(surface_admin);
+    SDL_FreeSurface(surface_exit);
+    SDL_Surface* imageSurface = IMG_Load("E:/C/.vscode/finalproject2/BG.png");
+    SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
+    SDL_FreeSurface(imageSurface);
+    SDL_Rect rect_reader; //create rect
+    SDL_Rect rect_admin;
+    SDL_Rect button_exit;
+    rect_reader.x = 30;
+    rect_reader.y = 50;
+    rect_reader.w = 150;
+    rect_reader.h = 70;
+
+    rect_admin.x = 200;
+    rect_admin.y = 50;
+    rect_admin.w = 130;
+    rect_admin.h = 70;
+
+    button_exit.x = 380;
+    button_exit.y = 50;
+    button_exit.w = 120;
+    button_exit.h = 70;
+
+    SDL_Event choose;
+    bool quit = false;
+    while(!quit){
+        while(SDL_PollEvent(&choose)){
+            if (choose.type == SDL_QUIT) {
+                choose_menu = -1;
+                quit = true;
+                break; 
+            }
+            if(choose.type == SDL_MOUSEBUTTONDOWN){
+                int x = choose.button.x;
+                int y = choose.button.y;
+                if (x > rect_reader.x && x < rect_reader.x + rect_reader.w &&
+                    y > rect_reader.y && y < rect_reader.y + rect_reader.h){
+                        choose_sign_in_or_sign_up=1;
+                        quit = true;
+                        break;
+                    }
+                if (x > rect_admin.x && x < rect_admin.x + rect_admin.w &&
+                    y > rect_admin.y && y < rect_admin.y + rect_admin.h){
+                        choose_sign_in_or_sign_up=2;
+                        quit = true;
+                        break;
+                    }
+                if (x > button_exit.x && x < button_exit.x + button_exit.w &&
+                    y > button_exit.y && y < button_exit.y + button_exit.h){
+                        choose_menu=3;
+                        quit = true;
+                        break;
+                    }
+            }
+            SDL_RenderClear(renderer);
+            // 渲染背景纹理到整个窗口
+            SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);            
+            SDL_RenderCopy(renderer, texture_reader, NULL, &rect_reader);
+            SDL_RenderCopy(renderer, texture_admin, NULL, &rect_admin);
+            SDL_RenderCopy(renderer, texture_exit, NULL, &button_exit);
+            SDL_RenderPresent(renderer);
+        }
+    }
+    TTF_CloseFont(font);
+    SDL_DestroyTexture(texture_reader);
+    SDL_DestroyTexture(texture_admin);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyTexture(backgroundTexture);
+
+    SDL_DestroyWindow(window);
+    TTF_Quit();
+    SDL_Quit();
+}
 
 void create_reader_Window(const char* title) {
     SDL_Renderer *renderer = NULL;
@@ -145,7 +280,7 @@ void create_reader_Window(const char* title) {
         printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
         return ;
     }
-    font = TTF_OpenFont("/Users/leo/Library/Group Containers/UBF8T346G9.Office/FontCache/4/CloudFonts/Noto Sans/29090505532.ttf", 18);
+    font = TTF_OpenFont("C:/Windows/WinSxS/amd64_microsoft-windows-font-truetype-cambria_31bf3856ad364e35_10.0.18362.1_none_c4ff0ed18149069c/cambriai.ttf", 18);
     if (font == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -175,6 +310,9 @@ void create_reader_Window(const char* title) {
     for(int i=0 ; i<=11; i++){
         SDL_FreeSurface(arr_surface[i]);
     }
+    SDL_Surface* imageSurface = IMG_Load("E:/C/.vscode/finalproject2/BG.png");
+    SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
+    SDL_FreeSurface(imageSurface);
     SDL_Rect review_library; //create rect
     SDL_Rect arr_rect[15];
 
@@ -210,6 +348,9 @@ void create_reader_Window(const char* title) {
                 }
             }
             if(quit == true) break;
+            SDL_RenderClear(renderer);
+            // 渲染背景纹理到整个窗口
+            SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL); 
             for(int i = 0;i<=11;i++){
                 SDL_RenderCopy(renderer, arr_text[i], NULL, &arr_rect[i]);
             }
@@ -221,6 +362,7 @@ void create_reader_Window(const char* title) {
         SDL_RenderCopy(renderer, arr_text[i], NULL, &arr_rect[i]);
         SDL_DestroyTexture(arr_text[i]);
     }
+    SDL_DestroyTexture(backgroundTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     TTF_Quit();
@@ -252,7 +394,7 @@ void create_admin_Window(const char* title) {
         printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
         return ;
     }
-    font = TTF_OpenFont("/Users/leo/Library/Group Containers/UBF8T346G9.Office/FontCache/4/CloudFonts/Noto Sans/29090505532.ttf", 18);
+    font = TTF_OpenFont("C:/Windows/WinSxS/amd64_microsoft-windows-font-truetype-cambria_31bf3856ad364e35_10.0.18362.1_none_c4ff0ed18149069c/cambriai.ttf", 18);
     if (font == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
@@ -280,6 +422,9 @@ void create_admin_Window(const char* title) {
     for(int i=0 ; i<10; i++){
         SDL_FreeSurface(arr_surface[i]);
     }
+    SDL_Surface* imageSurface = IMG_Load("E:/C/.vscode/finalproject2/BG.png");
+    SDL_Texture* backgroundTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
+    SDL_FreeSurface(imageSurface);
     SDL_Rect review_library; //create rect
     SDL_Rect arr_rect[10];
 
@@ -318,6 +463,9 @@ void create_admin_Window(const char* title) {
                 }
             }
             if(quit == true) break;
+            SDL_RenderClear(renderer);
+            // 渲染背景纹理到整个窗口
+            SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
             for(int i = 0;i<10;i++){
                 SDL_RenderCopy(renderer, arr_text[i], NULL, &arr_rect[i]);
             }
@@ -331,22 +479,27 @@ void create_admin_Window(const char* title) {
     }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    SDL_DestroyTexture(backgroundTexture);
     TTF_Quit();
     SDL_Quit();
 }
 
-int main(int argc, char *argv[]){
+SDL_main(int argc, char *argv[]){
     while(choose_menu!=3){
         if(choose_menu == 0){
             create_menu_window("Menu");
         } 
         if(choose_menu == 1){
+            //add_reader();
+            create_sign_in_or_upwindow("sign_in_or_sign_up");         
+            if(choose_sign_in_or_sign_up == 1){
+                //sign_in_reader();
+            }
+            if(choose_sign_in_or_sign_up==2){
+                //add_reader();
+            }
             create_reader_Window("Reader");
             switch (choose_reader){
-            case BUTTON_SEARCH:
-                printf("search_book_name()\n");
-                //search_book_name();
-                break;
             case BUTTON_BOOK_NAME:
                 printf("search_book_name()\n");
                 //search_book_name();
@@ -377,11 +530,11 @@ int main(int argc, char *argv[]){
                 break;
             case BUTTON_INFORMATION:
                 //check_personal_information();
-                printf("check_personal_information()\n");
+                //printf("check_personal_information()\n");
                 break;
             case BUTTON_SHOW_BOOK:
                 printf("show_book()\n");
-                //show_book();
+                show_book();
                 break;
             case 520:
                 choose_menu=0;
@@ -394,31 +547,31 @@ int main(int argc, char *argv[]){
             create_admin_Window("Admin");
             switch (choose_admin){
             case BUTTON_REVIEW:
-                //review_library();
+                review_library();
                 printf("review_library();\n");
                 break;
             case BUTTON_ADD_DELETE:
-                //add_book();
+                add_book();
                 printf("add_book();\n");
                 break;
             case BUTTON_CHECK_BORROWING:
-                //check_borrowing();
+                check_borrowing();
                 printf("check_borrowing()\n");
                 break;
             case BUTTON_CHECK_RE:
-                //check_re_information();
+                check_re_information();
                 printf("check_re_information()\n");
                 break;
             case BUTTON_CHECK_AD:
-                //check_ad_information();
+                check_ad_information();
                 printf("check_ad_information()\n");
                 break;
             case BUTTON_LEND:
-                //lend_book();
+                lend_book();
                 printf("lend_book()\n");
                 break;
             case BUTTON_ADD_AD:
-                //add_administrator();
+                add_administrator();
                 printf("add_administrator()\n");
                 break;
             case 380:
