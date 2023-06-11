@@ -532,7 +532,7 @@ void reserve_book()
                     if (option_reserve == 1)
                     {
                         book[i].viewer_count++;
-                        printf("\033[H\033[2J"); // clear screen
+                        CLEARSCREAN; // clear screen
                         printf("==========================\n");
                         printf("| Reserved successfully. |\n");
                         printf("==========================\n");
