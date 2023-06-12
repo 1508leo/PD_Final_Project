@@ -11,5 +11,6 @@
 5. Before execute run. Please make shure there exist (administrator.txt, book.txt, history.txt, reader.txt, reader.txt) these text files   
    in your folder 
 6. Execute "run"
+7. The built-in administrator account is "leohsu" and password is "leo930228"
 
 ### Hope you enjoy in the library !
