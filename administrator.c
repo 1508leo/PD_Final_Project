@@ -218,66 +218,89 @@ void add_book()
 
 void delete_book( )//show every book first(use search_book_name()). To make sure whether the book you want to delete
 {
-    int delete_number=0, find=0;
-    review_library(); // print every book first
-    printf("Please enter the accession number of book you want to delete: ");
-    scanf(" %d", &delete_number);
-
-    for (int i = 0; i < amount_books; i++)
+    
+    while(1)
     {
-        if(book[i].accession_number == delete_number)
+        int delete_number=0, find=0;
+        review_library(); // print every book first
+        printf("================================================================\n");
+        printf("| Please enter the accession number of book you want to delete |\n");
+        printf("| Enter -1 to back to menu                                     |\n");
+        printf("================================================================\n");
+        printf("Enter: ");
+        scanf(" %d", &delete_number);
+
+        if(delete_number == -1)
         {
-            int confirm=0;
-            find = 1;
-            while(1)
-            {
-                printf("========================================================\n");
-                printf("| Are you sure you want to delete %-20s |\n", book[i].book_name);
-                printf("| 1. Yes%46s |\n", " ");
-                printf("| 2. No%47s |\n", " ");
-                printf("========================================================\n");
-                printf("Please enter your option: ");
-                scanf(" %d", &confirm);
-                if(confirm > 2 || confirm < 1)
-                {
-                    CLEARSCREAN; // clear screen
-                    printf("Error Option\n\n");
-                    continue;
-                }
-                else if(confirm == 1)
-                {
-                    if(i == MAX_BUF - 1)
-                    {
-                        strcpy(book[i].book_name, "\0");
-                        strcpy(book[i].author, "\0");
-                        strcpy(book[i].publisher, "\0");
-                        book[i].publish_year = 0;
-                        strcpy(book[i].call_number, "\0");
-                        strcpy(book[i].isbn, "\0");
-                        book[i].viewer_count = 0;
-                        book[i].accession_number = 0;
-                        book[i].status = 0;
-                    }
-                    else
-                    {
-                        for(int j = i; j < amount_books; j++)
-                        book[j] = book[j + 1];
-                    }
-
-                    printf("\nThe deletion of book is complete.\n");
-                    amount_books--;
-                    break;
-                }
-                else // confirm = 2
-                    break;
-            }
             break;
-            
         }
-    }
+        else
+        {
+            for (int i = 0; i < amount_books; i++)
+            {
+                if(book[i].accession_number == delete_number)
+                {
+                    int confirm=0;
+                    find = 1;
+                    while(1)
+                    {
+                        printf("========================================================\n");
+                        printf("| Are you sure you want to delete %-20s |\n", book[i].book_name);
+                        printf("| 1. Yes%46s |\n", " ");
+                        printf("| 2. No%47s |\n", " ");
+                        printf("========================================================\n");
+                        printf("Please enter your option: ");
+                        scanf(" %d", &confirm);
+                        if(confirm > 2 || confirm < 1)
+                        {
+                            CLEARSCREAN; // clear screen
+                            printf("Error Option\n\n");
+                            continue;
+                        }
+                        else if(confirm == 1)
+                        {
+                            if(i == MAX_BUF - 1)
+                            {
+                                strcpy(book[i].book_name, "\0");
+                                strcpy(book[i].author, "\0");
+                                strcpy(book[i].publisher, "\0");
+                                book[i].publish_year = 0;
+                                strcpy(book[i].call_number, "\0");
+                                strcpy(book[i].isbn, "\0");
+                                book[i].viewer_count = 0;
+                                book[i].accession_number = 0;
+                                book[i].status = 0;
+                            }
+                            else
+                            {
+                                for(int j = i; j < amount_books; j++)
+                                book[j] = book[j + 1];
+                            }
+                            CLEARSCREAN;
+                            printf("The deletion of book is complete.\n");
+                            amount_books--;
+                            sleep(2);
+                            break;
+                        }
+                        else // confirm = 2
+                            break;
+                    }
+                    break;
+                    
+                }
+            }
 
-    if(find == 0)
-        printf("\nThere is no book with accession number %d in the library.\n", delete_number);
+            if(find == 0)
+            {
+                CLEARSCREAN;
+                printf("There is no book with accession number %d in the library.\n", delete_number);
+                sleep(2);
+            }
+                
+            }
+        }
+        
+        
 
     return;
 }
@@ -354,6 +377,7 @@ void return_book()
                     }
                     else // status = 1
                     {
+                        CLEARSCREAN;
                         printf("\nReturn %s successfully.\n", book[i].book_name);
                         book[i].status = 0;
                         sleep(2);
