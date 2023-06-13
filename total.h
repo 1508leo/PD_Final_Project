@@ -24,7 +24,7 @@ extern int accession_numer; //record accession_number
 extern int amount_re; // trace the amount of reader
 extern char name_re[SPACE]; // current user
 extern char name_ad[SPACE]; // current user
-extern int amount_history;
+extern int amount_history; // trace the amount of borrowing history
 
 
 extern FILE *fp_amount, *fp_administrator, *fp_book, *fp_reader, *fp_history;

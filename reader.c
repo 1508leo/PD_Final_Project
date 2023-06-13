@@ -3,7 +3,7 @@
 
 void reader_mode()
 {
-    int option_re=0; // ???裡�??�???��?��?��????��??�????�?麼�????????
+    int option_re=0; //
     while(1)
     {
         CLEARSCREAN;
@@ -22,7 +22,7 @@ void reader_mode()
         printf("| 11. Exit                       |\n");
         printf("==================================\n");
         printf("Please enter an option: ");
-        scanf("%d", &option_re); // 輸�?��?????�?麼�?????
+        scanf("%d", &option_re); //
 
         fflush(stdin);
 
