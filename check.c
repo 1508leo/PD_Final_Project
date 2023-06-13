@@ -187,7 +187,9 @@ int in_check_account_ad(char account[])
     }
     /* Account doesn't exist */
     CLEARSCREAN; // clear the screen
-    printf("The account doesn't exist!\n\n");
+    printf("==============================\n");
+    printf("| The account doesn't exist! |\n");
+    printf("==============================\n\n");
 
     return NO; // ask to enter again
 }
@@ -205,7 +207,9 @@ int in_check_password_ad(char account[], char password[])
     }
     /* Password isn't correct */
     CLEARSCREAN; // clear the screen
-    printf("Your password isn't correct!\n\n");
+    printf("================================\n");
+    printf("| Your password isn't correct! |\n");
+    printf("================================\n\n");
     printf("Account: %s\n", account);
     
     return NO; // ask to enter again
@@ -261,7 +265,9 @@ int in_check_account_re(char account[])
     }
     /* Account doesn't exist */
     CLEARSCREAN; // clear the screen
-    printf("The account doesn't exist!\n\n");
+    printf("==============================\n");
+    printf("| The account doesn't exist! |\n");
+    printf("==============================\n\n");
 
     return NO;
 }
@@ -281,7 +287,9 @@ int in_check_password_re(char account[], char password[])
     }
     /* Password isn't correct */
     CLEARSCREAN; // clear the screen
-    printf("Your password isn't correct!\n\n");
+    printf("================================\n");
+    printf("| Your password isn't correct! |\n");
+    printf("================================\n\n");
     printf("Account: %s\n", account);
     
     return NO; // ask to enter again

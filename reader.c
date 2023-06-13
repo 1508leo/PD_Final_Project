@@ -16,7 +16,7 @@ void reader_mode()
         printf("| 5. Search by ISBN              |\n");
         printf("| 6. Search by viewer count      |\n");
         printf("| 7. Reserve a book              |\n");
-        printf("| 8. Show all books              |\n");
+        printf("| 8. Show every book             |\n");
         printf("| 9. Sorting                     |\n");
         printf("| 10. Check personal information |\n");
         printf("| 11. Exit                       |\n");
@@ -513,9 +513,9 @@ void reserve_book()
                     if(book[i].status == 1)
                     {
                         CLEARSCREAN; // clear screen
-                        printf("========================================\n");
-                        printf("| Sorry, the book is already reserved. |\n");
-                        printf("========================================\n");
+                        printf("==============================================\n");
+                        printf("| Sorry, the book has already been borrowed. |\n");
+                        printf("==============================================\n");
                         break;
                     }
 

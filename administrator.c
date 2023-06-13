@@ -15,7 +15,7 @@ void administrator_mode()
         CLEARSCREAN;
         printf("=======================================\n");
         printf("| What would you like to do?          |\n");
-        printf("| 1. Review_library                   |\n");
+        printf("| 1. Browse the library               |\n");
         printf("| 2. Add book or delete book          |\n");
         printf("| 3. Check borrowing                  |\n");
         printf("| 4. Check reader information         |\n");
@@ -378,7 +378,7 @@ void return_book()
                     else // status = 1
                     {
                         CLEARSCREAN;
-                        printf("\nReturn %s successfully.\n", book[i].book_name);
+                        printf("Return %s successfully.\n", book[i].book_name);
                         book[i].status = 0;
                         sleep(2);
                         continue;
